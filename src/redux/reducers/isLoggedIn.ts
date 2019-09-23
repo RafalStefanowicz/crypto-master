@@ -1,9 +1,9 @@
 import { ActionType, ACTION_TYPES } from "../../types/ACTION_TYPES";
 
-export type IsLoggedInType = boolean;
+export type IsLoggedInType = boolean | null;
 
 export const isLoggedIn = (
-  state: IsLoggedInType = false,
+  state: IsLoggedInType = null,
   action: ActionType
 ): IsLoggedInType => {
   switch (action.type) {

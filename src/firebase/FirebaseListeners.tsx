@@ -3,31 +3,49 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 
 import { withFirebase } from "./withFirebase";
-import { Firebase } from "./Firebase";
+import { FirebaseOperations } from "./FirebaseOperations";
 import { setIsLogIn } from "../redux/actions/setIsLogIn";
+import { addUserNames } from "../redux/actions/addUserNames";
 
 interface IFirebaseListener {
-  firebase: Firebase;
+  firebase: FirebaseOperations;
   setIsLogIn: typeof setIsLogIn;
+  addUserNames: typeof addUserNames;
 }
 
-const _FirebaseListener = ({ firebase, setIsLogIn }: IFirebaseListener) => {
+const _FirebaseListener = ({
+  firebase,
+  setIsLogIn,
+  addUserNames
+}: IFirebaseListener) => {
   useEffect(() => {
-    const unsubscribe = firebase.auth.onAuthStateChanged((user: any) => {
-      console.log(user);
+    const listener = firebase.auth.onAuthStateChanged(user => {
       setIsLogIn(!!user);
     });
     return () => {
-      unsubscribe();
+      listener();
     };
-  }, []);
+  }, [firebase.auth, setIsLogIn]);
+
+  useEffect(() => {
+    firebase.userNamesDb().on("value", snapshot => {
+      const users = snapshot.val();
+      if (users) {
+        addUserNames(users);
+      }
+    });
+    return () => {
+      firebase.userNamesDb().off();
+    };
+  }, [firebase, addUserNames]);
+
   return <></>;
 };
 
 export const FirebaseListeners = compose(
   connect(
     null,
-    { setIsLogIn }
+    { setIsLogIn, addUserNames }
   ),
   withFirebase
 )(_FirebaseListener) as React.ReactType;

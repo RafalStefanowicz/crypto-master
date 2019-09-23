@@ -1,25 +1,36 @@
 import * as React from "react";
+import { connect } from "react-redux";
+
 import { Route, Switch } from "react-router-dom";
 
 import { Home } from "../layouts/Home/Home";
-import { Stock } from "../layouts/Stock/Stock";
+import { StockContainer } from "../layouts/Stock/StockContainer";
 import { Ranking } from "../layouts/Ranking/Ranking";
 import { History } from "../layouts/History/History";
 import { Account } from "../layouts/Account/Account";
 import { ROUTES } from "../../types";
+import { IStore } from "../../redux/reducers";
+import { IsLoggedInType } from "../../redux/reducers/isLoggedIn";
 
-export interface PageProps {}
+interface PageProps {
+  isLoggedIn: IsLoggedInType;
+}
 
-const Page: React.SFC<PageProps> = () => {
+const _Page = ({ isLoggedIn }: PageProps) => {
   return (
     <Switch>
       <Route exact component={Home} path={ROUTES.CRYTPO_MASTER} />
-      <Route component={Stock} path={ROUTES.STOCK} />
-      <Route component={Account} path={ROUTES.ACCOUNT} />
-      <Route component={History} path={ROUTES.HISTORY} />
-      <Route component={Ranking} path={ROUTES.RANK} />
+      <Route
+        component={isLoggedIn ? StockContainer : Home}
+        path={ROUTES.STOCK}
+      />
+      <Route component={isLoggedIn ? Account : Home} path={ROUTES.ACCOUNT} />
+      <Route component={isLoggedIn ? History : Home} path={ROUTES.HISTORY} />
+      <Route component={isLoggedIn ? Ranking : Home} path={ROUTES.RANK} />
     </Switch>
   );
 };
 
-export default Page;
+const mapStateToProps = (state: IStore) => ({ isLoggedIn: state.isLoggedIn });
+
+export const Page = connect(mapStateToProps)(_Page);

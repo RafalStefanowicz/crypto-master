@@ -5,7 +5,6 @@ import "firebase/database";
 import { firebaseConfig } from "../keys/keys";
 
 export interface DoSignUpI {
-  userName: string;
   email: string;
   password: string;
 }
@@ -13,12 +12,6 @@ export interface DoSignUpI {
 export interface DoSignInI {
   email: string;
   password: string;
-}
-
-export interface DoSetUserDataI {
-  userId: string | null;
-  userName: string | null;
-  email: string | null;
 }
 
 export class Firebase {
@@ -36,74 +29,23 @@ export class Firebase {
     this.db = this.firebase.database();
   }
 
-  doSignUp = ({ userName, email, password }: DoSignUpI) =>
-    this.auth
-      .createUserWithEmailAndPassword(email, password)
-      .then(auth => {
-        const user = auth.user;
-        if (user) {
-          this.doSetUserData({
-            userId: user.uid,
-            userName: userName,
-            email: user.email
-          });
-        }
-        return user;
-      })
-      .catch(error => {
-        return Promise.reject(error);
-      });
+  protected doSignUp = ({ email, password }: DoSignUpI) =>
+    this.auth.createUserWithEmailAndPassword(email, password);
 
   doSignIn = ({ email, password }: DoSignInI) =>
     this.auth.signInWithEmailAndPassword(email, password);
 
   doPasswordReset = (email: string) => this.auth.sendPasswordResetEmail(email);
 
-  doSetUserData = ({ userId, userName, email }: DoSetUserDataI): void => {
-    this.db.ref(`users/${userId}`).set({
-      userName,
-      email
-    });
-  };
+  protected doSignInWithGoogle = () =>
+    this.auth.signInWithPopup(this.googleProvider);
 
-  doSignInWithGoogle = () => {
-    this.auth
-      .signInWithPopup(this.googleProvider)
-      .then(auth => {
-        const user = auth.user;
-        const userInfo = auth.additionalUserInfo;
-        if (user && userInfo && userInfo.isNewUser) {
-          this.doSetUserData({
-            userId: user.uid,
-            userName: user.displayName,
-            email: user.email
-          });
-        }
+  protected doSignInWithFacebook = () =>
+    this.auth.signInWithPopup(this.facebookProvider);
 
-        return user;
-      })
-      .catch(error => {
-        alert(error.message);
-      });
-  };
+  walletDb = (userId: string) => this.db.ref(`users/${userId}/wallet`);
 
-  doSignInWithFacebook = () => {
-    this.auth
-      .signInWithPopup(this.facebookProvider)
-      .then(auth => {
-        const user = auth.user;
-        const userInfo = auth.additionalUserInfo;
-        if (user && userInfo && userInfo.isNewUser) {
-          this.doSetUserData({
-            userId: user.uid,
-            userName: user.displayName,
-            email: user.email
-          });
-        }
-        return user;
-      })
-      .catch(error => {
-        alert(error.message);
-      });
-  };
+  personalDb = (userId: string) => this.db.ref(`users/${userId}/personal`);
+
+  userNamesDb = () => this.db.ref(`usernames`);
 }

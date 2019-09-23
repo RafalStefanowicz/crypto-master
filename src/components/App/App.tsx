@@ -1,7 +1,7 @@
 import React from "react";
 
 import Nav from "../Nav/Nav";
-import Page from "../Page/Page";
+import { PageContainer } from "../Page/PageContainer";
 
 export const App = () => {
   return (
@@ -10,7 +10,7 @@ export const App = () => {
         <Nav></Nav>
       </header>
       <main>
-        <Page />
+        <PageContainer />
       </main>
     </>
   );

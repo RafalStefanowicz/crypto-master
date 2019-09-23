@@ -1,5 +1,4 @@
-import { ACTION_TYPES } from "../../types/ACTION_TYPES";
-import { ActionType } from "../../types/ACTION_TYPES";
+import { ACTION_TYPES, ActionType } from "../../types/ACTION_TYPES";
 import { MODAL_TYPES } from "../../types/MODAL_TYPES";
 
 const INITIAL_MODAL_STATE = {

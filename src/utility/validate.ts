@@ -1,3 +1,6 @@
+import { getUniqueUserName } from "./getUniqueUserName";
+import { UserNamesI } from "../redux/reducers/userNames";
+
 interface ISignUpValues {
   userName: string;
   email: string;
@@ -10,10 +13,18 @@ interface ISignUpErrors {
   password?: string;
 }
 
-export const signUpValidate = (values: ISignUpValues): ISignUpErrors => {
+export type SignUpValidateType = (values: ISignUpValues) => ISignUpErrors;
+
+export const signUpValidate = (userNames: UserNamesI): SignUpValidateType => (
+  values: ISignUpValues
+): ISignUpErrors => {
   let errors: ISignUpErrors = {};
-  if (!values.userName) {
+  const userName = values.userName;
+  const uniqueUserName = getUniqueUserName(userName, userNames);
+  if (!userName) {
     errors.userName = "Required";
+  } else if (userName !== uniqueUserName) {
+    errors.userName = `The username is already in use. We suggest ${uniqueUserName}`;
   }
   if (!values.email) {
     errors.email = "Required";
@@ -76,6 +87,6 @@ export const resetPasswordValidate = (
 };
 
 export type ValidationType =
-  | typeof signUpValidate
+  | SignUpValidateType
   | typeof signInValidate
   | typeof resetPasswordValidate;

@@ -1,18 +1,23 @@
 import React from "react";
+import { connect } from "react-redux";
+import { compose } from "redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookF } from "@fortawesome/free-brands-svg-icons";
 
 import { AuthButton } from "../AuthButton/AuthButton";
-import { Firebase } from "../../../firebase/Firebase";
+import { FirebaseOperations } from "../../../firebase/FirebaseOperations";
 import { withFirebase } from "../../../firebase/withFirebase";
+import { IStore } from "../../../redux/reducers";
+import { UserNamesI } from "../../../redux/reducers/userNames";
 
 interface FacebookButtonProps {
-  firebase: Firebase;
+  firebase: FirebaseOperations;
+  userNames: UserNamesI;
 }
 
-const _FacebookButton = ({ firebase }: FacebookButtonProps) => {
+const _FacebookButton = ({ firebase, userNames }: FacebookButtonProps) => {
   const handleLogIn = () => {
-    firebase.doSignInWithFacebook();
+    firebase.doCreateUserWithFacebook(userNames);
   };
   return (
     <AuthButton handleLogIn={handleLogIn}>
@@ -21,4 +26,11 @@ const _FacebookButton = ({ firebase }: FacebookButtonProps) => {
   );
 };
 
-export const FacebookButton = withFirebase(_FacebookButton);
+const mapStateToProps = (state: IStore) => ({
+  userNames: state.userNames
+});
+
+export const FacebookButton = compose(
+  withFirebase,
+  connect(mapStateToProps)
+)(_FacebookButton) as React.ReactType;

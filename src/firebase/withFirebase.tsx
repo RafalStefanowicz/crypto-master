@@ -9,7 +9,7 @@ export interface WithFirebaseProps {
 }
 
 export const withFirebase = <P extends WithFirebaseProps>(
-  Component: React.ComponentType<P>
+  Component: React.FC<P>
 ) => (props: Subtract<P, WithFirebaseProps>) => {
   return (
     <FirebaseContext.Consumer>

@@ -4,14 +4,20 @@ import { compose } from "redux";
 
 import { JoinForm } from "../JoinForm/JoinForm";
 import { withFirebase } from "../../../firebase/withFirebase";
-import { Firebase, DoSignUpI } from "../../../firebase/Firebase";
+import {
+  FirebaseOperations,
+  DoCreateUserI
+} from "../../../firebase/FirebaseOperations";
 import { hideModal } from "../../../redux/actions/modalActions";
 import { signUpValidate } from "../../../utility/validate";
 import { FIELDS_NAME } from "../../../types/FIELDS_NAMES";
+import { IStore } from "../../../redux/reducers";
+import { UserNamesI } from "../../../redux/reducers/userNames";
 
 interface SignUpFormProps {
-  firebase: Firebase;
+  firebase: FirebaseOperations;
   hideModal: typeof hideModal;
+  userNames: UserNamesI;
 }
 
 const SignUpFields = [
@@ -29,23 +35,17 @@ const SignUpFields = [
   }
 ];
 
-const _SignUpForm = ({ firebase, hideModal }: SignUpFormProps) => {
-  const handleSignUp = (values: DoSignUpI) => {
-    firebase
-      .doSignUp(values)
-      .then(() => {
-        hideModal();
-      })
-      .catch(error => {
-        alert(error.message);
-      });
+const _SignUpForm = ({ firebase, hideModal, userNames }: SignUpFormProps) => {
+  const handleSignUp = (values: DoCreateUserI) => {
+    firebase.doCreateUser(values);
   };
+  const validate = signUpValidate(userNames);
 
   return (
     <div>
       <JoinForm
         fields={SignUpFields}
-        validate={signUpValidate}
+        validate={validate}
         handleSubmit={handleSignUp}
         buttonText="Sign up"
       />
@@ -53,9 +53,11 @@ const _SignUpForm = ({ firebase, hideModal }: SignUpFormProps) => {
   );
 };
 
+const mapStateToProps = (state: IStore) => ({ userNames: state.userNames });
+
 export const SignUpForm = compose(
   connect(
-    null,
+    mapStateToProps,
     { hideModal }
   ),
   withFirebase
