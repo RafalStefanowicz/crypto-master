@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
 
 import { App } from "./components/App/App";
-import { ModalRoot } from "./components/ModalRoot/ModalRoot";
+import { ModalRoot } from "./components/Modals/ModalRoot/ModalRoot";
 import { CryptoListener } from "./api/CryptoListener";
 import { FirebaseListeners } from "./firebase/FirebaseListeners";
 import { FirebaseContext } from "./firebase/FirebaseContext";

@@ -26,8 +26,8 @@ export const withWallet = <P extends withWalletProps>(
     ...otherProps
   }: P & WithWallet) => {
     useEffect(() => {
-      if (firebase.auth.currentUser) {
-        const userId = firebase.auth.currentUser.uid;
+      const userId = firebase.getUserId();
+      if (userId) {
         firebase
           .walletDb(userId)
           .on("value", (snapshot: firebase.database.DataSnapshot) => {

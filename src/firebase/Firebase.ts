@@ -29,6 +29,12 @@ export class Firebase {
     this.db = this.firebase.database();
   }
 
+  getUserId = () => {
+    if (this.auth && this.auth.currentUser) {
+      return this.auth.currentUser.uid;
+    }
+  };
+
   protected doSignUp = ({ email, password }: DoSignUpI) =>
     this.auth.createUserWithEmailAndPassword(email, password);
 

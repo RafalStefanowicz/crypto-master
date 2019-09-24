@@ -8,7 +8,7 @@ const INITIAL_MODAL_STATE = {
 
 export interface IModal {
   modalType: MODAL_TYPES;
-  modalProps: {};
+  modalProps: any;
 }
 
 export const modal = (

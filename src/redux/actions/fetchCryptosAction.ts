@@ -11,8 +11,10 @@ export interface FetchCryptosAction {
 
 export const fetchCryptosAction = () => async (dispatch: Dispatch) => {
   const cryptos = await fetchCryptos();
-  dispatch<FetchCryptosAction>({
-    type: ACTION_TYPES.FETCH_CRYPTOS,
-    payload: cryptos
-  });
+  if (cryptos) {
+    dispatch<FetchCryptosAction>({
+      type: ACTION_TYPES.FETCH_CRYPTOS,
+      payload: cryptos
+    });
+  }
 };

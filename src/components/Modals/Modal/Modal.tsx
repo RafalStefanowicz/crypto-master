@@ -2,7 +2,7 @@ import React from "react";
 import ReactModal from "react-modal";
 import { connect } from "react-redux";
 
-import { hideModal } from "../../redux/actions/modalActions";
+import { hideModal } from "../../../redux/actions/modalActions";
 
 interface ModalProps {
   children: JSX.Element;

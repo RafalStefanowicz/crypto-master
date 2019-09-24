@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Modal } from "../Modal/Modal";
 
-import { FacebookButton } from "../AuthButtons/FacebookButton/FacebookButton";
-import { GoogleButton } from "../AuthButtons/GoogleButton/GoogleButton";
-import { SignUpForm } from "../Form/SignUpForm/SignUpForm";
-import { SignInForm } from "../Form/SignInForm/SignInForm";
-import { ResetPasswordForm } from "../Form/ResetPasswordForm/ResetPasswordForm";
-import { JOIN_FORM_TYPES } from "../../types/JOIN_FORM_TYPES";
+import { FacebookButton } from "../../AuthButtons/FacebookButton/FacebookButton";
+import { GoogleButton } from "../../AuthButtons/GoogleButton/GoogleButton";
+import { SignUpForm } from "../../Form/SignUpForm/SignUpForm";
+import { SignInForm } from "../../Form/SignInForm/SignInForm";
+import { ResetPasswordForm } from "../../Form/ResetPasswordForm/ResetPasswordForm";
+import { JOIN_FORM_TYPES } from "../../../types/JOIN_FORM_TYPES";
 export const JoinModal = () => {
   const [form, setForm] = useState<JOIN_FORM_TYPES>(JOIN_FORM_TYPES.LOG_IN);
 
