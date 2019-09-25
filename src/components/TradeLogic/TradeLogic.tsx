@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import _mapKeys from "lodash/mapKeys";
 
 import { Switcher } from "./Switcher/Switcher";
 import { CryptoList } from "./CryptoList/CryptoList";
@@ -66,7 +65,7 @@ const _TradeLogic = ({ wallet, cryptos, showModal }: TradeContainerProps) => {
     e.preventDefault();
 
     // compute new wallet contents
-    const newWallet = { ...wallet } as WalletType;
+    const newWallet: WalletType = { ...wallet };
     if (!newWallet) return;
 
     const usd = newWallet.USD || 0;
@@ -117,18 +116,24 @@ const _TradeLogic = ({ wallet, cryptos, showModal }: TradeContainerProps) => {
     setInputValue({});
   };
 
-  const cryptosForSell = _mapKeys(cryptos, (value, key) => {
-    if (wallet && value.FROMSYMBOL in wallet) {
-      return key;
+  const getCryptosForSell = () => {
+    let cryptosForSell: CryptosI = {};
+    if (cryptos) {
+      for (let prop in wallet) {
+        if (prop !== "USD") cryptosForSell[prop] = cryptos[prop];
+      }
     }
-  });
+    return cryptosForSell;
+  };
 
   return (
     <div>
       <Switcher handleSwitch={handleSwitch} />
       <CryptoList
         cryptos={
-          transactionType === TransactionType.buy ? cryptos : cryptosForSell
+          transactionType === TransactionType.buy
+            ? cryptos
+            : getCryptosForSell()
         }
         transactionType={transactionType}
         handleInputChange={handleInputChange}

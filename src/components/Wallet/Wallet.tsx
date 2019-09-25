@@ -1,7 +1,7 @@
 import React from "react";
-import BTC from "../../../node_modules/cryptocurrency-icons/svg/black/btc.svg";
+import usdIcon from "../../../node_modules/cryptocurrency-icons/svg/color/usd.svg";
 
-import { cryptoSymbols } from "../../constants/cryptoSymbols";
+import { CRYPTO_SYMBOLS } from "../../types/CRYPTO_SYMBOLS";
 import { cryptoIcons } from "../../constants/cryptoIcons";
 import { WalletType } from "../../redux/reducers/wallet";
 
@@ -14,7 +14,7 @@ export const Wallet = ({ wallet }: WalletProps) => {
   let usdItem = null;
   if (wallet) {
     const walletKeys = Object.keys(wallet) as Array<
-      keyof typeof cryptoSymbols | "USD"
+      keyof typeof CRYPTO_SYMBOLS | "USD"
     >;
     cryptoItems = walletKeys.map(crypto => {
       if (crypto === "USD") return null;
@@ -25,7 +25,7 @@ export const Wallet = ({ wallet }: WalletProps) => {
             src={cryptoIcons[crypto]}
             alt={crypto}
           ></img>
-          <span>{cryptoSymbols[crypto]} </span>
+          <span>{CRYPTO_SYMBOLS[crypto]} </span>
           <span>{wallet[crypto]}</span>
         </li>
       );
@@ -33,7 +33,12 @@ export const Wallet = ({ wallet }: WalletProps) => {
 
     usdItem = (
       <li>
-        <span>USD</span>
+        <img
+          style={{ width: "30px", height: "30px" }}
+          src={usdIcon}
+          alt="usd"
+        ></img>
+        <span>USD </span>
         <span>{wallet.USD}</span>
       </li>
     );

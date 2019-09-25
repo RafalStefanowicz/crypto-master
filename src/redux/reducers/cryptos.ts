@@ -3,7 +3,6 @@ import { ACTION_TYPES, ActionType } from "../../types/ACTION_TYPES";
 export interface CryptoI {
   CHANGEPCT24HOUR: number;
   FROMSYMBOL: string;
-  IMAGEURL: string;
   PRICE: number;
 }
 

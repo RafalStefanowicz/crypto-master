@@ -1,5 +1,7 @@
 import React from "react";
 
+import { cryptoIcons } from "../../../constants/cryptoIcons";
+import { CRYPTO_SYMBOLS } from "../../../types/CRYPTO_SYMBOLS";
 import { CryptosI } from "../../../redux/reducers/cryptos";
 import { TransactionType } from "../TradeLogic";
 import { InputValueType } from "../TradeLogic";
@@ -26,18 +28,20 @@ export const CryptoList = ({
   acqusition
 }: CryptoListProps) => {
   let items = null;
+
   if (cryptos) {
-    items = Object.keys(cryptos).map(cryptoSymbol => {
-      const { FROMSYMBOL, IMAGEURL, PRICE, CHANGEPCT24HOUR } = cryptos[
-        cryptoSymbol
-      ];
+    const symbols = Object.keys(cryptos) as Array<keyof typeof CRYPTO_SYMBOLS>;
+
+    items = symbols.map(cryptoSymbol => {
+      const { FROMSYMBOL, PRICE, CHANGEPCT24HOUR } = cryptos[cryptoSymbol];
+
       return (
         <li key={FROMSYMBOL}>
           <form onSubmit={handleTransaction}>
             <img
               style={{ width: "30px", height: "30px" }}
-              src={`https://www.cryptocompare.com${IMAGEURL}`}
-              alt={FROMSYMBOL}
+              src={cryptoIcons[cryptoSymbol]}
+              alt={cryptoIcons[cryptoSymbol]}
             ></img>
             <span>{`${FROMSYMBOL} `}</span>
             <span>{PRICE} $</span>

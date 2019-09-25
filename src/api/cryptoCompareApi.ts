@@ -1,7 +1,7 @@
 import { CRYPTO_COMPARE_KEY } from "../keys/keys";
 
-import { cryptoSymbols } from "../constants/cryptoSymbols";
+import { CRYPTO_SYMBOLS } from "../types/CRYPTO_SYMBOLS";
 
-const cryptoList = Object.keys(cryptoSymbols).join(",");
+const cryptoList = Object.keys(CRYPTO_SYMBOLS).join(",");
 
 export const get20CryptosURL = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${cryptoList}&tsyms=USD&api_key=${CRYPTO_COMPARE_KEY}`;
