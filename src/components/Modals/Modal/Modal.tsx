@@ -8,8 +8,9 @@ interface ModalProps {
   children: JSX.Element;
   hideModal: typeof hideModal;
 }
+const element = document.getElementById("root");
 
-ReactModal.setAppElement(document.getElementById("root") as HTMLElement);
+element && ReactModal.setAppElement(element);
 
 const _Modal = ({ children, hideModal }: ModalProps) => {
   return (

@@ -7,14 +7,14 @@ export const fetchCryptos = async () => {
   try {
     const response = await fetch(get20CryptosURL);
     const data = await response.json();
-    const cryptos = _mapValues(data.RAW, crypto => {
+    const cryptos: FetchedCryptosI = _mapValues(data.RAW, crypto => {
       const PRICE = Math.floor(crypto.USD.PRICE * 100) / 100;
       return {
         ...crypto.USD,
         PRICE
       };
     });
-    return cryptos as FetchedCryptosI;
+    return cryptos;
   } catch (error) {
     console.log(error);
   }
