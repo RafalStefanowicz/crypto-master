@@ -11,7 +11,7 @@ export const cryptoSymbols = {
   ADA: "Cardano",
   TRX: "TRON",
   XMR: "Monero",
-  DASG: "Dash",
+  DASH: "Dash",
   MIOTA: "IOTA",
   ONT: "Ontology",
   ETC: "ETH Classic",

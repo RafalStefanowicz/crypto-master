@@ -6,7 +6,10 @@ interface WalletI {
 
 export type WalletType = WalletI | null;
 
-export const wallet = (state: WalletType = null, action: ActionType) => {
+export const wallet = (
+  state: WalletType = null,
+  action: ActionType
+): WalletType => {
   switch (action.type) {
     case ACTION_TYPES.SET_WALLET:
       return action.payload;

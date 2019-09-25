@@ -1,12 +1,14 @@
 import React from "react";
+
 import { CryptosI } from "../../../redux/reducers/cryptos";
 import { TransactionType } from "../TradeLogic";
+import { InputValueType } from "../TradeLogic";
 
 interface CryptoListProps {
   cryptos: CryptosI;
   transactionType: TransactionType;
   handleInputChange: HandleInputChangeType;
-  inputValue: { [crypto: string]: number };
+  inputValue: InputValueType;
   handleTransaction: (e: React.FormEvent) => void;
   acqusition: number;
 }
