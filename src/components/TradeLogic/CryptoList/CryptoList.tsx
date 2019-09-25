@@ -1,13 +1,12 @@
 import React from "react";
 import { CryptosI } from "../../../redux/reducers/cryptos";
-import { CRYPTO_TYPES } from "../../../types/CRYPTO_TYPES";
 import { TransactionType } from "../TradeLogic";
 
 interface CryptoListProps {
   cryptos: CryptosI;
   transactionType: TransactionType;
   handleInputChange: HandleInputChangeType;
-  inputValue: { [key in CRYPTO_TYPES]?: number };
+  inputValue: { [crypto: string]: number };
   handleTransaction: (e: React.FormEvent) => void;
   acqusition: number;
 }
@@ -28,7 +27,7 @@ export const CryptoList = ({
   if (cryptos) {
     items = Object.keys(cryptos).map(cryptoSymbol => {
       const { FROMSYMBOL, IMAGEURL, PRICE, CHANGEPCT24HOUR } = cryptos[
-        cryptoSymbol as CRYPTO_TYPES
+        cryptoSymbol
       ];
       return (
         <li key={FROMSYMBOL}>

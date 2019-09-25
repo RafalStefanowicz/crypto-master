@@ -8,7 +8,6 @@ import { WalletType } from "../../redux/reducers/wallet";
 import { CryptosI } from "../../redux/reducers/cryptos";
 import { IStore } from "../../redux/reducers";
 import { HandleInputChangeType } from "./CryptoList/CryptoList";
-import { CRYPTO_TYPES } from "../../types/CRYPTO_TYPES";
 import { MODAL_TYPES } from "../../types/MODAL_TYPES";
 import { showModal, hideModal } from "../../redux/actions/modalActions";
 import { getPriceFormat } from "../../utility/getPriceFormat";
@@ -27,13 +26,13 @@ interface TradeContainerProps {
 }
 
 export type InputValueType = {
-  [key in CRYPTO_TYPES]?: number;
+  [crypto: string]: number;
 };
 
 const _TradeLogic = ({ wallet, cryptos, showModal }: TradeContainerProps) => {
   const [transactionType, setTransactionType] = useState(TransactionType.buy);
   const [inputValue, setInputValue] = useState<InputValueType>({});
-  const cryptoSymbol = Object.keys(inputValue)[0] as CRYPTO_TYPES;
+  const cryptoSymbol = Object.keys(inputValue)[0];
   let cryptoAmount = 0;
   let usdAmount = 0;
 
@@ -118,25 +117,19 @@ const _TradeLogic = ({ wallet, cryptos, showModal }: TradeContainerProps) => {
     setInputValue({});
   };
 
-  // const cryptosInWallet: any = {};
-  // wallet &&
-  //   Object.keys(wallet).forEach(crypto => {
-  //     if (crypto === "USD" || !cryptos || !(crypto in cryptos)) return;
-  //     cryptosInWallet[crypto] = cryptos[crypto];
-  //   });
-  // console.log(cryptosInWallet);
   const cryptosForSell = _mapKeys(cryptos, (value, key) => {
     if (wallet && value.FROMSYMBOL in wallet) {
       return key;
     }
   });
-  console.log(cryptosForSell);
 
   return (
     <div>
       <Switcher handleSwitch={handleSwitch} />
       <CryptoList
-        cryptos={transactionType === TransactionType.buy ? cryptos : null}
+        cryptos={
+          transactionType === TransactionType.buy ? cryptos : cryptosForSell
+        }
         transactionType={transactionType}
         handleInputChange={handleInputChange}
         inputValue={inputValue}
