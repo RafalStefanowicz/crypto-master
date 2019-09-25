@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import _mapKeys from "lodash/mapKeys";
 
 import { Switcher } from "./Switcher/Switcher";
 import { CryptoList } from "./CryptoList/CryptoList";
@@ -84,8 +85,8 @@ const _TradeLogic = ({ wallet, cryptos, showModal }: TradeContainerProps) => {
       showModal({
         modalType: MODAL_TYPES.ALERT,
         modalProps: {
-          alertText: `You don't have enough usd for this transaction. 
-            Price including tax is ${usdAmount + fee} usd`
+          alertText: `You don't have enough money for this transaction. 
+            Price including tax is ${usdAmount + fee} $`
         }
       });
     } else if ((newWallet[cryptoSymbol] as number) < 0) {
@@ -117,11 +118,25 @@ const _TradeLogic = ({ wallet, cryptos, showModal }: TradeContainerProps) => {
     setInputValue({});
   };
 
+  // const cryptosInWallet: any = {};
+  // wallet &&
+  //   Object.keys(wallet).forEach(crypto => {
+  //     if (crypto === "USD" || !cryptos || !(crypto in cryptos)) return;
+  //     cryptosInWallet[crypto] = cryptos[crypto];
+  //   });
+  // console.log(cryptosInWallet);
+  const cryptosForSell = _mapKeys(cryptos, (value, key) => {
+    if (wallet && value.FROMSYMBOL in wallet) {
+      return key;
+    }
+  });
+  console.log(cryptosForSell);
+
   return (
     <div>
       <Switcher handleSwitch={handleSwitch} />
       <CryptoList
-        cryptos={cryptos}
+        cryptos={transactionType === TransactionType.buy ? cryptos : null}
         transactionType={transactionType}
         handleInputChange={handleInputChange}
         inputValue={inputValue}

@@ -69,9 +69,9 @@ const _TransactionModal = ({
         <span>{cryptoAmount} </span>
         <span>{cryptoSymbol} </span>
         <span>for </span>
-        <span>{usdAmount} USD </span>
+        <span>{usdAmount} $ </span>
         <span>?</span>
-        <p>{`Fee: ${fee} USD`}</p>
+        <p>{`Fee: ${fee} $`}</p>
         <button onClick={handleAccept}>{transactionType}</button>
       </>
     </Modal>

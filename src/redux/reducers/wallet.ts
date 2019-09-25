@@ -21,7 +21,7 @@ type WalletCryptos = {
 };
 
 interface WalletI extends WalletCryptos {
-  USD: number;
+  USD?: number;
 }
 
 export type WalletType = WalletI | null;
