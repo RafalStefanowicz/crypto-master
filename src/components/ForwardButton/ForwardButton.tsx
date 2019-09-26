@@ -9,49 +9,39 @@ import { MODAL_TYPES } from "../../types/MODAL_TYPES";
 import { showModal } from "../../redux/actions/modalActions";
 import { IStore } from "../../redux/reducers";
 import { IsLoggedInType } from "../../redux/reducers/isLoggedIn";
-import { fetchCryptosAction } from "../../redux/actions/fetchCryptosAction";
-import { CryptosI } from "../../redux/reducers/cryptos";
 
 interface ForwardButtonProps {
   isLoggedIn: IsLoggedInType;
   showModal: typeof showModal;
   history: History;
-  fetchCryptosAction: typeof fetchCryptosAction;
-  cryptos: CryptosI;
 }
 
 const _ForwardButton = ({
   isLoggedIn,
   showModal,
-  history,
-  fetchCryptosAction,
-  cryptos
+  history
 }: ForwardButtonProps) => {
   const handleClick = () => {
-    fetchCryptosAction();
-    if (cryptos) {
-      console.log(cryptos.BTC);
-    }
     isLoggedIn
       ? history.push(ROUTES.STOCK)
       : showModal({ modalType: MODAL_TYPES.JOIN, modalProps: {} });
   };
 
   const buttonText = isLoggedIn ? "Play" : "Join";
-  return <button onClick={handleClick}>{buttonText}</button>;
+
+  return isLoggedIn !== null ? (
+    <button onClick={handleClick}>{buttonText}</button>
+  ) : null;
 };
 
-const mapStateToProps = (
-  state: IStore
-): { isLoggedIn: IsLoggedInType; cryptos: CryptosI } => ({
-  isLoggedIn: state.isLoggedIn,
-  cryptos: state.cryptos
+const mapStateToProps = (state: IStore): { isLoggedIn: IsLoggedInType } => ({
+  isLoggedIn: state.isLoggedIn
 });
 
 export const ForwardButton = compose(
   connect(
     mapStateToProps,
-    { showModal, fetchCryptosAction }
+    { showModal }
   ),
   withRouter
 )(_ForwardButton) as React.ReactType;

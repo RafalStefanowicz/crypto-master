@@ -25,22 +25,23 @@ export const withWallet = <P extends withWalletProps>(
     firebase,
     ...otherProps
   }: P & WithWallet) => {
+    const userId = firebase.getUserId();
+
     useEffect(() => {
-      const userId = firebase.getUserId();
       if (userId) {
         firebase
           .walletDb(userId)
           .on("value", (snapshot: firebase.database.DataSnapshot) => {
-            wallet = snapshot.val();
-            if (wallet) {
-              setWallet(wallet);
+            const newWallet = snapshot.val();
+            if (newWallet) {
+              setWallet(newWallet);
             }
           });
         return () => {
           firebase.walletDb(userId).off();
         };
       }
-    }, [firebase, setWallet]);
+    }, [firebase, userId, setWallet]);
 
     return <Component wallet={wallet} {...(otherProps as any)} />;
   };

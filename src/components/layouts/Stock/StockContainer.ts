@@ -9,8 +9,11 @@ import { withWallet } from "../../Wallet/withWallet";
 
 const StockOrAlternative = renderAlternative(Loader)(Stock);
 
-const mapStateToProps = (state: IStore, { wallet }: StockProps) => {
-  const renderAlternative = !wallet || !state.cryptos;
+const mapStateToProps = (
+  { isLoggedIn, cryptos }: IStore,
+  { wallet }: StockProps
+) => {
+  const renderAlternative = !wallet || !cryptos || isLoggedIn === null;
   return {
     renderAlternative
   };

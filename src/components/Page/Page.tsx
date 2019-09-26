@@ -21,12 +21,21 @@ const _Page = ({ isLoggedIn }: PageProps) => {
     <Switch>
       <Route exact component={Home} path={ROUTES.CRYTPO_MASTER} />
       <Route
-        component={isLoggedIn ? StockContainer : Home}
+        component={isLoggedIn === false ? Home : StockContainer}
         path={ROUTES.STOCK}
       />
-      <Route component={isLoggedIn ? Account : Home} path={ROUTES.ACCOUNT} />
-      <Route component={isLoggedIn ? History : Home} path={ROUTES.HISTORY} />
-      <Route component={isLoggedIn ? Ranking : Home} path={ROUTES.RANK} />
+      <Route
+        component={isLoggedIn === false ? Home : Account}
+        path={ROUTES.ACCOUNT}
+      />
+      <Route
+        component={isLoggedIn === false ? Home : History}
+        path={ROUTES.HISTORY}
+      />
+      <Route
+        component={isLoggedIn === false ? Home : Ranking}
+        path={ROUTES.RANK}
+      />
     </Switch>
   );
 };

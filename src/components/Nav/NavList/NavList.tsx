@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 import { ROUTES, NAV_LINKS } from "../../../types";
 
-const _NavList = () => {
+export const NavList = () => {
   return (
     <ul>
       <li>
@@ -29,5 +29,3 @@ const _NavList = () => {
     </ul>
   );
 };
-
-export const NavList = _NavList;

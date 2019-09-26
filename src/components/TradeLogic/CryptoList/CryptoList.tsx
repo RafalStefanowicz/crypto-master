@@ -48,6 +48,7 @@ export const CryptoList = ({
             <span> 24h: {CHANGEPCT24HOUR.toFixed(2)}%</span>
             <input
               name={FROMSYMBOL}
+              value={inputValue[FROMSYMBOL] || ""}
               type="number"
               placeholder={
                 transactionType === TransactionType.buy
@@ -55,7 +56,6 @@ export const CryptoList = ({
                   : `${FROMSYMBOL}..`
               }
               onChange={handleInputChange}
-              value={inputValue[FROMSYMBOL] || ""}
             />
             {cryptoSymbol in inputValue ? (
               <>
