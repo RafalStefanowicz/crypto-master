@@ -9,7 +9,7 @@ import { IStore } from "../../redux/reducers";
 import { HandleInputChangeType } from "./CryptoList/CryptoList";
 import { MODAL_TYPES } from "../../types/MODAL_TYPES";
 import { showModal, hideModal } from "../../redux/actions/modalActions";
-import { getPriceFormat } from "../../utility/getPriceFormat";
+import { getCurrencyFormat } from "../../utility/getCurrencyFormat";
 
 const FEE_AMOUNT = 0.01;
 
@@ -32,25 +32,26 @@ const _TradeLogic = ({ wallet, cryptos, showModal }: TradeContainerProps) => {
   const [transactionType, setTransactionType] = useState(TransactionType.buy);
   const [inputValue, setInputValue] = useState<InputValueType>({});
   const cryptoSymbol = Object.keys(inputValue)[0];
+  let fee = 0;
   let cryptoAmount = 0;
   let usdAmount = 0;
 
   const getAcqusition = () => {
-    // set cryptoAmount and usdAmount involved to transaction
+    // set cryptoAmount , usdAmount  and fee involved to transaction
     const value = inputValue[cryptoSymbol];
     if (!(cryptos && value)) return;
     const price = cryptos[cryptoSymbol].PRICE;
     if (transactionType === TransactionType.buy) {
-      cryptoAmount = Math.floor((value / price) * 10000) / 10000;
+      fee = getCurrencyFormat(value * FEE_AMOUNT);
+      cryptoAmount = Math.floor(((value - fee) / price) * 10000) / 10000;
       usdAmount = value;
     } else {
+      fee = getCurrencyFormat(value * price * FEE_AMOUNT);
       cryptoAmount = value;
-      usdAmount = getPriceFormat(value * price);
+      usdAmount = getCurrencyFormat(value * price - fee);
     }
   };
   getAcqusition();
-
-  const fee = getPriceFormat(usdAmount * FEE_AMOUNT);
 
   const handleInputChange: HandleInputChangeType = event => {
     const { name, value } = event.currentTarget;
@@ -71,11 +72,14 @@ const _TradeLogic = ({ wallet, cryptos, showModal }: TradeContainerProps) => {
     const usd = newWallet.USD || 0;
     const crypto = newWallet[cryptoSymbol] || 0;
     if (transactionType === TransactionType.buy) {
-      newWallet.USD = usd - usdAmount - fee;
+      newWallet.USD = usd - usdAmount;
       newWallet[cryptoSymbol] = crypto + cryptoAmount;
     } else {
-      newWallet.USD = usd + usdAmount - fee;
+      newWallet.USD = usd + usdAmount;
       newWallet[cryptoSymbol] = crypto - cryptoAmount;
+
+      // remove crypto property from wallet when sold
+      if (!newWallet[cryptoSymbol]) delete newWallet[cryptoSymbol];
     }
 
     // handle transaction in modals
@@ -83,8 +87,7 @@ const _TradeLogic = ({ wallet, cryptos, showModal }: TradeContainerProps) => {
       showModal({
         modalType: MODAL_TYPES.ALERT,
         modalProps: {
-          alertText: `You don't have enough money for this transaction. 
-            Price including tax is ${usdAmount + fee} $`
+          alertText: `You don't have enough money for this transaction.`
         }
       });
     } else if ((newWallet[cryptoSymbol] as number) < 0) {
@@ -139,10 +142,9 @@ const _TradeLogic = ({ wallet, cryptos, showModal }: TradeContainerProps) => {
         handleInputChange={handleInputChange}
         inputValue={inputValue}
         handleTransaction={handleTransaction}
+        fee={fee}
         acqusition={
-          transactionType === TransactionType.buy
-            ? cryptoAmount
-            : getPriceFormat(usdAmount - fee)
+          transactionType === TransactionType.buy ? cryptoAmount : usdAmount
         }
       />
     </div>

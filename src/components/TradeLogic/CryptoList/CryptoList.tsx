@@ -13,6 +13,7 @@ interface CryptoListProps {
   inputValue: InputValueType;
   handleTransaction: (e: React.FormEvent) => void;
   acqusition: number;
+  fee: number;
 }
 
 export type HandleInputChangeType = (
@@ -25,7 +26,8 @@ export const CryptoList = ({
   handleInputChange,
   inputValue,
   handleTransaction,
-  acqusition
+  acqusition,
+  fee
 }: CryptoListProps) => {
   let items = null;
 
@@ -62,6 +64,7 @@ export const CryptoList = ({
                 <span>{`${acqusition} ${
                   transactionType === TransactionType.buy ? FROMSYMBOL : "usd"
                 }`}</span>
+                <span> {fee}$ fee</span>
                 <button>{transactionType}</button>
               </>
             ) : null}

@@ -1,6 +1,7 @@
 import { Firebase } from "./Firebase";
 import { UserNamesI } from "../redux/reducers/userNames";
 import { getUniqueUserName } from "../utility/getUniqueUserName";
+import { createInvestmentsObject } from "../utility/createInvestmentObject";
 
 export interface AddUserToDbI {
   userId: string;
@@ -46,7 +47,7 @@ export class FirebaseOperations extends Firebase {
             userId: user.uid,
             userName: userName,
             email: user.email,
-            createdBy: "Firebase"
+            createdBy: "firebase.com"
           });
         }
         return user;
@@ -89,4 +90,12 @@ export class FirebaseOperations extends Firebase {
       .catch(error => {
         alert(error.message);
       });
+
+  getInvestments = async (userId: string, cryptoSymbol: string) => {
+    let snapShot = null;
+    await this.investmentsDb(userId).once("value", snapshot => {
+      snapShot = snapshot.val();
+    });
+    return createInvestmentsObject(snapShot, cryptoSymbol);
+  };
 }

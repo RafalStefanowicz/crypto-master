@@ -54,4 +54,30 @@ export class Firebase {
   personalDb = (userId: string) => this.db.ref(`users/${userId}/personal`);
 
   userNamesDb = () => this.db.ref(`usernames`);
+
+  investmentsDb = (userId: string) =>
+    this.db.ref(`users/${userId}/investments`);
+
+  doChangePassword = (currentPassword: string, newPassword: string) => {
+    const user = this.auth.currentUser;
+
+    if (user && user.email) {
+      return this.doReauthenticateUser(user, user.email, currentPassword)
+        .then(() => user.updatePassword(newPassword))
+        .catch(error => Promise.reject(error));
+    }
+    return user;
+  };
+
+  private doReauthenticateUser = (
+    user: firebase.User,
+    userEmail: string,
+    currentPassword: string
+  ) => {
+    const credential = firebase.auth.EmailAuthProvider.credential(
+      userEmail,
+      currentPassword
+    );
+    return user.reauthenticateWithCredential(credential);
+  };
 }

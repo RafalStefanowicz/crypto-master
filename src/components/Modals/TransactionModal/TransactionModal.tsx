@@ -7,8 +7,9 @@ import { hideModal } from "../../../redux/actions/modalActions";
 import { WalletType } from "../../../redux/reducers/wallet";
 import { FirebaseOperations } from "../../../firebase/FirebaseOperations";
 import { withFirebase } from "../../../firebase/withFirebase";
-
+import { getInvestmentAfterTransaction } from "../../../utility/getInvestmentAfterTransaction";
 import { TransactionType } from "../../TradeLogic/TradeLogic";
+import { InvestmentsI } from "../../../types/Investments";
 
 interface TransactionModalProps {
   newWallet: WalletType;
@@ -50,54 +51,16 @@ const _TransactionModal = ({
 
     if (userId) {
       const investments = await firebase.getInvestments(userId, cryptoSymbol);
-
-      if (transactionType === TransactionType.buy) {
-        investments.now[cryptoSymbol][Date.now()] = {
+      const investmentsAfterTransaction: InvestmentsI = getInvestmentAfterTransaction(
+        {
+          transactionType,
+          investments,
+          cryptoSymbol,
           cryptoAmount,
-          buyPrice: Math.floor(((usdAmount + fee) / cryptoAmount) * 100) / 100
-        };
-      }
-      await firebase.investmentsDb(userId).set(investments);
-
-      const past = investments.past[cryptoSymbol];
-      const now = investments.now[cryptoSymbol];
-
-      if (transactionType === TransactionType.sell) {
-        const times: any = Object.keys(now).sort();
-        let amount = cryptoAmount;
-        let sellTime = Date.now();
-
-        for (let i = 0; amount > 0; i++) {
-          const buyCryptoAmount = now[times[i]].cryptoAmount;
-          const buyPrice = now[times[i]].buyPrice;
-
-          const sellPrice = (usdAmount - fee) / cryptoAmount;
-
-          const roi = sellPrice / buyPrice;
-          let sellCryptoAmount = 0;
-
-          if (buyCryptoAmount > amount) {
-            sellCryptoAmount = amount;
-            now[times[i]].cryptoAmount = buyCryptoAmount - amount;
-            amount -= buyCryptoAmount;
-          } else if (buyCryptoAmount <= amount) {
-            sellCryptoAmount = buyCryptoAmount;
-            now[times[i]] = {};
-            amount -= buyCryptoAmount;
-          }
-
-          sellTime += 1;
-          past[sellTime] = {
-            buyTime: times[i],
-            sellTime: sellTime,
-            sellCryptoAmount,
-            buyPrice,
-            sellPrice,
-            roi
-          };
+          usdAmount
         }
-      }
-      await firebase.investmentsDb(userId).set(investments);
+      );
+      firebase.investmentsDb(userId).set(investmentsAfterTransaction);
 
       firebase
         .walletDb(userId)
@@ -122,7 +85,7 @@ const _TransactionModal = ({
         <span>for </span>
         <span>{usdAmount} $ </span>
         <span>?</span>
-        <p>{`Fee: ${fee} $`}</p>
+        <p>{`Fee included: ${fee} $`}</p>
         <button onClick={handleAccept}>{transactionType}</button>
       </>
     </Modal>
