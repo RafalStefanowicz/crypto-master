@@ -13,6 +13,21 @@ interface ISignUpErrors {
   password?: string;
 }
 
+interface ChangePasswordValuesI {
+  currentPassword: string;
+  newPassword: string;
+}
+
+interface ChangePasswordErrors {
+  currentPassword?: string;
+  newPassword?: string;
+}
+
+export type ValidationType =
+  | SignUpValidateType
+  | typeof signInValidate
+  | typeof resetPasswordValidate;
+
 export type SignUpValidateType = (values: ISignUpValues) => ISignUpErrors;
 
 export const signUpValidate = (userNames: UserNamesI): SignUpValidateType => (
@@ -86,7 +101,20 @@ export const resetPasswordValidate = (
   return errors;
 };
 
-export type ValidationType =
-  | SignUpValidateType
-  | typeof signInValidate
-  | typeof resetPasswordValidate;
+export const changePasswordValidate = (
+  values: ChangePasswordValuesI
+): ChangePasswordErrors => {
+  let errors: ChangePasswordErrors = {};
+  if (!values.currentPassword) {
+    errors.currentPassword = "Required";
+  }
+  if (!values.newPassword) {
+    errors.newPassword = "Required";
+  } else if (
+    !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/i.test(values.newPassword)
+  ) {
+    errors.newPassword =
+      "Invalid password: Minimum six characters, at least one letter and one number:";
+  }
+  return errors;
+};

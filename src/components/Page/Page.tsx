@@ -7,7 +7,7 @@ import { Home } from "../layouts/Home/Home";
 import { StockContainer } from "../layouts/Stock/StockContainer";
 import { Ranking } from "../layouts/Ranking/Ranking";
 import { History } from "../layouts/History/History";
-import { Account } from "../layouts/Account/Account";
+import { AccountLogic } from "../layouts/Account/AccountLogic";
 import { ROUTES } from "../../types";
 import { IStore } from "../../redux/reducers";
 import { IsLoggedInType } from "../../redux/reducers/isLoggedIn";
@@ -25,7 +25,7 @@ const _Page = ({ isLoggedIn }: PageProps) => {
         path={ROUTES.STOCK}
       />
       <Route
-        component={isLoggedIn === false ? Home : Account}
+        component={isLoggedIn === false ? Home : AccountLogic}
         path={ROUTES.ACCOUNT}
       />
       <Route
