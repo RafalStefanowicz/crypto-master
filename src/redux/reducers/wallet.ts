@@ -1,6 +1,6 @@
 import { ActionType, ACTION_TYPES } from "../../types/ACTION_TYPES";
 
-interface WalletI {
+export interface WalletI {
   [key: string]: number;
 }
 

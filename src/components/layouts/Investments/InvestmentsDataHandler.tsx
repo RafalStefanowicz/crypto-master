@@ -32,7 +32,20 @@ const _InvestmentsDataHandler = ({
   const userId = searchUserId || firebase.getUserId();
   const investments = useInvestmentsDb(userId, firebase);
 
-  // Loader when data hasn't loaded
+  // Investments have already been fetched and are empty
+  if (investments === null) {
+    return (
+      <Info
+        infoText={
+          userNameParams
+            ? `User ${userNameParams} has no investments`
+            : "You don't have any investments"
+        }
+      />
+    );
+  }
+
+  // Loader when data haven't been loaded yet
   if (!Object.keys(userNames).length || !("current" in investments)) {
     return <Loader />;
   }

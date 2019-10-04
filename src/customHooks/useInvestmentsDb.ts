@@ -5,8 +5,8 @@ import { Firebase } from "../firebase/Firebase";
 export const useInvestmentsDb = (
   userId: string | undefined,
   firebase: Firebase
-): InvestmentsI | {} => {
-  const [investments, setInvestments] = useState<InvestmentsI | {}>({});
+): InvestmentsI | null | {} => {
+  const [investments, setInvestments] = useState<InvestmentsI | null | {}>({});
 
   useEffect(() => {
     if (userId) {

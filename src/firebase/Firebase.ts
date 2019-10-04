@@ -49,15 +49,6 @@ export class Firebase {
   protected doSignInWithFacebook = () =>
     this.auth.signInWithPopup(this.facebookProvider);
 
-  walletDb = (userId: string) => this.db.ref(`users/${userId}/wallet`);
-
-  personalDb = (userId: string) => this.db.ref(`users/${userId}/personal`);
-
-  userNamesDb = () => this.db.ref(`usernames`);
-
-  investmentsDb = (userId: string) =>
-    this.db.ref(`users/${userId}/investments`);
-
   doChangePassword = (currentPassword: string, newPassword: string) => {
     const user = this.auth.currentUser;
 
@@ -80,4 +71,15 @@ export class Firebase {
     );
     return user.reauthenticateWithCredential(credential);
   };
+
+  walletDb = (userId: string) => this.db.ref(`users/${userId}/wallet`);
+
+  personalDb = (userId: string) => this.db.ref(`users/${userId}/personal`);
+
+  userNamesDb = () => this.db.ref(`usernames`);
+
+  investmentsDb = (userId: string) =>
+    this.db.ref(`users/${userId}/investments`);
+
+  usersDb = () => this.db.ref("users");
 }
