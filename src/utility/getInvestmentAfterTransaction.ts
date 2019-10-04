@@ -1,5 +1,5 @@
 import { TransactionType } from "../components/TradeLogic/TradeLogic";
-import { InvestmentsI } from "../types/Investments";
+import { InvestmentsI } from "../types/InvestmentsInterfaces";
 
 interface GetInvestmentAfterTransactionProps {
   transactionType: TransactionType;
@@ -17,25 +17,26 @@ export const getInvestmentAfterTransaction = ({
 }: GetInvestmentAfterTransactionProps) => {
   const investmentsAfterTransaction = JSON.parse(JSON.stringify(investments));
   //references
-  const pastInvestments = investmentsAfterTransaction.past[cryptoSymbol];
-  const pendingInvestments = investmentsAfterTransaction.pending[cryptoSymbol];
+  const completedInvestments =
+    investmentsAfterTransaction.completed[cryptoSymbol];
+  const currentInvestments = investmentsAfterTransaction.current[cryptoSymbol];
 
   if (transactionType === TransactionType.buy) {
-    pendingInvestments[Date.now()] = {
+    currentInvestments[Date.now()] = {
       cryptoAmount,
       buyPrice: Math.floor((usdAmount / cryptoAmount) * 100) / 100
     };
   }
 
   if (transactionType === TransactionType.sell) {
-    const times = Object.keys(pendingInvestments).sort();
+    const times = Object.keys(currentInvestments).sort();
     //copy cryptoAmount
     let amount = cryptoAmount;
     let sellTime = Date.now();
 
     for (let i = 0; amount > 0; i++) {
-      const buyCryptoAmount = pendingInvestments[times[i]].cryptoAmount;
-      const buyPrice = pendingInvestments[times[i]].buyPrice;
+      const buyCryptoAmount = currentInvestments[times[i]].cryptoAmount;
+      const buyPrice = currentInvestments[times[i]].buyPrice;
 
       const sellPrice = usdAmount / cryptoAmount;
 
@@ -44,16 +45,16 @@ export const getInvestmentAfterTransaction = ({
 
       if (buyCryptoAmount > amount) {
         sellCryptoAmount = amount;
-        pendingInvestments[times[i]].cryptoAmount = buyCryptoAmount - amount;
+        currentInvestments[times[i]].cryptoAmount = buyCryptoAmount - amount;
         amount -= buyCryptoAmount;
       } else if (buyCryptoAmount <= amount) {
         sellCryptoAmount = buyCryptoAmount;
-        pendingInvestments[times[i]] = {};
+        currentInvestments[times[i]] = {};
         amount -= buyCryptoAmount;
       }
 
       sellTime += 1;
-      pastInvestments[sellTime] = {
+      completedInvestments[sellTime] = {
         buyTime: times[i],
         sellTime: sellTime,
         sellCryptoAmount,

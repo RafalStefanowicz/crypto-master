@@ -6,7 +6,7 @@ import { Route, Switch } from "react-router-dom";
 import { Home } from "../layouts/Home/Home";
 import { StockContainer } from "../layouts/Stock/StockContainer";
 import { Ranking } from "../layouts/Ranking/Ranking";
-import { History } from "../layouts/History/History";
+import { InvestmentsDataHandler } from "../layouts/Investments/InvestmentsDataHandler";
 import { AccountLogic } from "../layouts/Account/AccountLogic";
 import { ROUTES } from "../../types";
 import { IStore } from "../../redux/reducers";
@@ -29,8 +29,8 @@ const _Page = ({ isLoggedIn }: PageProps) => {
         path={ROUTES.ACCOUNT}
       />
       <Route
-        component={isLoggedIn === false ? Home : History}
-        path={ROUTES.HISTORY}
+        component={isLoggedIn === false ? Home : InvestmentsDataHandler}
+        path={ROUTES.INVESTMENTS}
       />
       <Route
         component={isLoggedIn === false ? Home : Ranking}

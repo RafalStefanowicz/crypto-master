@@ -5,17 +5,17 @@ export const createInvestmentsObject = (
   if (!investments) {
     investments = {};
   }
-  if (!investments.pending) {
-    investments.pending = {};
+  if (!investments.current) {
+    investments.current = {};
   }
-  if (!investments.pending[cryptoSymbol]) {
-    investments.pending[cryptoSymbol] = {};
+  if (!investments.current[cryptoSymbol]) {
+    investments.current[cryptoSymbol] = {};
   }
-  if (!investments.past) {
-    investments.past = {};
+  if (!investments.completed) {
+    investments.completed = {};
   }
-  if (!investments.past[cryptoSymbol]) {
-    investments.past[cryptoSymbol] = {};
+  if (!investments.completed[cryptoSymbol]) {
+    investments.completed[cryptoSymbol] = {};
   }
 
   return investments;

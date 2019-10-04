@@ -9,7 +9,10 @@ import { IStore } from "../../redux/reducers";
 import { HandleInputChangeType } from "./CryptoList/CryptoList";
 import { MODAL_TYPES } from "../../types/MODAL_TYPES";
 import { showModal, hideModal } from "../../redux/actions/modalActions";
-import { getCurrencyFormat } from "../../utility/getCurrencyFormat";
+import {
+  getCurrencyFormat,
+  getCryptoFormat
+} from "../../utility/numberFormats";
 
 const FEE_AMOUNT = 0.01;
 
@@ -25,7 +28,7 @@ interface TradeContainerProps {
 }
 
 export type InputValueType = {
-  [crypto: string]: number;
+  [crypto: string]: string;
 };
 
 const _TradeLogic = ({ wallet, cryptos, showModal }: TradeContainerProps) => {
@@ -38,12 +41,12 @@ const _TradeLogic = ({ wallet, cryptos, showModal }: TradeContainerProps) => {
 
   const getAcqusition = () => {
     // set cryptoAmount , usdAmount  and fee involved to transaction
-    const value = inputValue[cryptoSymbol];
+    const value = Number(inputValue[cryptoSymbol]);
     if (!(cryptos && value)) return;
     const price = cryptos[cryptoSymbol].PRICE;
     if (transactionType === TransactionType.buy) {
       fee = getCurrencyFormat(value * FEE_AMOUNT);
-      cryptoAmount = Math.floor(((value - fee) / price) * 10000) / 10000;
+      cryptoAmount = getCryptoFormat((value - fee) / price);
       usdAmount = value;
     } else {
       fee = getCurrencyFormat(value * price * FEE_AMOUNT);
@@ -55,10 +58,10 @@ const _TradeLogic = ({ wallet, cryptos, showModal }: TradeContainerProps) => {
 
   const handleInputChange: HandleInputChangeType = event => {
     const { name, value } = event.currentTarget;
-    if (!value) {
+    if (value == "") {
       setInputValue({});
     } else {
-      setInputValue({ [name]: Number(value) });
+      setInputValue({ [name]: value });
     }
   };
 
@@ -72,11 +75,11 @@ const _TradeLogic = ({ wallet, cryptos, showModal }: TradeContainerProps) => {
     const usd = newWallet.USD || 0;
     const crypto = newWallet[cryptoSymbol] || 0;
     if (transactionType === TransactionType.buy) {
-      newWallet.USD = usd - usdAmount;
-      newWallet[cryptoSymbol] = crypto + cryptoAmount;
+      newWallet.USD = getCurrencyFormat(usd - usdAmount);
+      newWallet[cryptoSymbol] = getCryptoFormat(crypto + cryptoAmount);
     } else {
-      newWallet.USD = usd + usdAmount;
-      newWallet[cryptoSymbol] = crypto - cryptoAmount;
+      newWallet.USD = getCurrencyFormat(usd + usdAmount);
+      newWallet[cryptoSymbol] = getCryptoFormat(crypto - cryptoAmount);
 
       // remove crypto property from wallet when sold
       if (!newWallet[cryptoSymbol]) delete newWallet[cryptoSymbol];

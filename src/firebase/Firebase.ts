@@ -30,7 +30,7 @@ export class Firebase {
   }
 
   getUserId = () => {
-    if (this.auth && this.auth.currentUser) {
+    if (this.auth.currentUser) {
       return this.auth.currentUser.uid;
     }
   };

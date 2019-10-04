@@ -9,7 +9,7 @@ import { FirebaseOperations } from "../../../firebase/FirebaseOperations";
 import { withFirebase } from "../../../firebase/withFirebase";
 import { getInvestmentAfterTransaction } from "../../../utility/getInvestmentAfterTransaction";
 import { TransactionType } from "../../TradeLogic/TradeLogic";
-import { InvestmentsI } from "../../../types/Investments";
+import { InvestmentsI } from "../../../types/InvestmentsInterfaces";
 
 interface TransactionModalProps {
   newWallet: WalletType;
