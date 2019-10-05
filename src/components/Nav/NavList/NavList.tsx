@@ -17,7 +17,7 @@ export const NavList = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink to={ROUTES.LOGGED_USER_INVESTMENTS}>
+        <NavLink to={ROUTES.INVESTMENTS}>
           <span>{NAV_LINKS.INVESTMENTS}</span>
         </NavLink>
       </li>

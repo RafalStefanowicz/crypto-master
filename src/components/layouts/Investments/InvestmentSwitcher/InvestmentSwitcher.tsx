@@ -16,10 +16,12 @@ import {
 
 interface InvestmentSwitcherProps {
   investments: InvestmentsI;
+  userNameParams?: string;
 }
 
 export const InvestmentSwitcher = ({
-  investments
+  investments,
+  userNameParams
 }: InvestmentSwitcherProps) => {
   const [showCurrent, setShowCurrent] = useState(true);
 
@@ -43,7 +45,7 @@ export const InvestmentSwitcher = ({
 
     // render info if no completed investments
     if (!("completed" in investments)) {
-      return <Info infoText={`Zero completed investments so far`} />;
+      return <Info infoText={`No completed investments so far`} />;
     }
 
     // render completed investments
@@ -64,6 +66,7 @@ export const InvestmentSwitcher = ({
 
   return (
     <div id="investments">
+      {userNameParams ? <Info infoText={userNameParams} /> : null}
       <SwitchButtons
         showCurrent={showCurrent}
         setShowCurrent={setShowCurrent}

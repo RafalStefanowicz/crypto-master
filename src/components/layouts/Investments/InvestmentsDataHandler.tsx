@@ -55,7 +55,12 @@ const _InvestmentsDataHandler = ({
     return <Info infoText={`User ${userNameParams} doesn't exist`} />;
   }
 
-  return <InvestmentSwitcher investments={investments} />;
+  return (
+    <InvestmentSwitcher
+      investments={investments}
+      userNameParams={userNameParams}
+    />
+  );
 };
 
 const mapStateToProps = (state: IStore) => ({

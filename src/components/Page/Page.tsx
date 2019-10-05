@@ -30,7 +30,7 @@ const _Page = ({ isLoggedIn }: PageProps) => {
       />
       <Route
         component={isLoggedIn === false ? Home : InvestmentsDataHandler}
-        path={ROUTES.INVESTMENTS}
+        path={ROUTES.INVESTMENTS_PARAMS}
       />
       <Route
         component={isLoggedIn === false ? Home : RankingDataHandler}

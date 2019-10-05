@@ -1,4 +1,7 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
+
+import { ROUTES } from "../../../../types/ROUTES";
 import { getUsersAssetDetails } from "../../../../utility/getUsersAssetDetails";
 
 interface RankingListProps {
@@ -12,6 +15,9 @@ export const RankingList = ({ filteredUsersAssetRank }: RankingListProps) => {
         <span>{userAsset.rank} </span>
         <span>{userAsset.userName} </span>
         <span>{userAsset.asset} </span>
+        <NavLink to={`${ROUTES.INVESTMENTS}/${userAsset.userName}`}>
+          Investments
+        </NavLink>
       </li>
     ));
   return <ul>{renderRankItems()}</ul>;
