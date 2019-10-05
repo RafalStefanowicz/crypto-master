@@ -16,7 +16,7 @@ const _CryptoListener = ({ fetchCryptosAction }: any) => {
     return () => {
       clearInterval(listener);
     };
-  }, []);
+  }, [fetchCryptosAction]);
 
   return <></>;
 };

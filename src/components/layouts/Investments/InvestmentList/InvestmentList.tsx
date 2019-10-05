@@ -28,16 +28,20 @@ export const InvestmentList = ({
       const renderTransactonsOfIndividualCrypto = () =>
         indiviudalTransactions.map(investmentTime => {
           const investment = investments[cryptoSymbol][Number(investmentTime)];
-          return renderInvestmentItem({
-            investment,
-            cryptoSymbol,
-            investmentTime
-          });
+          return (
+            <li key={investmentTime}>
+              {renderInvestmentItem({
+                investment,
+                cryptoSymbol,
+                investmentTime
+              })}
+            </li>
+          );
         });
 
       return (
         <li id={cryptoSymbol} key={cryptoSymbol}>
-          <img src={cryptoIcons[cryptoSymbol]}></img>
+          <img src={cryptoIcons[cryptoSymbol]} alt={cryptoSymbol}></img>
           <span>{CRYPTO_SYMBOLS[cryptoSymbol]}</span>
           <ul>{renderTransactonsOfIndividualCrypto()}</ul>
         </li>

@@ -58,7 +58,7 @@ const _TradeLogic = ({ wallet, cryptos, showModal }: TradeContainerProps) => {
 
   const handleInputChange: HandleInputChangeType = event => {
     const { name, value } = event.currentTarget;
-    if (value == "") {
+    if (value === "") {
       setInputValue({});
     } else {
       setInputValue({ [name]: value });

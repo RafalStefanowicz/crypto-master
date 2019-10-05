@@ -15,13 +15,13 @@ export const CompletedInvestmentItem = ({
   cryptoSymbol
 }: CompletedInvestmentItemProps) => {
   return (
-    <li key={investmentTime}>
+    <>
       <p>{investment.buyTime}</p>
       <p>{investment.buyPrice}</p>
       <p>{investment.sellTime}</p>
       <p>{investment.sellPrice}</p>
       <p>{investment.sellCryptoAmount}</p>
       <p>{investment.roi}</p>
-    </li>
+    </>
   );
 };

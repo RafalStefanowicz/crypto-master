@@ -15,10 +15,10 @@ export const CurrentInvestmentItem = ({
   cryptoSymbol
 }: CurrentInvestmentItemProps) => {
   return (
-    <li key={investmentTime}>
+    <>
       <span>{investmentTime} </span>
       <span>{`${investment.cryptoAmount} ${cryptoSymbol}`} </span>
       <span>{`for ${investment.buyPrice} usd`}</span>
-    </li>
+    </>
   );
 };

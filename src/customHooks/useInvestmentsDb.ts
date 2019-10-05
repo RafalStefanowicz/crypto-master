@@ -17,7 +17,7 @@ export const useInvestmentsDb = (
         firebase.investmentsDb(userId).off();
       };
     }
-  }, [userId]);
+  }, [userId, firebase]);
 
   return investments;
 };
