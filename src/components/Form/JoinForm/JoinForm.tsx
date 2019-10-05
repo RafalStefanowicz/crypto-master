@@ -32,24 +32,22 @@ export const JoinForm = ({ fields, handleSubmit, validate }: JoinFormProps) => {
     ));
 
   return (
-    <div>
-      <Formik
-        initialValues={{ ...initialValues }}
-        validate={validate}
-        onSubmit={async (values, { setSubmitting }) => {
-          await handleSubmit(values);
-          setSubmitting(false);
-        }}
-      >
-        {({ isSubmitting }) => (
-          <Form>
-            {renderFields()}
-            <button type="submit" disabled={isSubmitting}>
-              Submit
-            </button>
-          </Form>
-        )}
-      </Formik>
-    </div>
+    <Formik
+      initialValues={{ ...initialValues }}
+      validate={validate}
+      onSubmit={async (values, { setSubmitting }) => {
+        await handleSubmit(values);
+        setSubmitting(false);
+      }}
+    >
+      {({ isSubmitting }) => (
+        <Form>
+          {renderFields()}
+          <button type="submit" disabled={isSubmitting}>
+            Submit
+          </button>
+        </Form>
+      )}
+    </Formik>
   );
 };
