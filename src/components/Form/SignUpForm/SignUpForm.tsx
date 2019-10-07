@@ -37,7 +37,14 @@ const SignUpFields = [
 
 const _SignUpForm = ({ firebase, hideModal, userNames }: SignUpFormProps) => {
   const handleSignUp = (values: DoCreateUserI) => {
-    firebase.doCreateUser(values);
+    firebase
+      .doCreateUser(values)
+      .then(() => {
+        hideModal();
+      })
+      .catch(error => {
+        alert(error.message);
+      });
   };
   const validate = signUpValidate(userNames);
 

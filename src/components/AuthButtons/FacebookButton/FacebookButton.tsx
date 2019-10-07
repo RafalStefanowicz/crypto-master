@@ -9,15 +9,28 @@ import { FirebaseOperations } from "../../../firebase/FirebaseOperations";
 import { withFirebase } from "../../../firebase/withFirebase";
 import { IStore } from "../../../redux/reducers";
 import { UserNamesI } from "../../../redux/reducers/userNames";
+import { hideModal } from "../../../redux/actions/modalActions";
 
 interface FacebookButtonProps {
   firebase: FirebaseOperations;
   userNames: UserNamesI;
+  hideModal: typeof hideModal;
 }
 
-const _FacebookButton = ({ firebase, userNames }: FacebookButtonProps) => {
+const _FacebookButton = ({
+  firebase,
+  userNames,
+  hideModal
+}: FacebookButtonProps) => {
   const handleLogIn = () => {
-    firebase.doCreateUserWithFacebook(userNames);
+    firebase
+      .doCreateUserWithFacebook(userNames)
+      .then(() => {
+        hideModal();
+      })
+      .catch(error => {
+        alert(error.message);
+      });
   };
   return (
     <AuthButton handleLogIn={handleLogIn}>
@@ -32,5 +45,8 @@ const mapStateToProps = (state: IStore) => ({
 
 export const FacebookButton = compose(
   withFirebase,
-  connect(mapStateToProps)
+  connect(
+    mapStateToProps,
+    { hideModal }
+  )
 )(_FacebookButton) as React.ReactType;

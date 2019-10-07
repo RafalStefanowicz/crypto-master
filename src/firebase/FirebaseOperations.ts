@@ -53,7 +53,7 @@ export class FirebaseOperations extends Firebase {
         return user;
       })
       .catch(error => {
-        alert(error.message);
+        return Promise.reject(error);
       });
 
   doCreateUserWithGoogle = (userNames: UserNamesI) =>
@@ -88,7 +88,7 @@ export class FirebaseOperations extends Firebase {
         return user;
       })
       .catch(error => {
-        alert(error.message);
+        return Promise.reject(error);
       });
 
   getInvestments = async (userId: string, cryptoSymbol: string) => {

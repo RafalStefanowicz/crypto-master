@@ -9,15 +9,24 @@ import { FirebaseOperations } from "../../../firebase/FirebaseOperations";
 import { withFirebase } from "../../../firebase/withFirebase";
 import { IStore } from "../../../redux/reducers";
 import { UserNamesI } from "../../../redux/reducers/userNames";
+import { hideModal } from "../../../redux/actions/modalActions";
 
 interface GoogleButtonProps {
   firebase: FirebaseOperations;
   userNames: UserNamesI;
+  hideModal: typeof hideModal;
 }
 
 const _GoogleButton = ({ firebase, userNames }: GoogleButtonProps) => {
   const handleLogIn = () => {
-    firebase.doCreateUserWithGoogle(userNames);
+    firebase
+      .doCreateUserWithGoogle(userNames)
+      .then(() => {
+        hideModal();
+      })
+      .catch(error => {
+        alert(error.message);
+      });
   };
 
   return (
@@ -33,5 +42,8 @@ const mapStateToProps = (state: IStore) => ({
 
 export const GoogleButton = compose(
   withFirebase,
-  connect(mapStateToProps)
+  connect(
+    mapStateToProps,
+    { hideModal }
+  )
 )(_GoogleButton) as React.ReactType;

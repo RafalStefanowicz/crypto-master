@@ -22,7 +22,7 @@ const ResetPasswordFields = [
 ];
 
 const _ResetPasswordForm = ({ firebase, hideModal }: ResetPasswordForm) => {
-  const handlePasswordReset = (email: string) => {
+  const handlePasswordReset = ({ email }: { email: "string" }) => {
     firebase
       .doPasswordReset(email)
       .then(() => {
