@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Modal } from "../Modal/Modal";
 
-import { FacebookButton } from "../../AuthButtons/FacebookButton/FacebookButton";
-import { GoogleButton } from "../../AuthButtons/GoogleButton/GoogleButton";
+import { FacebookLogIn } from "../../AuthButtons/FacebookLogIn/FacebookLogIn";
+import { GoogleLogIn } from "../../AuthButtons/GoogleLogIn/GoogleLogIn";
 import { SignUpForm } from "../../Form/SignUpForm/SignUpForm";
 import { SignInForm } from "../../Form/SignInForm/SignInForm";
 import { ResetPasswordForm } from "../../Form/ResetPasswordForm/ResetPasswordForm";
 import { JOIN_FORM_TYPES } from "../../../types/JOIN_FORM_TYPES";
+import { JoinSwitchButtons } from "./JoinSwitchButtons/JoinSwitchButtons";
+import ForgotPasswordButton from "./ForgotPasswordButton/ForgotPasswordButton";
 export const JoinModal = () => {
   const [form, setForm] = useState<JOIN_FORM_TYPES>(JOIN_FORM_TYPES.LOG_IN);
 
@@ -29,26 +31,26 @@ export const JoinModal = () => {
     }
   };
 
+  const handleLogIn = () => {
+    setForm(JOIN_FORM_TYPES.LOG_IN);
+  };
+  const handleSignUp = () => {
+    setForm(JOIN_FORM_TYPES.SIGN_UP);
+  };
+
   return (
     <Modal>
       <>
-        <button
-          onClick={() => {
-            setForm(JOIN_FORM_TYPES.LOG_IN);
-          }}
-        >
-          LOG IN
-        </button>
-        <button
-          onClick={() => {
-            setForm(JOIN_FORM_TYPES.SIGN_UP);
-          }}
-        >
-          SIGN UP
-        </button>
-        <FacebookButton />
-        <GoogleButton />
+        <JoinSwitchButtons
+          handleLogIn={handleLogIn}
+          handleSignUp={handleSignUp}
+        />
+        <FacebookLogIn />
+        <GoogleLogIn />
         {renderForm()}
+        {form !== JOIN_FORM_TYPES.REMIND_PASSWORD && (
+          <ForgotPasswordButton setResetPassword={setResetPassword} />
+        )}
       </>
     </Modal>
   );

@@ -12,7 +12,6 @@ import { FIELDS_NAME } from "../../../types/FIELDS_NAMES";
 interface SignInFormProps {
   firebase: Firebase;
   hideModal: typeof hideModal;
-  setResetPassword: () => void;
 }
 
 const SignInFields = [
@@ -26,11 +25,7 @@ const SignInFields = [
   }
 ];
 
-const _SignInForm = ({
-  firebase,
-  hideModal,
-  setResetPassword
-}: SignInFormProps) => {
+const _SignInForm = ({ firebase, hideModal }: SignInFormProps) => {
   const handleSignIn = (values: DoSignInI) => {
     firebase
       .doSignIn(values)
@@ -50,13 +45,6 @@ const _SignInForm = ({
         handleSubmit={handleSignIn}
         buttonText="Log in"
       />
-      <button
-        onClick={() => {
-          setResetPassword();
-        }}
-      >
-        Forgot Password
-      </button>
     </div>
   );
 };
