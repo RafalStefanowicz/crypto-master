@@ -2,7 +2,7 @@ import React from "react";
 
 import { ForwardButton } from "../../ForwardButton/ForwardButton";
 
-export const Home = () => {
+const Home = () => {
   return (
     <>
       Improve your trading skills on a virtual cryptocurrency market Trade
@@ -12,3 +12,5 @@ export const Home = () => {
     </>
   );
 };
+
+export default Home;

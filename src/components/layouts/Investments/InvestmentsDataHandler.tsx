@@ -67,7 +67,7 @@ const mapStateToProps = (state: IStore) => ({
   userNames: state.userNames
 });
 
-export const InvestmentsDataHandler = compose(
+export default compose(
   connect(mapStateToProps),
   withFirebase
 )(_InvestmentsDataHandler) as React.FC;

@@ -34,7 +34,7 @@ const mapStateToProps = (state: IStore) => ({
   cryptos: state.cryptos
 });
 
-export const RankingDataHandler = compose(
+export default compose(
   connect(mapStateToProps),
   withFirebase
 )(_RankingDataHandler) as React.FC;

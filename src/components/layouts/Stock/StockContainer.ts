@@ -20,4 +20,4 @@ const mapStateToProps = (
 };
 const _StockContainer = connect(mapStateToProps)(StockOrAlternative);
 
-export const StockContainer = withWallet(_StockContainer);
+export default withWallet(_StockContainer);

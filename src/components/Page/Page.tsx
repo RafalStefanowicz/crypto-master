@@ -1,16 +1,21 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { connect } from "react-redux";
 
 import { Route, Switch } from "react-router-dom";
 
-import { Home } from "../layouts/Home/Home";
-import { StockContainer } from "../layouts/Stock/StockContainer";
-import { InvestmentsDataHandler } from "../layouts/Investments/InvestmentsDataHandler";
-import { RankingDataHandler } from "../layouts/Ranking/RankingDataHandler";
-import { AccountLogic } from "../layouts/Account/AccountLogic";
 import { ROUTES } from "../../types";
 import { IStore } from "../../redux/reducers";
 import { IsLoggedInType } from "../../redux/reducers/isLoggedIn";
+
+const Home = lazy(() => import("../layouts/Home/Home"));
+const StockContainer = lazy(() => import("../layouts/Stock/StockContainer"));
+const RankingDataHandler = lazy(() =>
+  import("../layouts/Ranking/RankingDataHandler")
+);
+const InvestmentsDataHandler = lazy(() =>
+  import("../layouts/Investments/InvestmentsDataHandler")
+);
+const AccountLogic = lazy(() => import("../layouts/Account/AccountLogic"));
 
 interface PageProps {
   isLoggedIn: IsLoggedInType;
@@ -19,23 +24,25 @@ interface PageProps {
 const _Page = ({ isLoggedIn }: PageProps) => {
   return (
     <Switch>
-      <Route exact component={Home} path={ROUTES.CRYTPO_MASTER} />
-      <Route
-        component={isLoggedIn === false ? Home : StockContainer}
-        path={ROUTES.STOCK}
-      />
-      <Route
-        component={isLoggedIn === false ? Home : AccountLogic}
-        path={ROUTES.ACCOUNT}
-      />
-      <Route
-        component={isLoggedIn === false ? Home : InvestmentsDataHandler}
-        path={ROUTES.INVESTMENTS_PARAMS}
-      />
-      <Route
-        component={isLoggedIn === false ? Home : RankingDataHandler}
-        path={ROUTES.RANK}
-      />
+      <Suspense fallback={<></>}>
+        <Route exact component={Home} path={ROUTES.CRYTPO_MASTER} />
+        <Route
+          component={isLoggedIn === false ? Home : StockContainer}
+          path={ROUTES.STOCK}
+        />
+        <Route
+          component={isLoggedIn === false ? Home : AccountLogic}
+          path={ROUTES.ACCOUNT}
+        />
+        <Route
+          component={isLoggedIn === false ? Home : InvestmentsDataHandler}
+          path={ROUTES.INVESTMENTS_PARAMS}
+        />
+        <Route
+          component={isLoggedIn === false ? Home : RankingDataHandler}
+          path={ROUTES.RANK}
+        />
+      </Suspense>
     </Switch>
   );
 };

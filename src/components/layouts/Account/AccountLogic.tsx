@@ -51,4 +51,4 @@ const _AccountLogic = ({ firebase }: AccountLogicProps) => {
   );
 };
 
-export const AccountLogic = withFirebase(_AccountLogic);
+export default withFirebase(_AccountLogic);
