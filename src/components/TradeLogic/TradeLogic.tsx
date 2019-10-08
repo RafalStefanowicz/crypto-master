@@ -3,18 +3,16 @@ import { connect } from "react-redux";
 
 import { Switcher } from "./Switcher/Switcher";
 import { CryptoList } from "./CryptoList/CryptoList";
-import { WalletType } from "../../redux/reducers/wallet";
-import { CryptosI } from "../../redux/reducers/cryptos";
-import { IStore } from "../../redux/reducers";
+import { WalletI } from "../../redux/reducers/wallet";
+import { CryptosI, FetchedCryptosI } from "../../redux/reducers/cryptos";
 import { HandleInputChangeType } from "./CryptoList/CryptoList";
 import { MODAL_TYPES } from "../../types/MODAL_TYPES";
 import { showModal, hideModal } from "../../redux/actions/modalActions";
-import {
-  getCurrencyFormat,
-  getCryptoFormat
-} from "../../utility/numberFormats";
+import { createNewWallet } from "../../utility/createNewWallet";
+import { handleTransactionInModalsApprove } from "../../utility/handleTransactionInModalsApprove";
+import { getAcquisition } from "../../utility/getAcquisition";
 
-const FEE_AMOUNT = 0.01;
+const MAX_TRANSACTION_AMOUNT = 20000;
 
 export enum TransactionType {
   sell = "sell",
@@ -22,8 +20,8 @@ export enum TransactionType {
 }
 
 interface TradeContainerProps {
-  wallet: WalletType;
-  cryptos: CryptosI;
+  wallet: WalletI;
+  cryptos: FetchedCryptosI;
   showModal: typeof showModal;
 }
 
@@ -34,87 +32,65 @@ export type InputValueType = {
 const _TradeLogic = ({ wallet, cryptos, showModal }: TradeContainerProps) => {
   const [transactionType, setTransactionType] = useState(TransactionType.buy);
   const [inputValue, setInputValue] = useState<InputValueType>({});
-  const cryptoSymbol = Object.keys(inputValue)[0];
-  let fee = 0;
-  let cryptoAmount = 0;
-  let usdAmount = 0;
 
-  const getAcqusition = () => {
-    // set cryptoAmount , usdAmount  and fee involved to transaction
-    const value = Number(inputValue[cryptoSymbol]);
-    if (!(cryptos && value)) return;
-    const price = cryptos[cryptoSymbol].PRICE;
-    if (transactionType === TransactionType.buy) {
-      fee = getCurrencyFormat(value * FEE_AMOUNT);
-      cryptoAmount = getCryptoFormat((value - fee) / price);
-      usdAmount = value;
-    } else {
-      fee = getCurrencyFormat(value * price * FEE_AMOUNT);
-      cryptoAmount = value;
-      usdAmount = getCurrencyFormat(value * price - fee);
-    }
-  };
-  getAcqusition();
+  const cryptoSymbol = Object.keys(inputValue)[0];
+  const value = Number(inputValue[cryptoSymbol]);
+
+  const price = cryptoSymbol ? cryptos[cryptoSymbol].PRICE : 0;
+
+  const { fee, cryptoAmount, usdAmount } = getAcquisition({
+    value,
+    price,
+    transactionType
+  });
 
   const handleInputChange: HandleInputChangeType = event => {
     const { name, value } = event.currentTarget;
-    if (value === "") {
-      setInputValue({});
+    if (value === "") return setInputValue({});
+
+    let error = false;
+    if (transactionType === TransactionType.buy) {
+      error = Number(value) > MAX_TRANSACTION_AMOUNT;
     } else {
-      setInputValue({ [name]: value });
+      error = Number(value) * cryptos[name].PRICE > MAX_TRANSACTION_AMOUNT;
     }
+
+    if (error) {
+      showModal({
+        modalType: MODAL_TYPES.ALERT,
+        modalProps: {
+          alertText: `Maximum transaction is ${MAX_TRANSACTION_AMOUNT} USD`
+        }
+      });
+      return;
+    }
+
+    setInputValue({ [name]: value });
   };
 
   const handleTransaction = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // compute new wallet contents
-    const newWallet: WalletType = { ...wallet };
-    if (!newWallet) return;
-
-    const usd = newWallet.USD || 0;
-    const crypto = newWallet[cryptoSymbol] || 0;
-    if (transactionType === TransactionType.buy) {
-      newWallet.USD = getCurrencyFormat(usd - usdAmount);
-      newWallet[cryptoSymbol] = getCryptoFormat(crypto + cryptoAmount);
-    } else {
-      newWallet.USD = getCurrencyFormat(usd + usdAmount);
-      newWallet[cryptoSymbol] = getCryptoFormat(crypto - cryptoAmount);
-
-      // remove crypto property from wallet when sold
-      if (!newWallet[cryptoSymbol]) delete newWallet[cryptoSymbol];
-    }
+    const newWallet = createNewWallet({
+      wallet,
+      cryptoSymbol,
+      transactionType,
+      usdAmount,
+      cryptoAmount
+    });
 
     // handle transaction in modals
-    if (newWallet.USD < 0) {
-      showModal({
-        modalType: MODAL_TYPES.ALERT,
-        modalProps: {
-          alertText: `You don't have enough money for this transaction.`
-        }
-      });
-    } else if ((newWallet[cryptoSymbol] as number) < 0) {
-      showModal({
-        modalType: MODAL_TYPES.ALERT,
-        modalProps: {
-          alertText: `You dont have ${cryptoAmount} ${cryptoSymbol} !`
-        }
-      });
-    } else {
-      showModal({
-        modalType: MODAL_TYPES.TRANSACTION,
-        modalProps: {
-          newWallet,
-          transactionType,
-          cryptoAmount,
-          fee,
-          usdAmount,
-          cryptoSymbol
-        }
-      });
+    const transactionApproved = handleTransactionInModalsApprove({
+      showModal,
+      newWallet,
+      cryptoAmount,
+      cryptoSymbol,
+      transactionType,
+      fee,
+      usdAmount
+    });
 
-      setInputValue({});
-    }
+    transactionApproved && setInputValue({});
   };
 
   const handleSwitch = (TransactionType: TransactionType) => {
@@ -154,11 +130,7 @@ const _TradeLogic = ({ wallet, cryptos, showModal }: TradeContainerProps) => {
   );
 };
 
-const mapStateToProps = (state: IStore) => ({
-  cryptos: state.cryptos
-});
-
 export const TradeLogic = connect(
-  mapStateToProps,
+  null,
   { showModal, hideModal }
 )(_TradeLogic) as React.ReactType;

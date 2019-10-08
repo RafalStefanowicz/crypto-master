@@ -1,7 +1,6 @@
 import React from "react";
 
 import { TransactionType } from "../../TradeLogic";
-import { InputValueType } from "../../TradeLogic";
 import { HandleInputChangeType } from "../CryptoList";
 
 interface CryptoItemFormProps {

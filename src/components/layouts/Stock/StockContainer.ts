@@ -15,7 +15,8 @@ const mapStateToProps = (
 ) => {
   const renderAlternative = !wallet || !cryptos || isLoggedIn === null;
   return {
-    renderAlternative
+    renderAlternative,
+    cryptos
   };
 };
 const _StockContainer = connect(mapStateToProps)(StockOrAlternative);

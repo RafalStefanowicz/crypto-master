@@ -12,12 +12,14 @@ interface WalletProps {
 export const Wallet = ({ wallet }: WalletProps) => {
   let cryptoItems = null;
   let usdItem = null;
+
   if (wallet) {
     const walletKeys = Object.keys(wallet) as Array<
       keyof typeof CRYPTO_SYMBOLS | "USD"
     >;
     cryptoItems = walletKeys.map(crypto => {
       if (crypto === "USD") return null;
+
       return (
         <li key={crypto}>
           <img
