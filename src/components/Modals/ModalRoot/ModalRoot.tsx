@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { JoinModal } from "../JoinModal/JoinModal";
-import { TransactionModal } from "../TransactionModal/TransactionModal";
+import { TransactionModalLogic } from "../TransactionModalLogic/TransactionModalLogic";
 import { AlertModal } from "../AlertModal/AltertModal";
 import { MODAL_TYPES } from "../../../types/MODAL_TYPES";
 import { IStore } from "../../../redux/reducers";
@@ -20,7 +20,7 @@ const _ModalRoot = ({ modal, isLoggedIn }: ModalRootProps) => {
       if (isLoggedIn) return null;
       return <JoinModal />;
     case MODAL_TYPES.TRANSACTION:
-      return <TransactionModal {...modal.modalProps} />;
+      return <TransactionModalLogic {...modal.modalProps} />;
     case MODAL_TYPES.ALERT:
       return <AlertModal {...modal.modalProps} />;
     default:

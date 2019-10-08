@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 
-import { Modal } from "../Modal/Modal";
+import { TransactionModal } from "./TransactionModal/TransactionModal";
 import { hideModal } from "../../../redux/actions/modalActions";
 import { WalletType } from "../../../redux/reducers/wallet";
 import { FirebaseOperations } from "../../../firebase/FirebaseOperations";
@@ -11,7 +11,7 @@ import { getInvestmentAfterTransaction } from "../../../utility/getInvestmentAft
 import { TransactionType } from "../../TradeLogic/TradeLogic";
 import { InvestmentsI } from "../../../types/InvestmentsInterfaces";
 
-interface TransactionModalProps {
+interface TransactionModalLogicProps {
   newWallet: WalletType;
   transactionType: TransactionType;
   cryptoAmount: number;
@@ -22,7 +22,7 @@ interface TransactionModalProps {
   hideModal: typeof hideModal;
 }
 
-const _TransactionModal = ({
+const _TransactionModalLogic = ({
   newWallet,
   transactionType,
   cryptoAmount,
@@ -31,10 +31,11 @@ const _TransactionModal = ({
   cryptoSymbol,
   firebase,
   hideModal
-}: TransactionModalProps) => {
+}: TransactionModalLogicProps) => {
   // time for modal on screen
   const [timeLeft, setTimeLeft] = useState(10);
 
+  // set counting
   useEffect(() => {
     const listener = setInterval(() => {
       setTimeLeft(timeLeft => {
@@ -76,26 +77,22 @@ const _TransactionModal = ({
   }
 
   return (
-    <Modal>
-      <>
-        <h1>{timeLeft}</h1>
-        <span>{`Do you want to ${transactionType} `}</span>
-        <span>{cryptoAmount} </span>
-        <span>{cryptoSymbol} </span>
-        <span>for </span>
-        <span>{usdAmount} $ </span>
-        <span>?</span>
-        <p>{`Fee included: ${fee} $`}</p>
-        <button onClick={handleAccept}>{transactionType}</button>
-      </>
-    </Modal>
+    <TransactionModal
+      timeLeft={timeLeft}
+      transactionType={transactionType}
+      cryptoAmount={cryptoAmount}
+      cryptoSymbol={cryptoSymbol}
+      usdAmount={usdAmount}
+      fee={fee}
+      handleAccept={handleAccept}
+    />
   );
 };
 
-export const TransactionModal = compose(
+export const TransactionModalLogic = compose(
   withFirebase,
   connect(
     null,
     { hideModal }
   )
-)(_TransactionModal) as React.ReactType;
+)(_TransactionModalLogic) as React.ReactType;
