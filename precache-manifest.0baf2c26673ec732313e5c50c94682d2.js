@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "7e2dbbc360e92bcd8ae67de0da0eb8c9",
+    "revision": "8a443bb57d0b8f26d879bf777a2e7371",
     "url": "/crypto-master/index.html"
   },
   {
@@ -36,8 +36,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/crypto-master/static/js/9.c3045dbf.chunk.js"
   },
   {
-    "revision": "f7b9e64f62e0684ecd5a",
-    "url": "/crypto-master/static/js/main.168d15c6.chunk.js"
+    "revision": "6900151866286a3386fb",
+    "url": "/crypto-master/static/js/main.ae1faa7e.chunk.js"
   },
   {
     "revision": "9e40c6481090bb62ec34",
