@@ -1,6 +1,6 @@
 import React from "react";
 
-import { StyledButtonAccess } from "../../styles/Buttons";
+import { StyledButtonAccess } from "../../styles/buttons";
 
 interface ForwardButtonProps {
   text: string;

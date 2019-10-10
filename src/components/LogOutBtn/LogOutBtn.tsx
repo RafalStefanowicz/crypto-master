@@ -1,6 +1,6 @@
 import React from "react";
 
-import { StyledButtonAccess } from "../../styles/Buttons";
+import { StyledButtonAccess } from "../../styles/buttons";
 import { withFirebase } from "../../firebase/withFirebase";
 import { Firebase } from "../../firebase/Firebase";
 

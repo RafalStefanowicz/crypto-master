@@ -1,6 +1,6 @@
 import React from "react";
 
-import { RectangleButton } from "../../../../styles/Buttons";
+import { RectangleButton } from "../../../../styles/buttons";
 
 interface ChangePasswordButtonProps {
   handleClick: () => void;
