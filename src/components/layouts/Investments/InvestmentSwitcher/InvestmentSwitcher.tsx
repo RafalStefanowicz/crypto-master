@@ -25,6 +25,10 @@ export const InvestmentSwitcher = ({
 }: InvestmentSwitcherProps) => {
   const [showCurrent, setShowCurrent] = useState(true);
 
+  const handleSetShow = (showCurrent: boolean) => () => {
+    setShowCurrent(showCurrent);
+  };
+
   const renderInvestments = () => {
     // render current investments
     if (showCurrent) {
@@ -68,8 +72,10 @@ export const InvestmentSwitcher = ({
     <div id="investments">
       {userNameParams ? <Info infoText={userNameParams} /> : null}
       <SwitchButtons
-        showCurrent={showCurrent}
-        setShowCurrent={setShowCurrent}
+        leftActive={showCurrent}
+        changeActive={handleSetShow}
+        leftText="Current"
+        rightText="Completed"
       />
       {renderInvestments()}
     </div>

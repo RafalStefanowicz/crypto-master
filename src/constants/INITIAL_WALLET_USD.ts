@@ -1,0 +1,1 @@
+export const INITIAL_WALLET_USD = 10000;

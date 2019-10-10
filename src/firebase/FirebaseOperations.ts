@@ -2,6 +2,7 @@ import { Firebase } from "./Firebase";
 import { UserNamesI } from "../redux/reducers/userNames";
 import { getUniqueUserName } from "../utility/getUniqueUserName";
 import { createInvestmentsObject } from "../utility/createInvestmentObject";
+import { INITIAL_WALLET_USD } from "../constants/INITIAL_WALLET_USD";
 
 export interface AddUserToDbI {
   userId: string;
@@ -30,7 +31,7 @@ export class FirebaseOperations extends Firebase {
     });
 
     this.walletDb(userId).set({
-      USD: 10000
+      USD: INITIAL_WALLET_USD
     });
 
     if (typeof userName == "string") {

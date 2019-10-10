@@ -121,7 +121,7 @@ const _TradeLogic = ({ wallet, cryptos, showModal }: TradeContainerProps) => {
         leftActive={transactionType === TransactionType.buy}
         leftText="Buy"
         rightText="Sell"
-        setLeftActive={handleSwitch}
+        changeActive={handleSwitch}
       />
       <CryptoList
         cryptos={

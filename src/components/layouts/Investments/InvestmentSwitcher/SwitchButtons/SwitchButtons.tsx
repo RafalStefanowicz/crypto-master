@@ -1,29 +1,26 @@
 import React from "react";
+import { StyledButtonsWrapper, StyledSwitchButton } from "./switchButtonsStyle";
 
 interface SwitchButtonsProps {
-  showCurrent: boolean;
-  setShowCurrent: (showCurrent: boolean) => void;
+  leftActive: boolean;
+  changeActive: (leftActive: boolean) => () => void;
+  leftText: string;
+  rightText: string;
 }
 export const SwitchButtons = ({
-  showCurrent,
-  setShowCurrent
+  leftActive,
+  changeActive,
+  leftText,
+  rightText
 }: SwitchButtonsProps) => {
   return (
-    <div>
-      <button
-        onClick={() => {
-          setShowCurrent(true);
-        }}
-      >
-        Current
-      </button>
-      <button
-        onClick={() => {
-          setShowCurrent(false);
-        }}
-      >
-        Completed
-      </button>
-    </div>
+    <StyledButtonsWrapper>
+      <StyledSwitchButton onClick={changeActive(true)} isActive={leftActive}>
+        {leftText}
+      </StyledSwitchButton>
+      <StyledSwitchButton onClick={changeActive(false)} isActive={!leftActive}>
+        {rightText}
+      </StyledSwitchButton>
+    </StyledButtonsWrapper>
   );
 };
