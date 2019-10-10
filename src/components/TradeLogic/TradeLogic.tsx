@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 
-import { Switcher } from "./Switcher/Switcher";
 import { CryptoList } from "./CryptoList/CryptoList";
 import { WalletI } from "../../redux/reducers/wallet";
 import { CryptosI, FetchedCryptosI } from "../../redux/reducers/cryptos";
@@ -11,6 +10,11 @@ import { showModal, hideModal } from "../../redux/actions/modalActions";
 import { createNewWallet } from "../../utility/createNewWallet";
 import { handleTransactionInModalsApprove } from "../../utility/handleTransactionInModalsApprove";
 import { getAcquisition } from "../../utility/getAcquisition";
+import {
+  StyledStockLabel,
+  StyledTradeWrapper
+} from "../layouts/Stock/stockStyles";
+import { SwitchButtons } from "../layouts/Investments/InvestmentSwitcher/SwitchButtons/SwitchButtons";
 
 const MAX_TRANSACTION_AMOUNT = 20000;
 
@@ -93,8 +97,10 @@ const _TradeLogic = ({ wallet, cryptos, showModal }: TradeContainerProps) => {
     transactionApproved && setInputValue({});
   };
 
-  const handleSwitch = (TransactionType: TransactionType) => {
-    setTransactionType(TransactionType);
+  const handleSwitch = (isBuyActive: boolean) => () => {
+    setTransactionType(
+      isBuyActive ? TransactionType.buy : TransactionType.sell
+    );
     setInputValue({});
   };
 
@@ -109,8 +115,14 @@ const _TradeLogic = ({ wallet, cryptos, showModal }: TradeContainerProps) => {
   };
 
   return (
-    <div>
-      <Switcher handleSwitch={handleSwitch} />
+    <StyledTradeWrapper>
+      <StyledStockLabel>Stock</StyledStockLabel>
+      <SwitchButtons
+        leftActive={transactionType === TransactionType.buy}
+        leftText="Buy"
+        rightText="Sell"
+        setLeftActive={handleSwitch}
+      />
       <CryptoList
         cryptos={
           transactionType === TransactionType.buy
@@ -126,7 +138,7 @@ const _TradeLogic = ({ wallet, cryptos, showModal }: TradeContainerProps) => {
           transactionType === TransactionType.buy ? cryptoAmount : usdAmount
         }
       />
-    </div>
+    </StyledTradeWrapper>
   );
 };
 

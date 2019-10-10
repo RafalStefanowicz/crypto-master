@@ -2,10 +2,12 @@ import React, { useState } from "react";
 
 import { ChangePasswordForm } from "../../Form/ChangePasswordForm.tsx/ChangePasswordForm";
 import { Loader } from "../../Loader/Loader";
-import { LogOutBtn } from "../../LogOutBtn/LogOutBtn";
 import { withFirebase } from "../../../firebase/withFirebase";
 import { Firebase } from "../../../firebase/Firebase";
 import { usePersonalDb } from "../../../customHooks/usePersonalDb";
+import { Account } from "./Account";
+import { Provider } from "./Provider/Provider";
+import { ChangePasswordButton } from "./ChangePasswordButton/ChangePasswordButton";
 
 interface AccountLogicProps {
   firebase: Firebase;
@@ -19,35 +21,28 @@ const _AccountLogic = ({ firebase }: AccountLogicProps) => {
 
   const { userName, email, createdBy } = personalDb;
 
-  const renderChangePasswordForm = (): JSX.Element | null => {
+  const toggleIsFormShown = () => {
+    setIsFormShown(!isFormShown);
+  };
+
+  const renderProviderOrChangePass = (): JSX.Element => {
     if (createdBy !== "firebase.com") {
-      return (
-        <span>
-          logged by <span>{createdBy}</span>
-        </span>
-      );
+      return <Provider provider={createdBy} />;
     } else if (isFormShown) {
-      return <ChangePasswordForm />;
+      return <ChangePasswordForm toggleIsFormShown={toggleIsFormShown} />;
     } else {
-      return (
-        <button
-          onClick={() => {
-            setIsFormShown(true);
-          }}
-        >
-          Change password
-        </button>
-      );
+      return <ChangePasswordButton handleClick={toggleIsFormShown} />;
     }
   };
 
   return (
-    <div>
-      <h1>{userName}</h1>
-      <h1>{email}</h1>
-      {renderChangePasswordForm()}
-      <LogOutBtn />
-    </div>
+    <>
+      <Account
+        userName={userName}
+        email={email}
+        renderProviderOrChangePass={renderProviderOrChangePass}
+      />
+    </>
   );
 };
 

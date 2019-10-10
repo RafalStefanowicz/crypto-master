@@ -2,6 +2,7 @@ import React from "react";
 
 import Nav from "../Nav/Nav";
 import { Page } from "../Page/Page";
+import { StyledMain, StyledMainInner } from "./appStyles";
 
 export const App = () => {
   return (
@@ -9,9 +10,11 @@ export const App = () => {
       <header>
         <Nav></Nav>
       </header>
-      <main>
-        <Page />
-      </main>
+      <StyledMain>
+        <StyledMainInner>
+          <Page />
+        </StyledMainInner>
+      </StyledMain>
     </>
   );
 };

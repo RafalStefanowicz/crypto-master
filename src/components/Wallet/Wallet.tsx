@@ -4,6 +4,10 @@ import usdIcon from "../../../node_modules/cryptocurrency-icons/svg/color/usd.sv
 import { CRYPTO_SYMBOLS } from "../../types/CRYPTO_SYMBOLS";
 import { cryptoIcons } from "../../constants/cryptoIcons";
 import { WalletType } from "../../redux/reducers/wallet";
+import {
+  StyledStockLabel,
+  StyledWalletWrapper
+} from "../layouts/Stock/stockStyles";
 
 interface WalletProps {
   wallet: WalletType;
@@ -46,9 +50,12 @@ export const Wallet = ({ wallet }: WalletProps) => {
     );
   }
   return (
-    <ul>
-      {usdItem}
-      {cryptoItems}
-    </ul>
+    <StyledWalletWrapper>
+      <StyledStockLabel>Wallet</StyledStockLabel>
+      <ul>
+        {usdItem}
+        {cryptoItems}
+      </ul>
+    </StyledWalletWrapper>
   );
 };

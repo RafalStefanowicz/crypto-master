@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import { fetchCryptosAction } from "../redux/actions/fetchCryptosAction";
+import { FETCH_CRYPTO_TIME } from "../constants/FETCH_CRYPTO_TIME";
 
 interface CryptoListenerProps {
   fetchCryptosAction: typeof fetchCryptosAction;
@@ -11,7 +12,7 @@ const _CryptoListener = ({ fetchCryptosAction }: any) => {
     fetchCryptosAction();
     const listener = setInterval(() => {
       fetchCryptosAction();
-    }, 10000);
+    }, FETCH_CRYPTO_TIME);
 
     return () => {
       clearInterval(listener);

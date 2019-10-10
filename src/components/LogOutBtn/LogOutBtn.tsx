@@ -1,5 +1,6 @@
 import React from "react";
 
+import { StyledButtonAccess } from "../../styles/Buttons";
 import { withFirebase } from "../../firebase/withFirebase";
 import { Firebase } from "../../firebase/Firebase";
 
@@ -11,7 +12,12 @@ const _LogOutBtn = ({ firebase }: LogOutBtnProps) => {
   const handleLogOut = () => {
     firebase.auth.signOut();
   };
-  return <button onClick={handleLogOut}>LogOut</button>;
+
+  return (
+    <StyledButtonAccess onClick={handleLogOut} small>
+      Log out
+    </StyledButtonAccess>
+  );
 };
 
 export const LogOutBtn = withFirebase(_LogOutBtn);

@@ -1,13 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik } from "formik";
 
 import { changePasswordValidate } from "../../../utility/validate";
 import { MODAL_TYPES } from "../../../types/MODAL_TYPES";
 import { withFirebase } from "../../../firebase/withFirebase";
 import { Firebase } from "../../../firebase/Firebase";
 import { showModal } from "../../../redux/actions/modalActions";
+import {
+  StyledForm,
+  StyledField,
+  StyledMessage
+} from "../../../styles/formStyles";
+import { SubmitButton } from "../SubmitButton/SubmitButton";
 
 const FORM_INITIAL_VALUES = {
   currentPassword: "",
@@ -17,11 +23,13 @@ const FORM_INITIAL_VALUES = {
 interface ChangePasswordFormProps {
   firebase: Firebase;
   showModal: typeof showModal;
+  toggleIsFormShown: () => void;
 }
 
 const _ChangePasswordForm = ({
   firebase,
-  showModal
+  showModal,
+  toggleIsFormShown
 }: ChangePasswordFormProps) => {
   return (
     <Formik
@@ -31,7 +39,9 @@ const _ChangePasswordForm = ({
         try {
           await firebase.doChangePassword(currentPassword, newPassword);
           setSubmitting(false);
+          toggleIsFormShown();
         } catch (error) {
+          setSubmitting(false);
           showModal({
             modalType: MODAL_TYPES.ALERT,
             modalProps: { alertText: "Please provide actual password" }
@@ -39,13 +49,29 @@ const _ChangePasswordForm = ({
         }
       }}
     >
-      <Form>
-        <Field type="password" name="currentPassword" />
-        <ErrorMessage name="currentPassword" component="div" />
-        <Field type="password" name="newPassword" />
-        <ErrorMessage name="newPassword" component="div" />
-        <button type="submit">Change</button>
-      </Form>
+      {({ isSubmitting, isValid }) => {
+        return (
+          <StyledForm>
+            <StyledField
+              type="password"
+              name="currentPassword"
+              placeholder="current password"
+            />
+            <StyledMessage name="currentPassword" component="div" />
+            <StyledField
+              type="password"
+              name="newPassword"
+              placeholder="new password"
+            />
+            <StyledMessage name="newPassword" component="div" />
+            <SubmitButton
+              disabled={!isValid || isSubmitting}
+              submitting={isSubmitting}
+              text="Change"
+            ></SubmitButton>
+          </StyledForm>
+        );
+      }}
     </Formik>
   );
 };
