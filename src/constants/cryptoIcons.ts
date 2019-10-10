@@ -18,6 +18,11 @@ import NEO from "../../node_modules/cryptocurrency-icons/svg/color/neo.svg";
 import XTZ from "../../node_modules/cryptocurrency-icons/svg/color/xtz.svg";
 import XEM from "../../node_modules/cryptocurrency-icons/svg/color/xem.svg";
 import MKR from "../../node_modules/cryptocurrency-icons/svg/color/mkr.svg";
+
+export interface CryptoIconI {
+  [key: string]: string;
+}
+
 export const cryptoIcons = {
   BTC,
   ETH,

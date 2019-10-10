@@ -1,8 +1,20 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHandPointer } from "@fortawesome/free-solid-svg-icons";
 
 import { ROUTES } from "../../../../types/ROUTES";
 import { getUsersAssetDetails } from "../../../../utility/getUsersAssetDetails";
+import {
+  StyledRankList,
+  StyledRankItem,
+  StyledUserNameWrapper,
+  StyledAssetWrapper,
+  StyledLinkWrapper,
+  StyledLabel
+} from "./rankingListStyles";
+import { StyledNavLink } from "../../../../styles/common";
+import { INITIAL_WALLET_USD } from "../../../../constants/INITIAL_WALLET_USD";
+import { ColorType } from "../../../../styles/theme";
 
 interface RankingListProps {
   filteredUsersAssetRank: ReturnType<typeof getUsersAssetDetails>;
@@ -10,15 +22,28 @@ interface RankingListProps {
 
 export const RankingList = ({ filteredUsersAssetRank }: RankingListProps) => {
   const renderRankItems = () =>
-    filteredUsersAssetRank.map(userAsset => (
-      <li key={userAsset.userName}>
-        <span>{userAsset.rank} </span>
-        <span>{userAsset.userName} </span>
-        <span>{userAsset.asset} </span>
-        <NavLink to={`${ROUTES.INVESTMENTS}/${userAsset.userName}`}>
-          Investments
-        </NavLink>
-      </li>
-    ));
-  return <ul>{renderRankItems()}</ul>;
+    filteredUsersAssetRank.map(({ rank, userName, asset }) => {
+      const getColorAsset = (asset: number) => {
+        if (asset > INITIAL_WALLET_USD) return ColorType.green;
+        else if (asset < INITIAL_WALLET_USD) return ColorType.red;
+      };
+
+      return (
+        <StyledRankItem key={userName}>
+          <StyledUserNameWrapper>
+            <StyledLabel>{rank}.</StyledLabel>
+            <StyledLabel>{userName}</StyledLabel>
+          </StyledUserNameWrapper>
+          <StyledAssetWrapper color={getColorAsset(asset)}>
+            {asset} $
+          </StyledAssetWrapper>
+          <StyledLinkWrapper>
+            <StyledNavLink to={`${ROUTES.INVESTMENTS}/${userName}`}>
+              <FontAwesomeIcon icon={faHandPointer} />
+            </StyledNavLink>
+          </StyledLinkWrapper>
+        </StyledRankItem>
+      );
+    });
+  return <StyledRankList>{renderRankItems()}</StyledRankList>;
 };

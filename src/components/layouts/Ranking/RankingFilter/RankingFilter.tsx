@@ -1,4 +1,5 @@
 import React from "react";
+import { StyledFilterInput } from "./rankingFilterStyles";
 
 interface RankingFilterProps {
   filterValue: string;
@@ -9,5 +10,11 @@ export const RankingFilter = ({
   filterValue,
   handleFilterChange
 }: RankingFilterProps) => {
-  return <input value={filterValue} onChange={handleFilterChange} />;
+  return (
+    <StyledFilterInput
+      value={filterValue}
+      onChange={handleFilterChange}
+      placeholder="find.."
+    />
+  );
 };

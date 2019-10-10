@@ -1,9 +1,10 @@
 import React from "react";
 
 import { StyledIconsList, StyledIconItem } from "./cryptoIconsListStyle";
+import { CryptoIconI } from "../../../../../constants/cryptoIcons";
 
 interface CryptoIconsListProps {
-  iconsList: { [crypto: string]: string }[];
+  iconsList: CryptoIconI[];
 }
 
 export default function CryptoIconsList({ iconsList }: CryptoIconsListProps) {
