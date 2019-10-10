@@ -15,7 +15,7 @@ import { store } from "./redux/store/store";
 import { FirebaseOperations } from "./firebase/FirebaseOperations";
 
 ReactDOM.render(
-  <Router>
+  <Router basename={process.env.PUBLIC_URL}>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <FirebaseContext.Provider value={new FirebaseOperations()}>
