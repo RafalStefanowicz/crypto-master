@@ -1,5 +1,5 @@
 export enum ROUTES {
-  CRYTPO_MASTER = "/",
+  CRYTPO_MASTER = "/crypto-master",
   STOCK = "/stock",
   RANK = "/ranking",
   INVESTMENTS_PARAMS = "/investments/:userName?",
