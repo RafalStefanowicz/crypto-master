@@ -6,6 +6,7 @@ import { CRYPTO_SYMBOLS } from "../../../types/CRYPTO_SYMBOLS";
 import { CryptosI } from "../../../redux/reducers/cryptos";
 import { TransactionType } from "../TradeLogic";
 import { InputValueType } from "../TradeLogic";
+import { StyledCryptoItem } from "../../layouts/Stock/stockStyles";
 
 interface CryptoListProps {
   cryptos: CryptosI;
@@ -41,7 +42,7 @@ export const CryptoList = ({
       const isSelectedCrypto = selectedCrypto === FROMSYMBOL;
 
       return (
-        <li key={FROMSYMBOL}>
+        <StyledCryptoItem key={FROMSYMBOL}>
           <CryptoItemForm
             handleTransaction={handleTransaction}
             handleInputChange={handleInputChange}
@@ -54,7 +55,7 @@ export const CryptoList = ({
             acqusition={isSelectedCrypto ? acqusition : 0}
             fee={isSelectedCrypto ? fee : 0}
           />
-        </li>
+        </StyledCryptoItem>
       );
     });
   }
