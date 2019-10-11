@@ -1,13 +1,13 @@
 import React from "react";
 
-import { ForwardButtonLogic } from "../../ForwardButton/ForwardButtonLogic";
+import { ForwardButton } from "../../ForwardButton/ForwardButton";
 import GameGoals from "./GameGoals/GameGoals";
 
 const Home = () => {
   return (
     <>
       <GameGoals />
-      <ForwardButtonLogic />
+      <ForwardButton />
     </>
   );
 };

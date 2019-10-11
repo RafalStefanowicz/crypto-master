@@ -1,28 +1,39 @@
 import { Form, Field, ErrorMessage } from "formik";
 import styled from "styled-components";
-
-import { ThemeI } from "./theme";
+import { media } from "./media";
 
 export const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
+  align-items: center;
   flex: 1;
   max-width: 250px;
   margin: 0 auto;
+
+  @media ${media.small} {
+    max-width: 170px;
+  }
 `;
 
 export const StyledField = styled(Field)`
-  margin: 1px;
+  width: 100%;
+  margin: 1px 0;
   padding: 4px;
+  font-size: 18px;
   border: 1px solid black;
-  font-size: 16px;
+
+  @media ${media.small} {
+    font-size: 14px;
+  }
 `;
 
-interface StyledMessageProps {
-  theme: ThemeI;
-}
-export const StyledMessage = styled(ErrorMessage)<StyledMessageProps>`
+export const StyledMessage = styled(ErrorMessage)`
   font-size: 16px;
+
+  @media ${media.small} {
+    font-size: 12px;
+  }
+
   color: ${({ theme: { color } }) => color.red};
 `;
 
@@ -30,7 +41,6 @@ export const StyledSubmitButton = styled.button`
   display: block;
   margin: 4px auto;
   padding: 4px 22px;
-  font-size: 18px;
   border: 1px solid black;
 
   :hover {
@@ -41,7 +51,6 @@ export const StyledSubmitButton = styled.button`
   :disabled {
     border-color: gray;
     color: gray;
-    cursor: default;
 
     :hover {
       background-color: white;

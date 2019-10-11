@@ -12,17 +12,17 @@ import { IsLoggedInType } from "../../redux/reducers/isLoggedIn";
 import { Button } from "../Button/Button";
 import { ButtonTypes } from "../../styles/button";
 
-interface ForwardButtonLogicProps {
+interface ForwardButtonProps {
   isLoggedIn: IsLoggedInType;
   showModal: typeof showModal;
   history: History;
 }
 
-const _ForwardButtonLogic = ({
+const _ForwardButton = ({
   isLoggedIn,
   showModal,
   history
-}: ForwardButtonLogicProps) => {
+}: ForwardButtonProps) => {
   const handleClick = () => {
     isLoggedIn
       ? history.push(ROUTES.STOCK)
@@ -42,10 +42,10 @@ const mapStateToProps = (state: IStore): { isLoggedIn: IsLoggedInType } => ({
   isLoggedIn: state.isLoggedIn
 });
 
-export const ForwardButtonLogic = compose(
+export const ForwardButton = compose(
   connect(
     mapStateToProps,
     { showModal }
   ),
   withRouter
-)(_ForwardButtonLogic) as React.ReactType;
+)(_ForwardButton) as React.ReactType;

@@ -1,17 +1,20 @@
 import styled from "styled-components";
-
-export const ProviderLabel = styled.p`
-  font-size: 22px;
-`;
-
-export const ProviderImage = styled.img`
-  margin: 4px;
-  max-height: 50px;
-`;
+import { media } from "../../../../styles/media";
 
 export const ProviderWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin: 15px;
   align-items: center;
+`;
+
+export const ProviderLabel = styled.span``;
+
+export const ProviderImage = styled.img`
+  margin: 4px;
+  max-height: 50px;
+
+  @media ${media.small} {
+    max-height: 35px;
+  }
 `;

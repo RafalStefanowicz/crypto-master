@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import { ColorType } from "../../../../styles/theme";
-import { device } from "../../../../styles/media";
+import { media } from "../../../../styles/media";
 
 export const StyledRankItem = styled.li`
   display: flex;
@@ -12,11 +12,6 @@ export const StyledRankItem = styled.li`
 export const StyledRankList = styled.ul`
   max-width: 800px;
   margin: 0 auto;
-  font-size: 24px;
-
-  @media ${device.mobileL} {
-    font-size: 14px;
-  }
 `;
 
 interface StyledAssetWrapperProps {
@@ -37,7 +32,7 @@ export const StyledUserNameWrapper = styled.span`
 export const StyledLinkWrapper = styled.span`
   flex: 1;
   text-align: center;
-  @media ${device.mobileL} {
+  @media ${media.small} {
     text-align: left;
   }
 `;

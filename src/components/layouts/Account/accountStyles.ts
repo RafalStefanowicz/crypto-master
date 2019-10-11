@@ -7,6 +7,7 @@ export const StyledProviderWrapper = styled.div`
 
   @media ${media.small} {
     font-size: ${({ theme: { fontSize } }) => fontSize.smallSpan};
+    height: 160px;
   }
 `;
 

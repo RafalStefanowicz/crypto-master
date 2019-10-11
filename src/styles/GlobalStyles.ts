@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { media } from "./media";
 
 export const GlobalStyles = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap');
@@ -11,6 +12,11 @@ export const GlobalStyles = createGlobalStyle`
 
   body {
     font-family: 'Lato', sans-serif;
+    font-size: 24px;
+
+    @media ${media.small} {
+    font-size: 16px;
+    }
   }
 
   a {
@@ -25,10 +31,14 @@ export const GlobalStyles = createGlobalStyle`
   button {
     background-color: white;
     outline: 0;
-  }
 
-  button:hover {
-    cursor: pointer;
+    :hover {
+      cursor: pointer;
+    }
+    
+    :disabled {
+      cursor: default;
+    }
   }
 
   input, textarea, button {

@@ -15,10 +15,10 @@ export const SwitchButtons = ({
 }: SwitchButtonsProps) => {
   return (
     <StyledButtonsWrapper>
-      <StyledSwitchButton onClick={changeActive(true)} isActive={leftActive}>
+      <StyledSwitchButton onClick={changeActive(true)} disabled={leftActive}>
         {leftText}
       </StyledSwitchButton>
-      <StyledSwitchButton onClick={changeActive(false)} isActive={!leftActive}>
+      <StyledSwitchButton onClick={changeActive(false)} disabled={!leftActive}>
         {rightText}
       </StyledSwitchButton>
     </StyledButtonsWrapper>

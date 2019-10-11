@@ -1,17 +1,17 @@
 import styled from "styled-components";
-import { device } from "../../../styles/media";
+import { media } from "../../../styles/media";
 
 export const StyledStockWrapper = styled.div`
   display: flex;
   flex-direction: row-reverse;
 
-  @media ${device.mobileL} {
+  @media ${media.xlarge} {
     display: block;
   }
-`;
 
-export const StyledWalletWrapper = styled.div`
-  flex: 1;
+  @media ${media.small} {
+    font-size: 16px;
+  }
 `;
 
 export const StyledTradeWrapper = styled.div`
@@ -19,5 +19,15 @@ export const StyledTradeWrapper = styled.div`
 `;
 
 export const StyledStockLabel = styled.h1`
-  text-align: center;
+  margin-bottom: 20px;
+  color: ${({ theme: { color } }) => color.navyBlue};
+`;
+
+export const StyledSwitchWrapper = styled.div`
+  width: 50%;
+  margin: 0 auto;
+`;
+
+export const StyledCryptoItem = styled.li`
+  margin: 10px 0;
 `;
