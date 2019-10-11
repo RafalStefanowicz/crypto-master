@@ -5,9 +5,13 @@ import { CRYPTO_SYMBOLS } from "../../types/CRYPTO_SYMBOLS";
 import { cryptoIcons } from "../../constants/cryptoIcons";
 import { WalletType } from "../../redux/reducers/wallet";
 import {
-  StyledStockLabel,
-  StyledWalletWrapper
-} from "../layouts/Stock/stockStyles";
+  StyledImg,
+  StyledWalletWrapper,
+  StyledWalletItem,
+  StyledWalletAmount,
+  StyledWalletCrypto
+} from "./walletStyles";
+import { StyledStockLabel } from "../layouts/Stock/stockStyles";
 
 interface WalletProps {
   wallet: WalletType;
@@ -25,28 +29,24 @@ export const Wallet = ({ wallet }: WalletProps) => {
       if (crypto === "USD") return null;
 
       return (
-        <li key={crypto}>
-          <img
-            style={{ width: "30px", height: "30px" }}
-            src={cryptoIcons[crypto]}
-            alt={crypto}
-          ></img>
-          <span>{CRYPTO_SYMBOLS[crypto]} </span>
-          <span>{wallet[crypto]}</span>
-        </li>
+        <StyledWalletItem key={crypto}>
+          <StyledWalletCrypto>
+            <StyledImg src={cryptoIcons[crypto]} alt={crypto}></StyledImg>
+            <span>{CRYPTO_SYMBOLS[crypto]} </span>
+          </StyledWalletCrypto>
+          <StyledWalletAmount>{wallet[crypto]}</StyledWalletAmount>
+        </StyledWalletItem>
       );
     });
 
     usdItem = (
-      <li>
-        <img
-          style={{ width: "30px", height: "30px" }}
-          src={usdIcon}
-          alt="usd"
-        ></img>
-        <span>USD </span>
-        <span>{wallet.USD}</span>
-      </li>
+      <StyledWalletItem>
+        <StyledWalletCrypto>
+          <StyledImg src={usdIcon} alt="usd"></StyledImg>
+          <span>USD </span>
+        </StyledWalletCrypto>
+        <StyledWalletAmount>{wallet.USD}</StyledWalletAmount>
+      </StyledWalletItem>
     );
   }
   return (

@@ -7,7 +7,8 @@ import { Firebase } from "../../../firebase/Firebase";
 import { usePersonalDb } from "../../../customHooks/usePersonalDb";
 import { Account } from "./Account";
 import { Provider } from "./Provider/Provider";
-import { ChangePasswordButton } from "./ChangePasswordButton/ChangePasswordButton";
+import { Button } from "../../Button/Button";
+import { ButtonTypes } from "../../../styles/button";
 
 interface AccountLogicProps {
   firebase: Firebase;
@@ -31,7 +32,14 @@ const _AccountLogic = ({ firebase }: AccountLogicProps) => {
     } else if (isFormShown) {
       return <ChangePasswordForm toggleIsFormShown={toggleIsFormShown} />;
     } else {
-      return <ChangePasswordButton handleClick={toggleIsFormShown} />;
+      return (
+        <Button
+          handleClick={toggleIsFormShown}
+          buttonType={ButtonTypes.rectangle}
+        >
+          Change Password
+        </Button>
+      );
     }
   };
 

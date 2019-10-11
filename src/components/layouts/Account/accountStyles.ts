@@ -1,32 +1,32 @@
 import styled from "styled-components";
-import { ThemeI } from "../../../styles/theme";
-import { device } from "../../../styles/media";
+import { media } from "../../../styles/media";
 
-interface StyledUserNameProps {
-  theme: ThemeI;
-}
+export const StyledProviderWrapper = styled.div`
+  margin-top: 24px;
+  height: 200px;
 
-export const StyledUserName = styled.h1<StyledUserNameProps>`
+  @media ${media.small} {
+    font-size: ${({ theme: { fontSize } }) => fontSize.smallSpan};
+  }
+`;
+
+export const StyledUserName = styled.h1`
   margin: 30px 0 6px;
   text-align: center;
-  font-size: 40px;
+  font-size: ${({ theme: { fontSize } }) => fontSize.largeHeading};
   color: ${({ theme: { color } }) => color.navyBlue};
 
-  @media ${device.mobileL} {
-    font-size: 24px;
+  @media ${media.small} {
+    font-size: ${({ theme: { fontSize } }) => fontSize.smallHeading};
   }
 `;
 
 export const StyledEmail = styled.p`
   margin: 6px;
   text-align: center;
-  font-size: 26px;
+  font-size: ${({ theme: { fontSize } }) => fontSize.largeP};
 
-  @media ${device.mobileL} {
-    font-size: 20px;
+  @media ${media.small} {
+    font-size: ${({ theme: { fontSize } }) => fontSize.smallP};
   }
-`;
-
-export const StyledProviderWrapper = styled.div`
-  height: 160px;
 `;

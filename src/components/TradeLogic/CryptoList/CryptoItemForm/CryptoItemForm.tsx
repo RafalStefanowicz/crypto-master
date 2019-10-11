@@ -12,12 +12,12 @@ import {
   StyledFee,
   StyledCrypto,
   StyledInfoWrapper,
-  StyledAcquisitionWrapper
+  StyledAcquisitionWrapper,
+  StyledLabel
 } from "../cryptoListStyles";
 import { ColorType } from "../../../../styles/theme";
 import { Button } from "../../../Button/Button";
 import { ButtonTypes } from "../../../../styles/button";
-import { StyledLabel } from "../../../Wallet/walletStyles";
 
 interface CryptoItemFormProps {
   transactionType: TransactionType;
