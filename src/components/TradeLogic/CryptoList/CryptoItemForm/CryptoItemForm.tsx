@@ -2,6 +2,22 @@ import React from "react";
 
 import { TransactionType } from "../../TradeLogic";
 import { HandleInputChangeType } from "../CryptoList";
+import {
+  StyledTradeForm,
+  StyledImg,
+  StyledSymbol,
+  StyledChange,
+  StyledInput,
+  StyledAcquisition,
+  StyledFee,
+  StyledCrypto,
+  StyledInfoWrapper,
+  StyledAcquisitionWrapper
+} from "../cryptoListStyles";
+import { ColorType } from "../../../../styles/theme";
+import { Button } from "../../../Button/Button";
+import { ButtonTypes } from "../../../../styles/button";
+import { StyledLabel } from "../../../Wallet/walletStyles";
 
 interface CryptoItemFormProps {
   transactionType: TransactionType;
@@ -28,37 +44,52 @@ const _CryptoItemForm = ({
   acqusition,
   fee
 }: CryptoItemFormProps) => {
+  const getColorFee = (fee: number) => {
+    console.log(fee);
+    if (fee > 0) return ColorType.green;
+    else if (fee < 0) return ColorType.red;
+  };
+
   return (
-    <form onSubmit={handleTransaction}>
-      <img
-        style={{ width: "30px", height: "30px" }}
-        src={cryptoIcon}
-        alt={cryptoIcon}
-      ></img>
-      <span>{`${cryptoSymbol} `}</span>
-      <span>{price} $</span>
-      <span> 24h: {change24hour}%</span>
-      <input
-        name={cryptoSymbol}
-        value={inputValue}
-        type="number"
-        placeholder={
-          transactionType === TransactionType.buy
-            ? "USD.."
-            : `${cryptoSymbol}..`
-        }
-        onChange={handleInputChange}
-      />
+    <StyledTradeForm onSubmit={handleTransaction}>
+      <StyledInfoWrapper>
+        <StyledCrypto>
+          <StyledImg src={cryptoIcon} alt={cryptoIcon}></StyledImg>
+          <StyledSymbol>{`${cryptoSymbol} `}</StyledSymbol>
+        </StyledCrypto>
+
+        <StyledLabel>{price} $</StyledLabel>
+
+        <StyledChange color={getColorFee(Number(change24hour))}>
+          {change24hour}%
+        </StyledChange>
+
+        <StyledInput
+          name={cryptoSymbol}
+          value={inputValue}
+          type="number"
+          placeholder={
+            transactionType === TransactionType.buy
+              ? "USD.."
+              : `${cryptoSymbol}..`
+          }
+          onChange={handleInputChange}
+        />
+      </StyledInfoWrapper>
       {inputValue ? (
-        <>
-          <span>{`${acqusition} ${
+        <StyledAcquisitionWrapper>
+          <StyledAcquisition>{`${acqusition} ${
             transactionType === TransactionType.buy ? cryptoSymbol : "usd"
-          }`}</span>
-          <span> {fee}$ fee</span>
-          <button>{transactionType}</button>
-        </>
+          }`}</StyledAcquisition>
+          <StyledFee> {fee}$ fee</StyledFee>
+          <StyledLabel>
+            <Button buttonType={ButtonTypes.rectangle}>
+              {transactionType}
+            </Button>
+          </StyledLabel>
+        </StyledAcquisitionWrapper>
       ) : null}
-    </form>
+    </StyledTradeForm>
   );
 };
 
