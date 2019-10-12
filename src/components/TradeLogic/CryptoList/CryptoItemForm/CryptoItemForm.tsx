@@ -45,7 +45,6 @@ const _CryptoItemForm = ({
   fee
 }: CryptoItemFormProps) => {
   const getColorFee = (fee: number) => {
-    console.log(fee);
     if (fee > 0) return ColorType.green;
     else if (fee < 0) return ColorType.red;
   };

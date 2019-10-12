@@ -11,7 +11,7 @@ import { IStore } from "../../redux/reducers";
 interface withWalletProps {
   wallet: WalletType;
 }
-interface WithWallet {
+interface WithWalletProps {
   setWallet: typeof setWallet;
   firebase: Firebase;
 }
@@ -24,7 +24,7 @@ export const withWallet = <P extends withWalletProps>(
     setWallet,
     firebase,
     ...otherProps
-  }: P & WithWallet) => {
+  }: P & WithWalletProps) => {
     const userId = firebase.getUserId();
 
     useEffect(() => {

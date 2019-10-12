@@ -5,14 +5,16 @@ import { media } from "./media";
 export enum ButtonTypes {
   access = "access",
   accessSmall = "accessSmall",
-  rectangle = "rectangle"
+  rectangle = "rectangle",
+  backButton = "backButton"
 }
 
 interface StyledButtonProps {
   buttonType:
     | ButtonTypes.access
     | ButtonTypes.accessSmall
-    | ButtonTypes.rectangle;
+    | ButtonTypes.rectangle
+    | ButtonTypes.backButton;
   theme: ThemeI;
 }
 
@@ -61,4 +63,19 @@ export const StyledButton = styled.button<StyledButtonProps>`
         color: white;
       }
     `}
+
+    ${({ buttonType }) =>
+      buttonType === ButtonTypes.backButton &&
+      css`
+        position: absolute;
+        top: 0;
+        left: 0;
+        border: none;
+        background-color: transparent;
+        font-size: ${({ theme }) => theme.fontSize.largeHeading};
+
+        :hover {
+          color: ${({ theme: { color } }) => color.green};
+        }
+      `}
 `;

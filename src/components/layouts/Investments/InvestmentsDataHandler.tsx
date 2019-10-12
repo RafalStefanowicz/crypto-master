@@ -11,6 +11,7 @@ import { Firebase } from "../../../firebase/Firebase";
 import { withFirebase } from "../../../firebase/withFirebase";
 import { Loader } from "../../Loader/Loader";
 import { InvestmentSwitcher } from "./InvestmentSwitcher/InvestmentSwitcher";
+import { withBackButton } from "../../BackButton/withBackButton";
 
 interface InvestmentsDataHandlerProps {
   firebase: Firebase;
@@ -23,13 +24,11 @@ const _InvestmentsDataHandler = ({
   userNames
 }: InvestmentsDataHandlerProps) => {
   const userNameParams = match.params.userName;
-  let searchUserId = null;
 
-  if (userNameParams) {
-    searchUserId = userNames[userNameParams];
-  }
+  const userId = userNameParams
+    ? userNames[userNameParams]
+    : firebase.getUserId();
 
-  const userId = searchUserId || firebase.getUserId();
   const investments = useInvestmentsDb(userId, firebase);
 
   // Investments have already been fetched and are empty
@@ -51,7 +50,7 @@ const _InvestmentsDataHandler = ({
   }
 
   // when user pass manually unexsiting userName
-  if (searchUserId === undefined) {
+  if (userNameParams && !(userNameParams in userNames)) {
     return <Info infoText={`User ${userNameParams} doesn't exist`} />;
   }
 
@@ -69,5 +68,6 @@ const mapStateToProps = (state: IStore) => ({
 
 export default compose(
   connect(mapStateToProps),
-  withFirebase
+  withFirebase,
+  withBackButton
 )(_InvestmentsDataHandler) as React.FC;
