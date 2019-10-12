@@ -1,3 +1,7 @@
 import React from "react";
 
-export const Info = ({ infoText }: { infoText: string }) => <h1>{infoText}</h1>;
+import { StyledInfo } from "../../styles/infoStyles";
+
+export const Info = ({ infoText }: { infoText: string }) => (
+  <StyledInfo>{infoText}</StyledInfo>
+);
