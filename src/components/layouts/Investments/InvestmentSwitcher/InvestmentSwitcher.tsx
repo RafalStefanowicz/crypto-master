@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 
 import { Info } from "../../../Info/Info";
 import { InvestmentsI } from "../../../../types/InvestmentsInterfaces";
@@ -13,21 +14,27 @@ import {
   CompletedInvestmentItem,
   CompletedInvestmentItemProps
 } from "../InvestmentList/CompletedInvestmentItem/CompletedInvestmentItem";
+import { CryptosI } from "../../../../redux/reducers/cryptos";
+import { IStore } from "../../../../redux/reducers";
 
 interface InvestmentSwitcherProps {
   investments: InvestmentsI;
   userNameParams?: string;
+  cryptos: CryptosI;
 }
 
-export const InvestmentSwitcher = ({
+const _InvestmentSwitcher = ({
   investments,
-  userNameParams
+  userNameParams,
+  cryptos
 }: InvestmentSwitcherProps) => {
   const [showCurrent, setShowCurrent] = useState(true);
 
   const handleSetShow = (showCurrent: boolean) => () => {
     setShowCurrent(showCurrent);
   };
+
+  if (cryptos === null) return null;
 
   const renderInvestments = () => {
     // render current investments
@@ -39,7 +46,7 @@ export const InvestmentSwitcher = ({
             <InvestmentList
               investments={investments.current}
               renderInvestmentItem={(props: CurrentInvestmentItemProps) => (
-                <CurrentInvestmentItem {...props} />
+                <CurrentInvestmentItem {...props} cryptos={cryptos} />
               )}
             />
           )}
@@ -81,3 +88,7 @@ export const InvestmentSwitcher = ({
     </div>
   );
 };
+
+const mapStateToProps = ({ cryptos }: IStore) => ({ cryptos });
+
+export const InvestmentSwitcher = connect(mapStateToProps)(_InvestmentSwitcher);

@@ -15,6 +15,8 @@ export const StyledIconsList = styled.ul`
 
 export const StyledIconImg = styled.img`
   margin: 5px 10px;
+  width: 40px;
+  height: 40px;
   filter: opacity(40%);
 
   :hover {
@@ -24,5 +26,7 @@ export const StyledIconImg = styled.img`
 
   @media ${media.small} {
     margin: 3px 5px;
+    width: 32px;
+    height: 32px;
   }
 `;

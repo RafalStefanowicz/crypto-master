@@ -77,5 +77,9 @@ export const StyledButton = styled.button<StyledButtonProps>`
         :hover {
           color: ${({ theme: { color } }) => color.green};
         }
+
+        @media ${media.small} {
+          font-size: ${({ theme }) => theme.fontSize.smallHeading};
+        }
       `}
 `;

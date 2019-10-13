@@ -6,6 +6,7 @@ import {
   InvestmentsCurrentI,
   InvestmentsCompletedI
 } from "../../../../types/InvestmentsInterfaces";
+import { StyledCrypto, StyledCryptoImg } from "./investmentListStyles";
 
 interface InvestmentListProps {
   investments: InvestmentsCurrentI | InvestmentsCompletedI;
@@ -41,8 +42,13 @@ export const InvestmentList = ({
 
       return (
         <li id={cryptoSymbol} key={cryptoSymbol}>
-          <img src={cryptoIcons[cryptoSymbol]} alt={cryptoSymbol}></img>
-          <span>{CRYPTO_SYMBOLS[cryptoSymbol]}</span>
+          <StyledCrypto>
+            <StyledCryptoImg
+              src={cryptoIcons[cryptoSymbol]}
+              alt={cryptoSymbol}
+            ></StyledCryptoImg>
+            <span> {CRYPTO_SYMBOLS[cryptoSymbol]}</span>
+          </StyledCrypto>
           <ul>{renderTransactonsOfIndividualCrypto()}</ul>
         </li>
       );
