@@ -10,5 +10,14 @@ export const getCurrencyFormat = (number: number) => {
   return Math.floor(Math.round(number * format)) / format;
 };
 
-export const getCryptoFormat = (number: number) =>
-  Math.floor(Math.round(number * 10000)) / 10000;
+export const getCryptoFormat = (number: number) => {
+  let format = 10000;
+  if (number > 100) {
+    format = 1000;
+    if (number > 1000) {
+      format = 100;
+    }
+  }
+
+  return Math.floor(Math.round(number * format)) / format;
+};
