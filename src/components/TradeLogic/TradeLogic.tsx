@@ -16,8 +16,10 @@ import {
   StyledSwitchWrapper
 } from "../layouts/Stock/stockStyles";
 import { SwitchButtons } from "../layouts/Investments/InvestmentSwitcher/SwitchButtons/SwitchButtons";
-
-const MAX_TRANSACTION_AMOUNT = 20000;
+import {
+  TRANSACTION_ERROR,
+  TRANSACTION_LIMITS
+} from "../../constants/transactionLimits";
 
 export enum TransactionType {
   sell = "sell",
@@ -55,16 +57,16 @@ const _TradeLogic = ({ wallet, cryptos, showModal }: TradeContainerProps) => {
 
     let error = false;
     if (transactionType === TransactionType.buy) {
-      error = Number(value) > MAX_TRANSACTION_AMOUNT;
+      error = Number(value) > TRANSACTION_LIMITS.MAX;
     } else {
-      error = Number(value) * cryptos[name].PRICE > MAX_TRANSACTION_AMOUNT;
+      error = Number(value) * cryptos[name].PRICE > TRANSACTION_LIMITS.MAX;
     }
 
     if (error) {
       showModal({
         modalType: MODAL_TYPES.ALERT,
         modalProps: {
-          alertText: `Maximum transaction is ${MAX_TRANSACTION_AMOUNT} USD`
+          alertText: TRANSACTION_ERROR.MAX
         }
       });
       return;
@@ -75,6 +77,13 @@ const _TradeLogic = ({ wallet, cryptos, showModal }: TradeContainerProps) => {
 
   const handleTransaction = (e: React.FormEvent) => {
     e.preventDefault();
+    if (usdAmount < TRANSACTION_LIMITS.MIN)
+      return showModal({
+        modalType: MODAL_TYPES.ALERT,
+        modalProps: {
+          alertText: TRANSACTION_ERROR.MIN
+        }
+      });
 
     const newWallet = createNewWallet({
       wallet,
