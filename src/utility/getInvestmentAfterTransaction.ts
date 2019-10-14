@@ -1,5 +1,6 @@
 import { TransactionType } from "../components/TradeLogic/TradeLogic";
 import { InvestmentsI } from "../types/InvestmentsInterfaces";
+import { getCurrencyFormat } from "./numberFormats";
 
 interface GetInvestmentAfterTransactionProps {
   transactionType: TransactionType;
@@ -24,7 +25,7 @@ export const getInvestmentAfterTransaction = ({
   if (transactionType === TransactionType.buy) {
     currentInvestments[Date.now()] = {
       cryptoAmount,
-      buyPrice: Math.floor((usdAmount / cryptoAmount) * 100) / 100
+      buyPrice: getCurrencyFormat(usdAmount / cryptoAmount)
     };
   }
 
