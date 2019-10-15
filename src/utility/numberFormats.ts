@@ -21,3 +21,6 @@ export const getCryptoFormat = (number: number) => {
 
   return Math.floor(Math.round(number * format)) / format;
 };
+
+export const getMoneyFormat = (number: number) =>
+  Math.floor(Math.round(number * 100)) / 100;
