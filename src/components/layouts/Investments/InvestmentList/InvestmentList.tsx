@@ -6,15 +6,23 @@ import {
   InvestmentsCurrentI,
   InvestmentsCompletedI
 } from "../../../../types/InvestmentsInterfaces";
-import { StyledCrypto, StyledCryptoImg } from "./investmentListStyles";
+import {
+  StyledCryptoImg,
+  StyledHeaderName,
+  StyledInvestedItem,
+  StyledLabel,
+  InvestedItemTypes
+} from "./investmentListStyles";
 
 interface InvestmentListProps {
   investments: InvestmentsCurrentI | InvestmentsCompletedI;
   renderInvestmentItem: any;
+  renderCryptoHeader: () => JSX.Element;
 }
 export const InvestmentList = ({
   investments,
-  renderInvestmentItem
+  renderInvestmentItem,
+  renderCryptoHeader
 }: InvestmentListProps) => {
   const cryptoSymbolsList = Object.keys(investments) as Array<
     keyof typeof CRYPTO_SYMBOLS
@@ -42,13 +50,18 @@ export const InvestmentList = ({
 
       return (
         <li id={cryptoSymbol} key={cryptoSymbol}>
-          <StyledCrypto>
-            <StyledCryptoImg
-              src={cryptoIcons[cryptoSymbol]}
-              alt={cryptoSymbol}
-            ></StyledCryptoImg>
-            <span> {CRYPTO_SYMBOLS[cryptoSymbol]}</span>
-          </StyledCrypto>
+          <StyledInvestedItem type={InvestedItemTypes.header}>
+            <StyledLabel>
+              <StyledHeaderName>
+                <StyledCryptoImg
+                  src={cryptoIcons[cryptoSymbol]}
+                  alt={cryptoSymbol}
+                ></StyledCryptoImg>
+                <span> {CRYPTO_SYMBOLS[cryptoSymbol]}</span>
+              </StyledHeaderName>
+            </StyledLabel>
+            {renderCryptoHeader()}
+          </StyledInvestedItem>
           <ul>{renderTransactonsOfIndividualCrypto()}</ul>
         </li>
       );
