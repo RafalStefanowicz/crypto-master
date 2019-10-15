@@ -51,7 +51,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "svgr": "svgr -d src/Icons/ src/assets/icons/"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -67,5 +68,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@svgr/cli": "^4.3.3"
   }
 }
