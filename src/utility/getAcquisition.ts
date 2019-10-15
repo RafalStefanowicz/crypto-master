@@ -18,11 +18,11 @@ export const getAcquisition = ({
   if (!value) return { fee, cryptoAmount, usdAmount };
 
   if (transactionType === TransactionType.buy) {
-    fee = getCurrencyFormat(value * FEE_AMOUNT);
+    fee = Math.floor(Math.round(value * FEE_AMOUNT * 100)) / 100;
     cryptoAmount = getCryptoFormat((value - fee) / price);
     usdAmount = value;
   } else {
-    fee = getCurrencyFormat(value * price * FEE_AMOUNT);
+    fee = Math.floor(Math.round(value * price * FEE_AMOUNT * 100)) / 100;
     cryptoAmount = value;
     usdAmount = getCurrencyFormat(value * price - fee);
   }

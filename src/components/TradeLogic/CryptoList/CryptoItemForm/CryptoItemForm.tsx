@@ -93,8 +93,19 @@ const _CryptoItemForm = ({
 };
 
 const propsAreEqual = (
-  { price: prevPrice, inputValue: prevInpupValue }: CryptoItemFormProps,
-  { inputValue: nextInpupValue, price: nextPrice }: CryptoItemFormProps
-) => prevPrice === nextPrice && prevInpupValue === nextInpupValue;
+  {
+    price: prevPrice,
+    inputValue: prevInpupValue,
+    transactionType: prevTransactionType
+  }: CryptoItemFormProps,
+  {
+    inputValue: nextInpupValue,
+    price: nextPrice,
+    transactionType: nextTransactionType
+  }: CryptoItemFormProps
+) =>
+  prevPrice === nextPrice &&
+  prevInpupValue === nextInpupValue &&
+  prevTransactionType === nextTransactionType;
 
 export const CryptoItemForm = React.memo(_CryptoItemForm, propsAreEqual);
