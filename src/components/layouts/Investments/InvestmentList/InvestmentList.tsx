@@ -11,7 +11,7 @@ import {
   StyledHeaderName,
   StyledInvestedItem,
   StyledLabel,
-  InvestedItemTypes
+  StyledInvestedHeader
 } from "./investmentListStyles";
 
 interface InvestmentListProps {
@@ -38,19 +38,19 @@ export const InvestmentList = ({
         indiviudalTransactions.map(investmentTime => {
           const investment = investments[cryptoSymbol][Number(investmentTime)];
           return (
-            <li key={investmentTime}>
+            <StyledInvestedItem key={investmentTime}>
               {renderInvestmentItem({
                 investment,
                 cryptoSymbol,
                 investmentTime
               })}
-            </li>
+            </StyledInvestedItem>
           );
         });
 
       return (
         <li id={cryptoSymbol} key={cryptoSymbol}>
-          <StyledInvestedItem type={InvestedItemTypes.header}>
+          <StyledInvestedHeader>
             <StyledLabel>
               <StyledHeaderName>
                 <StyledCryptoImg
@@ -60,12 +60,16 @@ export const InvestmentList = ({
                 <span> {CRYPTO_SYMBOLS[cryptoSymbol]}</span>
               </StyledHeaderName>
             </StyledLabel>
-            {renderCryptoHeader()}
-          </StyledInvestedItem>
+          </StyledInvestedHeader>
           <ul>{renderTransactonsOfIndividualCrypto()}</ul>
         </li>
       );
     });
 
-  return <ul>{renderCryptoTransactionsList()}</ul>;
+  return (
+    <>
+      {renderCryptoHeader()}
+      <ul>{renderCryptoTransactionsList()}</ul>
+    </>
+  );
 };

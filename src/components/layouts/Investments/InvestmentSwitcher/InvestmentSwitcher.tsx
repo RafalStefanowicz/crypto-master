@@ -16,8 +16,10 @@ import {
 } from "../InvestmentList/CompletedInvestmentItem/CompletedInvestmentItem";
 import { CryptosI } from "../../../../redux/reducers/cryptos";
 import { IStore } from "../../../../redux/reducers";
-import { CurrentHeader } from "../InvestmentList/CurrentInvestmentItem/CurrentHeader";
-import { CompletedHeader } from "../InvestmentList/CompletedInvestmentItem/CompletedHeader";
+import {
+  InvestmentHeader,
+  InvestmentHeaderTypes
+} from "../InvestmentList/InvestmentHeader/InvestmentHeader";
 
 interface InvestmentSwitcherProps {
   investments: InvestmentsI;
@@ -50,7 +52,9 @@ const _InvestmentSwitcher = ({
               renderInvestmentItem={(props: CurrentInvestmentItemProps) => (
                 <CurrentInvestmentItem {...props} cryptos={cryptos} />
               )}
-              renderCryptoHeader={() => <CurrentHeader />}
+              renderCryptoHeader={() => (
+                <InvestmentHeader type={InvestmentHeaderTypes.current} />
+              )}
             />
           )}
         />
@@ -72,7 +76,9 @@ const _InvestmentSwitcher = ({
             renderInvestmentItem={(props: CompletedInvestmentItemProps) => (
               <CompletedInvestmentItem {...props} />
             )}
-            renderCryptoHeader={() => <CompletedHeader />}
+            renderCryptoHeader={() => (
+              <InvestmentHeader type={InvestmentHeaderTypes.completed} />
+            )}
           />
         )}
       />

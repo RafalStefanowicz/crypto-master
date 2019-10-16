@@ -19,7 +19,6 @@ export interface CompletedInvestmentItemProps {
 }
 
 export const CompletedInvestmentItem = ({
-  investmentTime,
   investment,
   cryptoSymbol
 }: CompletedInvestmentItemProps) => {
@@ -40,7 +39,7 @@ export const CompletedInvestmentItem = ({
     Math.floor(Math.round(sellPrice * sellCryptoAmount * 100)) / 100;
 
   return (
-    <StyledInvestedItem key={investmentTime}>
+    <>
       <StyledLabel>
         Sell {crypto} {cryptoSymbol} for {sellFor}$
       </StyledLabel>
@@ -55,6 +54,6 @@ export const CompletedInvestmentItem = ({
       <StyledLabel type={LabelTypes.roi} color={getRoiColor(roi)}>
         {Math.floor(Math.round(roi * 100)) / 100}%
       </StyledLabel>
-    </StyledInvestedItem>
+    </>
   );
 };
