@@ -1,5 +1,6 @@
 import { TransactionType } from "../components/TradeLogic/TradeLogic";
 import { InvestmentsI } from "../types/InvestmentsInterfaces";
+import { getCryptoFormat } from "./numberFormats";
 
 interface GetInvestmentAfterTransactionProps {
   transactionType: TransactionType;
@@ -17,7 +18,6 @@ export const getInvestmentAfterTransaction = ({
 }: GetInvestmentAfterTransactionProps) => {
   const investmentsAfterTransaction = JSON.parse(JSON.stringify(investments));
   //references
-
   const completedInvestments =
     investmentsAfterTransaction.completed[cryptoSymbol];
   const currentInvestments = investmentsAfterTransaction.current[cryptoSymbol];
@@ -35,11 +35,11 @@ export const getInvestmentAfterTransaction = ({
     let amount = cryptoAmount;
     let sellTime = Date.now();
     for (let i = 0; amount > 0; i++) {
-      const buyCryptoAmount = currentInvestments[times[i]].cryptoAmount;
+      const buyCryptoAmount = getCryptoFormat(
+        currentInvestments[times[i]].cryptoAmount
+      );
       const buyPrice = currentInvestments[times[i]].buyPrice;
-
       const sellPrice = usdAmount / cryptoAmount;
-
       const roi = sellPrice / buyPrice;
       let sellCryptoAmount = 0;
 
