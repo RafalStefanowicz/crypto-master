@@ -2,6 +2,8 @@ import styled, { css } from "styled-components";
 
 export const StyledButtonsWrapper = styled.div`
   display: flex;
+  max-width: 600px;
+  margin: 0 auto;
 `;
 
 export enum SwitchButtonTypes {

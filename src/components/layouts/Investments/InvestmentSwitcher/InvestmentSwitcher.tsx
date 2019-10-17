@@ -20,6 +20,7 @@ import {
   InvestmentHeader,
   InvestmentHeaderTypes
 } from "../InvestmentList/InvestmentHeader/InvestmentHeader";
+import { StyledSwitchButtonsWrapper } from "../InvestmentList/investmentListStyles";
 
 interface InvestmentSwitcherProps {
   investments: InvestmentsI;
@@ -88,13 +89,15 @@ const _InvestmentSwitcher = ({
   return (
     <div id="investments">
       {userNameParams ? <Info infoText={userNameParams} /> : null}
-      <SwitchButtons
-        active={SwitchActiveType.left}
-        leftClick={handleSetShow(true)}
-        rightClick={handleSetShow(false)}
-        leftText="Current"
-        rightText="Completed"
-      />
+      <StyledSwitchButtonsWrapper>
+        <SwitchButtons
+          active={showCurrent ? SwitchActiveType.left : SwitchActiveType.right}
+          leftClick={handleSetShow(true)}
+          rightClick={handleSetShow(false)}
+          leftText="Current"
+          rightText="Completed"
+        />
+      </StyledSwitchButtonsWrapper>
       {renderInvestments()}
     </div>
   );

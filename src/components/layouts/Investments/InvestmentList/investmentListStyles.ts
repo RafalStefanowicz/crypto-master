@@ -3,12 +3,20 @@ import { ColorType } from "../../../../styles/theme";
 import { media } from "../../../../styles/media";
 
 export const StyledInvestedItem = styled.li`
-  padding: 6px 0;
+  padding: 8px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid ${({ theme: { color } }) => color.navyBlue};
 `;
+
+export const StyledInvestmentTransactionsItem = styled.li`
+  margin-top: 25px;
+  :first-child {
+    margin-top: 0px;
+  }
+`;
+
 export enum InvestedHeaderTypes {
   icons = "icons"
 }
@@ -18,7 +26,7 @@ interface StyledInvestedHeaderProps {
 }
 
 export const StyledInvestedHeader = styled.div<StyledInvestedHeaderProps>`
-  margin: 6px 0;
+  margin: 8px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -134,4 +142,8 @@ export const StyledRoiWrapper = styled.span`
   @media ${media.small} {
     display: none;
   }
+`;
+
+export const StyledSwitchButtonsWrapper = styled.div`
+  margin: 20px auto;
 `;
