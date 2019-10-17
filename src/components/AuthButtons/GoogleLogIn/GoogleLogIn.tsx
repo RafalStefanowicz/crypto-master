@@ -1,11 +1,10 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 
 import { FirebaseOperations } from "../../../firebase/FirebaseOperations";
 import { withFirebase } from "../../../firebase/withFirebase";
 import { ProviderLogIn } from "../ProviderLogIn/ProviderLogIn";
 import { UserNamesI } from "../../../redux/reducers/userNames";
+import { StyledGoogleIcon } from "../../../styles/iconProvidersStyles";
 
 interface GoogleLogInProps {
   firebase: FirebaseOperations;
@@ -15,7 +14,7 @@ const _GoogleLogIn = ({ firebase }: GoogleLogInProps) => {
   const doCreateUserWithGoogle = (userNames: UserNamesI) =>
     firebase.doCreateUserWithGoogle(userNames);
 
-  const renderIcon = () => <FontAwesomeIcon icon={faGoogle} />;
+  const renderIcon = () => <StyledGoogleIcon />;
   return (
     <ProviderLogIn
       doCreateUserWithProvider={doCreateUserWithGoogle}

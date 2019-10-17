@@ -3,6 +3,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { FIELDS_NAME } from "../../../types/FIELDS_NAMES";
 
 import { ValidationType } from "../../../utility/validate";
+import { StyledField, StyledMessage } from "../../../styles/formStyles";
+import { SubmitButton } from "../SubmitButton/SubmitButton";
 
 interface JoinFormProps {
   fields: FieldsType;
@@ -26,8 +28,12 @@ export const JoinForm = ({ fields, handleSubmit, validate }: JoinFormProps) => {
   const renderFields = () =>
     fields.map(field => (
       <div key={field.name}>
-        <Field type={field.type} name={field.name} />
-        <ErrorMessage name={field.name} component="div" />
+        <StyledField
+          type={field.type}
+          name={field.name}
+          placeholder={field.name}
+        />
+        <StyledMessage name={field.name} component="div" />
       </div>
     ));
 
@@ -36,16 +42,23 @@ export const JoinForm = ({ fields, handleSubmit, validate }: JoinFormProps) => {
       initialValues={{ ...initialValues }}
       validate={validate}
       onSubmit={async (values, { setSubmitting }) => {
-        await handleSubmit(values);
-        setSubmitting(false);
+        const message = await handleSubmit(values);
+        await setSubmitting(false);
+
+        message &&
+          setTimeout(() => {
+            alert(message);
+          }, 0);
       }}
     >
-      {({ isSubmitting }) => (
+      {({ isSubmitting, isValid }) => (
         <Form>
           {renderFields()}
-          <button type="submit" disabled={isSubmitting}>
-            Submit
-          </button>
+          <SubmitButton
+            disabled={!isValid || isSubmitting}
+            submitting={isSubmitting}
+            text="Submit"
+          />
         </Form>
       )}
     </Formik>

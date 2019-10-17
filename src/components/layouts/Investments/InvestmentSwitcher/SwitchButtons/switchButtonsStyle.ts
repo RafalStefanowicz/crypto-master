@@ -4,7 +4,15 @@ export const StyledButtonsWrapper = styled.div`
   display: flex;
 `;
 
-export const StyledSwitchButton = styled.button`
+export enum SwitchButtonTypes {
+  small = "small"
+}
+
+interface StyledSwitchButton {
+  buttonType?: SwitchButtonTypes;
+}
+
+export const StyledSwitchButton = styled.button<StyledSwitchButton>`
   flex: 1;
   border: 2px solid gray;
   padding: 4px 0;
@@ -28,4 +36,23 @@ export const StyledSwitchButton = styled.button`
       color: black;
     }
   }
+
+  /* ${({ buttonType }) =>
+    buttonType === SwitchButtonTypes.small &&
+    css`
+      border-width: 1px;
+      padding: 2px 0;
+      letter-spacing: 2px;
+      font-weight: normal;
+    `}
+
+  :disabled {
+    border-width: 1px;
+  }
+
+  :not([disabled]) {
+    :hover {
+      border-width: 1px;
+    }
+  } */
 `;

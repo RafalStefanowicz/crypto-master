@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { Button } from "../Button/Button";
-import { ButtonTypes } from "../../styles/button";
+import { ButtonTypes } from "../../styles/buttonStyles";
 import { BackButtonWrapper } from "./backButtonStyles";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 

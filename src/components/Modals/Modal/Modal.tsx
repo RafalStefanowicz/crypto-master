@@ -1,8 +1,10 @@
 import React from "react";
-import ReactModal from "react-modal";
 import { connect } from "react-redux";
 
 import { hideModal } from "../../../redux/actions/modalActions";
+import { StyledReactModal, StyledExitButton } from "./modalStyles";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
 interface ModalProps {
   children: JSX.Element;
@@ -10,27 +12,16 @@ interface ModalProps {
 }
 const element = document.getElementById("root");
 
-element && ReactModal.setAppElement(element);
+element && StyledReactModal.setAppElement(element);
 
 const _Modal = ({ children, hideModal }: ModalProps) => {
   return (
-    <div>
-      <ReactModal
-        isOpen={true}
-        onRequestClose={() => {
-          hideModal();
-        }}
-      >
-        <button
-          onClick={() => {
-            hideModal();
-          }}
-        >
-          X
-        </button>
-        {children}
-      </ReactModal>
-    </div>
+    <StyledReactModal isOpen={true} onRequestClose={hideModal}>
+      <StyledExitButton onClick={hideModal}>
+        <FontAwesomeIcon icon={faTimesCircle}></FontAwesomeIcon>
+      </StyledExitButton>
+      {children}
+    </StyledReactModal>
   );
 };
 

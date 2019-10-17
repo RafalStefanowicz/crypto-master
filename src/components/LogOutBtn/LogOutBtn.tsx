@@ -3,7 +3,7 @@ import React from "react";
 import { withFirebase } from "../../firebase/withFirebase";
 import { Firebase } from "../../firebase/Firebase";
 import { Button } from "../Button/Button";
-import { ButtonTypes } from "../../styles/button";
+import { ButtonTypes } from "../../styles/buttonStyles";
 
 interface LogOutBtnProps {
   firebase: Firebase;

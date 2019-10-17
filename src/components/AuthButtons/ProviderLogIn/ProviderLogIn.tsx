@@ -1,10 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { AuthButton } from "../AuthButton/AuthButton";
 import { IStore } from "../../../redux/reducers";
 import { UserNamesI } from "../../../redux/reducers/userNames";
 import { hideModal } from "../../../redux/actions/modalActions";
+import { ButtonTypes } from "../../../styles/buttonStyles";
+import { Button } from "../../Button/Button";
 
 interface ProviderLogInProps {
   userNames: UserNamesI;
@@ -31,7 +32,11 @@ const _ProviderLogIn = ({
       });
   };
 
-  return <AuthButton handleLogIn={handleLogIn}>{renderIcon()}</AuthButton>;
+  return (
+    <Button buttonType={ButtonTypes.provider} handleClick={handleLogIn}>
+      {renderIcon()}
+    </Button>
+  );
 };
 
 const mapStateToProps = (state: IStore) => ({

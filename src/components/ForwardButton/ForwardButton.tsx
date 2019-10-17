@@ -10,7 +10,7 @@ import { showModal } from "../../redux/actions/modalActions";
 import { IStore } from "../../redux/reducers";
 import { IsLoggedInType } from "../../redux/reducers/isLoggedIn";
 import { Button } from "../Button/Button";
-import { ButtonTypes } from "../../styles/button";
+import { ButtonTypes } from "../../styles/buttonStyles";
 
 interface ForwardButtonProps {
   isLoggedIn: IsLoggedInType;

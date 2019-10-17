@@ -18,7 +18,7 @@ import {
 } from "../cryptoListStyles";
 import { ColorType } from "../../../../styles/theme";
 import { Button } from "../../../Button/Button";
-import { ButtonTypes } from "../../../../styles/button";
+import { ButtonTypes } from "../../../../styles/buttonStyles";
 import { TradeTransition } from "../../../TradeTransition/TradeTransition";
 
 interface CryptoItemFormProps {

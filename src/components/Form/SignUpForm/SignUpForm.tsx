@@ -36,16 +36,16 @@ const SignUpFields = [
 ];
 
 const _SignUpForm = ({ firebase, hideModal, userNames }: SignUpFormProps) => {
-  const handleSignUp = (values: DoCreateUserI) => {
+  const handleSignUp = (values: DoCreateUserI) =>
     firebase
       .doCreateUser(values)
       .then(() => {
         hideModal();
       })
       .catch(error => {
-        alert(error.message);
+        return error.message;
       });
-  };
+
   const validate = signUpValidate(userNames);
 
   return (

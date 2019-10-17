@@ -18,8 +18,8 @@ export const StyledForm = styled(Form)`
 export const StyledField = styled(Field)`
   width: 100%;
   margin: 1px 0;
-  padding: 4px;
-  font-size: 18px;
+  padding: 5px;
+  font-size: 16px;
   border: 1px solid black;
 
   @media ${media.small} {
@@ -28,10 +28,10 @@ export const StyledField = styled(Field)`
 `;
 
 export const StyledMessage = styled(ErrorMessage)`
-  font-size: 16px;
+  font-size: 12px;
 
   @media ${media.small} {
-    font-size: 12px;
+    font-size: 10px;
   }
 
   color: ${({ theme: { color } }) => color.red};

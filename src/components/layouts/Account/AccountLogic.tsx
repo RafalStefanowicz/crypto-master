@@ -8,7 +8,7 @@ import { usePersonalDb } from "../../../customHooks/usePersonalDb";
 import { Account } from "./Account";
 import { Provider } from "./Provider/Provider";
 import { Button } from "../../Button/Button";
-import { ButtonTypes } from "../../../styles/button";
+import { ButtonTypes } from "../../../styles/buttonStyles";
 
 interface AccountLogicProps {
   firebase: Firebase;

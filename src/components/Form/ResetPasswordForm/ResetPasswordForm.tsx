@@ -8,6 +8,7 @@ import { Firebase } from "../../../firebase/Firebase";
 import { hideModal } from "../../../redux/actions/modalActions";
 import { resetPasswordValidate } from "../../../utility/validate";
 import { FIELDS_NAME } from "../../../types/FIELDS_NAMES";
+import { StyledInfo } from "./renderPasswordFormStyles";
 
 interface ResetPasswordForm {
   firebase: Firebase;
@@ -22,28 +23,27 @@ const ResetPasswordFields = [
 ];
 
 const _ResetPasswordForm = ({ firebase, hideModal }: ResetPasswordForm) => {
-  const handlePasswordReset = ({ email }: { email: "string" }) => {
+  const handlePasswordReset = ({ email }: { email: "string" }) =>
     firebase
       .doPasswordReset(email)
       .then(() => {
-        alert("Email send");
         hideModal();
+        return "email send";
       })
       .catch(error => {
-        alert(error.message);
+        return error.message;
       });
-  };
 
   return (
-    <div>
-      <p>Reset Password</p>
+    <>
+      <StyledInfo>Reset Password</StyledInfo>
       <JoinForm
         fields={ResetPasswordFields}
         validate={resetPasswordValidate}
         handleSubmit={handlePasswordReset}
         buttonText="Send"
       />
-    </div>
+    </>
   );
 };
 

@@ -12,7 +12,7 @@ export const GlobalStyles = createGlobalStyle`
 
   body {
     font-family: 'Lato', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
 
     @media ${media.small} {
     font-size: 16px;

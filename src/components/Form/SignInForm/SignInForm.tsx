@@ -26,26 +26,23 @@ const SignInFields = [
 ];
 
 const _SignInForm = ({ firebase, hideModal }: SignInFormProps) => {
-  const handleSignIn = (values: DoSignInI) => {
+  const handleSignIn = (values: DoSignInI) =>
     firebase
       .doSignIn(values)
       .then(() => {
         hideModal();
       })
       .catch(error => {
-        alert(error.message);
+        return error.message;
       });
-  };
 
   return (
-    <div>
-      <JoinForm
-        fields={SignInFields}
-        validate={signInValidate}
-        handleSubmit={handleSignIn}
-        buttonText="Log in"
-      />
-    </div>
+    <JoinForm
+      fields={SignInFields}
+      validate={signInValidate}
+      handleSubmit={handleSignIn}
+      buttonText="Log in"
+    />
   );
 };
 
