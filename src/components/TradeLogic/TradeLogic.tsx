@@ -15,7 +15,10 @@ import {
   StyledTradeWrapper,
   StyledSwitchWrapper
 } from "../layouts/Stock/stockStyles";
-import { SwitchButtons } from "../layouts/Investments/InvestmentSwitcher/SwitchButtons/SwitchButtons";
+import {
+  SwitchButtons,
+  SwitchActiveType
+} from "../layouts/Investments/InvestmentSwitcher/SwitchButtons/SwitchButtons";
 import {
   TRANSACTION_ERROR,
   TRANSACTION_LIMITS
@@ -129,10 +132,15 @@ const _TradeLogic = ({ wallet, cryptos, showModal }: TradeContainerProps) => {
       <StyledStockLabel>Stock</StyledStockLabel>
       <StyledSwitchWrapper>
         <SwitchButtons
-          leftActive={transactionType === TransactionType.buy}
+          active={
+            transactionType === TransactionType.buy
+              ? SwitchActiveType.left
+              : SwitchActiveType.right
+          }
+          leftClick={handleSwitch(true)}
+          rightClick={handleSwitch(false)}
           leftText="Buy"
           rightText="Sell"
-          changeActive={handleSwitch}
         />
       </StyledSwitchWrapper>
       <CryptoList

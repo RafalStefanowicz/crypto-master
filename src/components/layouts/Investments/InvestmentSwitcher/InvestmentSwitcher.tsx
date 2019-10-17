@@ -5,7 +5,7 @@ import { Info } from "../../../Info/Info";
 import { InvestmentsI } from "../../../../types/InvestmentsInterfaces";
 import { Investments } from "../Investments";
 import { InvestmentList } from "../InvestmentList/InvestmentList";
-import { SwitchButtons } from "./SwitchButtons/SwitchButtons";
+import { SwitchButtons, SwitchActiveType } from "./SwitchButtons/SwitchButtons";
 import {
   CurrentInvestmentItem,
   CurrentInvestmentItemProps
@@ -89,8 +89,9 @@ const _InvestmentSwitcher = ({
     <div id="investments">
       {userNameParams ? <Info infoText={userNameParams} /> : null}
       <SwitchButtons
-        leftActive={showCurrent}
-        changeActive={handleSetShow}
+        active={SwitchActiveType.left}
+        leftClick={handleSetShow(true)}
+        rightClick={handleSetShow(false)}
         leftText="Current"
         rightText="Completed"
       />
