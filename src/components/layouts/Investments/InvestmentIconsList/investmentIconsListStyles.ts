@@ -2,14 +2,16 @@ import styled from "styled-components";
 import { media } from "../../../../styles/media";
 
 export const StyledIconItem = styled.li``;
+
 export const StyledIconsList = styled.ul`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  margin: 5px auto;
+  margin: 20px auto;
 
   @media ${media.small} {
     justify-content: left;
+    margin: 10px auto;
   }
 `;
 

@@ -23,11 +23,6 @@ export const StyledStockLabel = styled.h1`
   color: ${({ theme: { color } }) => color.navyBlue};
 `;
 
-export const StyledSwitchWrapper = styled.div`
-  width: 50%;
-  margin: 0 auto;
-`;
-
 export const StyledCryptoItem = styled.li`
   margin: 10px 0;
 `;

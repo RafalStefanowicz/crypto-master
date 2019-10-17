@@ -6,11 +6,16 @@ import { media } from "../../../../styles/media";
 export const StyledRankItem = styled.li`
   display: flex;
   justify-content: space-between;
-  margin: 8px 0;
+  margin: 14px 0;
   align-items: center;
+  font-size: 20px;
+
+  @media ${media.small} {
+    font-size: 14px;
+  }
 `;
-export const StyledRankList = styled.ul`
-  max-width: 800px;
+export const StyledRankWrapper = styled.div`
+  max-width: 500px;
   margin: 0 auto;
 `;
 

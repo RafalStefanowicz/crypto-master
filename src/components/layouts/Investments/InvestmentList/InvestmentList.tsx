@@ -11,7 +11,8 @@ import {
   StyledHeaderName,
   StyledInvestedItem,
   StyledLabel,
-  StyledInvestedHeader
+  StyledInvestedHeader,
+  StyledInvestmentTransactionsItem
 } from "./investmentListStyles";
 
 interface InvestmentListProps {
@@ -49,7 +50,7 @@ export const InvestmentList = ({
         });
 
       return (
-        <li id={cryptoSymbol} key={cryptoSymbol}>
+        <StyledInvestmentTransactionsItem id={cryptoSymbol} key={cryptoSymbol}>
           <StyledInvestedHeader>
             <StyledLabel>
               <StyledHeaderName>
@@ -62,7 +63,7 @@ export const InvestmentList = ({
             </StyledLabel>
           </StyledInvestedHeader>
           <ul>{renderTransactonsOfIndividualCrypto()}</ul>
-        </li>
+        </StyledInvestmentTransactionsItem>
       );
     });
 

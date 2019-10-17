@@ -5,7 +5,6 @@ import { faHandPointer } from "@fortawesome/free-solid-svg-icons";
 import { ROUTES } from "../../../../types/ROUTES";
 import { getUsersAssetDetails } from "../../../../utility/getUsersAssetDetails";
 import {
-  StyledRankList,
   StyledRankItem,
   StyledUserNameWrapper,
   StyledAssetWrapper,
@@ -45,5 +44,5 @@ export const RankingList = ({ filteredUsersAssetRank }: RankingListProps) => {
         </StyledRankItem>
       );
     });
-  return <StyledRankList>{renderRankItems()}</StyledRankList>;
+  return <ul>{renderRankItems()}</ul>;
 };

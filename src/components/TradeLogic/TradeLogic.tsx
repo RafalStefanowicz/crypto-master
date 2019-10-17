@@ -12,8 +12,7 @@ import { handleTransactionInModalsApprove } from "../../utility/handleTransactio
 import { getAcquisition } from "../../utility/getAcquisition";
 import {
   StyledStockLabel,
-  StyledTradeWrapper,
-  StyledSwitchWrapper
+  StyledTradeWrapper
 } from "../layouts/Stock/stockStyles";
 import {
   SwitchButtons,
@@ -130,19 +129,19 @@ const _TradeLogic = ({ wallet, cryptos, showModal }: TradeContainerProps) => {
   return (
     <StyledTradeWrapper>
       <StyledStockLabel>Stock</StyledStockLabel>
-      <StyledSwitchWrapper>
-        <SwitchButtons
-          active={
-            transactionType === TransactionType.buy
-              ? SwitchActiveType.left
-              : SwitchActiveType.right
-          }
-          leftClick={handleSwitch(true)}
-          rightClick={handleSwitch(false)}
-          leftText="Buy"
-          rightText="Sell"
-        />
-      </StyledSwitchWrapper>
+
+      <SwitchButtons
+        active={
+          transactionType === TransactionType.buy
+            ? SwitchActiveType.left
+            : SwitchActiveType.right
+        }
+        leftClick={handleSwitch(true)}
+        rightClick={handleSwitch(false)}
+        leftText="Buy"
+        rightText="Sell"
+      />
+
       <CryptoList
         cryptos={
           transactionType === TransactionType.buy

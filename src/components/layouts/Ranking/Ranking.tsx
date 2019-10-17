@@ -6,6 +6,7 @@ import { WalletsI } from "../../../customHooks/useWallets";
 import { CryptosI } from "../../../redux/reducers/cryptos";
 import { getUsersAssetDetails } from "../../../utility//getUsersAssetDetails";
 import { filterUsersAsset } from "../../../utility/filterUsersAsset";
+import { StyledRankWrapper } from "./RankingList/rankingListStyles";
 
 interface RankingProps {
   wallets: WalletsI;
@@ -26,12 +27,12 @@ export const Ranking = ({ wallets, cryptos }: RankingProps) => {
     filterValue
   );
   return (
-    <>
+    <StyledRankWrapper>
       <RankingFilter
         filterValue={filterValue}
         handleFilterChange={handleFilterChange}
       />
       <RankingList filteredUsersAssetRank={filteredUsersAssetRank} />
-    </>
+    </StyledRankWrapper>
   );
 };
