@@ -1,6 +1,16 @@
 import React from "react";
+
 import { Modal } from "../../Modal/Modal";
 import { TransactionType } from "../../../TradeLogic/TradeLogic";
+import {
+  StyledTransactionModal,
+  StyledTime,
+  StyledAcqusitionQuestion,
+  StyledFeeInfo,
+  StyledButtonWrapper,
+  StyledImportant
+} from "./transactionModalStyles";
+import { SubmitButton } from "../../../Form/SubmitButton/SubmitButton";
 
 interface TransactionModalProps {
   transactionType: TransactionType;
@@ -10,6 +20,7 @@ interface TransactionModalProps {
   fee: number;
   timeLeft: number;
   handleAccept: () => void;
+  isSubmitting: boolean;
 }
 
 export const TransactionModal = ({
@@ -19,21 +30,30 @@ export const TransactionModal = ({
   cryptoSymbol,
   usdAmount,
   fee,
+  isSubmitting,
   handleAccept
 }: TransactionModalProps) => {
   return (
     <Modal>
-      <>
-        <h1>{timeLeft}</h1>
-        <span>{`Do you want to ${transactionType} `}</span>
-        <span>{cryptoAmount} </span>
-        <span>{cryptoSymbol} </span>
-        <span>for </span>
-        <span>{usdAmount} $ </span>
-        <span>?</span>
-        <p>{`Fee included: ${fee} $`}</p>
-        <button onClick={handleAccept}>{transactionType}</button>
-      </>
+      <StyledTransactionModal>
+        <StyledTime>{timeLeft}</StyledTime>
+        <StyledAcqusitionQuestion>
+          <span>{`Do you want to ${transactionType} `}</span>
+          <StyledImportant>{`${cryptoAmount} ${cryptoSymbol}`}</StyledImportant>
+          <span>for </span>
+          <StyledImportant>{usdAmount} $</StyledImportant>
+          <span>?</span>
+        </StyledAcqusitionQuestion>
+        <StyledFeeInfo>{`Fee included: ${fee} $`}</StyledFeeInfo>
+        <StyledButtonWrapper>
+          <SubmitButton
+            text={transactionType}
+            submitting={isSubmitting}
+            disabled={isSubmitting}
+            handleSubmit={handleAccept}
+          ></SubmitButton>
+        </StyledButtonWrapper>
+      </StyledTransactionModal>
     </Modal>
   );
 };

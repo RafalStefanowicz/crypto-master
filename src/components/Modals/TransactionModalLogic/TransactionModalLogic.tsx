@@ -33,8 +33,8 @@ const _TransactionModalLogic = ({
   hideModal
 }: TransactionModalLogicProps) => {
   // time for modal on screen
-  const [timeLeft, setTimeLeft] = useState(10);
-
+  const [timeLeft, setTimeLeft] = useState(110);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   // set counting
   useEffect(() => {
     const listener = setInterval(() => {
@@ -48,6 +48,7 @@ const _TransactionModalLogic = ({
   }, []);
 
   const handleAccept = async () => {
+    setIsSubmitting(true);
     const userId = firebase.getUserId();
 
     if (userId) {
@@ -67,6 +68,7 @@ const _TransactionModalLogic = ({
         .walletDb(userId)
         .set(newWallet)
         .then(() => {
+          setIsSubmitting(false);
           hideModal();
         });
     }
@@ -85,6 +87,7 @@ const _TransactionModalLogic = ({
       usdAmount={usdAmount}
       fee={fee}
       handleAccept={handleAccept}
+      isSubmitting={isSubmitting}
     />
   );
 };

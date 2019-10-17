@@ -12,15 +12,21 @@ interface SubmitButtonProps {
   disabled: boolean;
   text: string;
   submitting: boolean;
+  handleSubmit?: () => void;
 }
 
 export const SubmitButton = ({
   disabled,
   text,
-  submitting
+  submitting,
+  handleSubmit
 }: SubmitButtonProps) => {
   return (
-    <StyledSubmitButton type="submit" disabled={disabled}>
+    <StyledSubmitButton
+      type="submit"
+      disabled={disabled}
+      onClick={handleSubmit}
+    >
       <StyledButtonInner>
         <StyledLoadingIconWrapper submitting={submitting}>
           <FontAwesomeIcon icon={faSpinner} className="fa-spin" />
