@@ -1,4 +1,6 @@
 export enum TransitionTypes {
-  more = "more",
-  less = "less"
+  green = "green",
+  red = "red",
+  lightGreen = "lightGreen",
+  lightRed = "lightRed"
 }

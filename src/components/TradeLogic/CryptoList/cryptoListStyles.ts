@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { ColorType } from "../../../styles/theme";
 import { media } from "../../../styles/media";
+import { TransitionTypes } from "../../../types/TransitionTypes";
 
 export const StyledTradeForm = styled.form`
   display: flex;
@@ -34,6 +35,25 @@ export const StyledAcquisitionWrapper = styled.div`
 export const StyledLabel = styled.div`
   flex: 1;
   margin-right: 10px;
+`;
+
+interface StyledPriceProps {
+  transitionType?: TransitionTypes;
+}
+
+export const StyledPrice = styled.span<StyledPriceProps>`
+  &.trade-item-enter {
+    background-color: ${({ transitionType, theme }) =>
+      transitionType === TransitionTypes.lightGreen && theme.color.lightGreen};
+
+    background-color: ${({ transitionType, theme }) =>
+      transitionType === TransitionTypes.lightRed && theme.color.lightRed};
+  }
+
+  &.trade-item-enter-active {
+    transition: 1s linear;
+    background-color: white;
+  }
 `;
 
 export const StyledImg = styled.img`

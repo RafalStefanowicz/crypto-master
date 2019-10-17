@@ -12,6 +12,8 @@ import {
   StyledWalletCrypto
 } from "./walletStyles";
 import { StyledStockLabel } from "../layouts/Stock/stockStyles";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { TradeTransition } from "../TradeTransition/TradeTransition";
 
 interface WalletProps {
   wallet: WalletType;
@@ -29,13 +31,24 @@ export const Wallet = ({ wallet }: WalletProps) => {
       if (crypto === "USD") return null;
 
       return (
-        <StyledWalletItem key={crypto}>
-          <StyledWalletCrypto>
-            <StyledImg src={cryptoIcons[crypto]} alt={crypto}></StyledImg>
-            <span>{CRYPTO_SYMBOLS[crypto]} </span>
-          </StyledWalletCrypto>
-          <StyledWalletAmount>{wallet[crypto]}</StyledWalletAmount>
-        </StyledWalletItem>
+        <CSSTransition
+          classNames="wallet-item"
+          timeout={{ enter: 2000, exit: 2000 }}
+          key={crypto}
+        >
+          <TradeTransition
+            value={wallet[crypto]}
+            renderTransitionedElement={transitionType => (
+              <StyledWalletItem key={crypto} transitionType={transitionType}>
+                <StyledWalletCrypto>
+                  <StyledImg src={cryptoIcons[crypto]} alt={crypto}></StyledImg>
+                  <span>{CRYPTO_SYMBOLS[crypto]} </span>
+                </StyledWalletCrypto>
+                <StyledWalletAmount>{wallet[crypto]}</StyledWalletAmount>
+              </StyledWalletItem>
+            )}
+          ></TradeTransition>
+        </CSSTransition>
       );
     });
 
@@ -54,7 +67,7 @@ export const Wallet = ({ wallet }: WalletProps) => {
       <StyledStockLabel>Wallet</StyledStockLabel>
       <ul>
         {usdItem}
-        {cryptoItems}
+        <TransitionGroup component={null}>{cryptoItems}</TransitionGroup>
       </ul>
     </StyledWalletWrapper>
   );

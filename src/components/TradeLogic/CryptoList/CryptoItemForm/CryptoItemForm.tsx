@@ -13,11 +13,13 @@ import {
   StyledCrypto,
   StyledInfoWrapper,
   StyledAcquisitionWrapper,
-  StyledLabel
+  StyledLabel,
+  StyledPrice
 } from "../cryptoListStyles";
 import { ColorType } from "../../../../styles/theme";
 import { Button } from "../../../Button/Button";
 import { ButtonTypes } from "../../../../styles/button";
+import { TradeTransition } from "../../../TradeTransition/TradeTransition";
 
 interface CryptoItemFormProps {
   transactionType: TransactionType;
@@ -56,13 +58,20 @@ const _CryptoItemForm = ({
           <StyledImg src={cryptoIcon} alt={cryptoIcon}></StyledImg>
           <StyledSymbol>{`${cryptoSymbol} `}</StyledSymbol>
         </StyledCrypto>
-
-        <StyledLabel>{price} $</StyledLabel>
-
+        <StyledLabel>
+          <TradeTransition
+            value={price}
+            light={true}
+            renderTransitionedElement={transactionType => (
+              <StyledPrice transitionType={transactionType}>
+                {price} $
+              </StyledPrice>
+            )}
+          ></TradeTransition>
+        </StyledLabel>
         <StyledChange color={getColorFee(Number(change24hour))}>
           {change24hour}%
         </StyledChange>
-
         <StyledInput
           name={cryptoSymbol}
           value={inputValue}

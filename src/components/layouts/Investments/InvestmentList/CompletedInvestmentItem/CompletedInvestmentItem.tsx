@@ -2,12 +2,7 @@ import React from "react";
 
 import { CompletedI } from "../../../../../types/InvestmentsInterfaces";
 import { CRYPTO_SYMBOLS } from "../../../../../types/CRYPTO_SYMBOLS";
-import {
-  StyledLabel,
-  StyledInvestedItem,
-  StyledData,
-  LabelTypes
-} from "../investmentListStyles";
+import { StyledLabel, StyledData, LabelTypes } from "../investmentListStyles";
 import { getCurrencyFormat } from "../../../../../utility/numberFormats";
 import { getLocaleDate } from "../../../../../utility/getLocaleDate";
 import { getRoiColor } from "../../../../../utility/getRoiColor";
