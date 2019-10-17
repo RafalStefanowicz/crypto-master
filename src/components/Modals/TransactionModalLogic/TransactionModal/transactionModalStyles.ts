@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledTime = styled.p`
   margin: 20px;
-  font-size: ${({ theme: { fontSize } }) => fontSize.largeP};
+  font-size: 30px;
   font-weight: bold;
 `;
 
@@ -12,7 +12,7 @@ export const StyledTransactionModal = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  font-size: ${({ theme: { fontSize } }) => fontSize.smallP};
+  font-size: 22px;
 `;
 
 export const StyledAcqusitionQuestion = styled.p`

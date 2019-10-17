@@ -8,7 +8,7 @@ export const StyledInfo = styled.h1`
   margin: 0 auto 20px;
 
   @media ${media.small} {
-    font-size: ${({ theme }) => theme.fontSize.smallHeading};
+    font-size: 24px;
     margin-bottom: 10px;
   }
 `;
