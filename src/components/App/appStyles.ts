@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { media } from "../../styles/media";
 
 export const StyledMain = styled.main`
-  max-width: 1600px;
+  max-width: 1300px;
   margin: 40px auto;
 
   @media ${media.small} {
