@@ -93,6 +93,33 @@ export const StyledButton = styled.button<StyledButtonProps>`
           border: none;
           padding: 0;
           line-height: 0;
+
+          svg {
+            .classOne,
+            .classTwo,
+            .classTree,
+            .classFour {
+              transition: 370ms ease-in-out;
+              fill: #000;
+            }
+          }
+
+          &:hover {
+            svg {
+              .classOne {
+                fill: #4285f4;
+              }
+              .classTwo {
+                fill: #34a853;
+              }
+              .classTree {
+                fill: #fbbc04;
+              }
+              .classFour {
+                fill: #ea4335;
+              }
+            }
+          }
         `}
 
         ${({ buttonType }) =>
