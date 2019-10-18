@@ -9,7 +9,8 @@ export enum ButtonTypes {
   backButton = "backButton",
   provider = "provider",
   forgotPassword = "forgotPassword",
-  alert = "alert"
+  alert = "alert",
+  hamburger = "hamburger"
 }
 
 interface StyledButtonProps {
@@ -20,8 +21,8 @@ interface StyledButtonProps {
     | ButtonTypes.backButton
     | ButtonTypes.provider
     | ButtonTypes.forgotPassword
-    | ButtonTypes.alert;
-
+    | ButtonTypes.alert
+    | ButtonTypes.hamburger;
   theme: ThemeI;
 }
 
@@ -71,90 +72,108 @@ export const StyledButton = styled.button<StyledButtonProps>`
       }
     `}
 
-    ${({ buttonType }) =>
-      buttonType === ButtonTypes.backButton &&
-      css`
-        position: absolute;
-        top: 0;
-        left: 0;
-        border: none;
-        background-color: transparent;
-        font-size: 52px;
+  ${({ buttonType }) =>
+    buttonType === ButtonTypes.backButton &&
+    css`
+      position: absolute;
+      top: 0;
+      left: 0;
+      border: none;
+      background-color: transparent;
+      font-size: 52px;
 
-        :hover {
-          color: ${({ theme: { color } }) => color.green};
+      :hover {
+        color: ${({ theme: { color } }) => color.green};
+      }
+
+      @media ${media.small} {
+        font-size: 30px;
+      }
+    `}
+
+    ${({ buttonType }) =>
+      buttonType === ButtonTypes.provider &&
+      css`
+        border: none;
+        padding: 0;
+        line-height: 0;
+
+        svg {
+          .classOne,
+          .classTwo,
+          .classTree,
+          .classFour {
+            transition: 370ms ease-in-out;
+            fill: #000;
+          }
         }
 
-        @media ${media.small} {
-          font-size: 30px;
+        &:hover {
+          svg {
+            .classOne {
+              fill: #4285f4;
+            }
+            .classTwo {
+              fill: #34a853;
+            }
+            .classTree {
+              fill: #fbbc04;
+            }
+            .classFour {
+              fill: #ea4335;
+            }
+          }
         }
       `}
 
-      ${({ buttonType }) =>
-        buttonType === ButtonTypes.provider &&
-        css`
-          border: none;
-          padding: 0;
-          line-height: 0;
+  ${({ buttonType }) =>
+    buttonType === ButtonTypes.forgotPassword &&
+    css`
+      border: none;
+      display: block;
+      color: ${({ theme: { color } }) => color.green};
+      margin-left: auto;
+      border-bottom: 1px solid transparent;
+      font-size: 14px;
 
-          svg {
-            .classOne,
-            .classTwo,
-            .classTree,
-            .classFour {
-              transition: 370ms ease-in-out;
-              fill: #000;
-            }
-          }
+      :hover {
+        border-bottom: 1px solid ${({ theme: { color } }) => color.green};
+      }
+    `}
 
-          &:hover {
-            svg {
-              .classOne {
-                fill: #4285f4;
-              }
-              .classTwo {
-                fill: #34a853;
-              }
-              .classTree {
-                fill: #fbbc04;
-              }
-              .classFour {
-                fill: #ea4335;
-              }
-            }
-          }
-        `}
+  ${({ buttonType }) =>
+    buttonType === ButtonTypes.alert &&
+    css`
+      display: block;
+      margin: 10px auto;
+      padding: 3px 12px;
+      border: 1px solid black;
+      border-radius: 5px;
+      font-size: 20px;
+      letter-spacing: 2px;
 
-        ${({ buttonType }) =>
-          buttonType === ButtonTypes.forgotPassword &&
-          css`
-            border: none;
-            display: block;
-            color: ${({ theme: { color } }) => color.green};
-            margin-left: auto;
-            border-bottom: 1px solid transparent;
-            font-size: 14px;
+      :hover {
+        background-color: ${({ theme: { color } }) => color.red};
+        color: white;
+        border-color: white;
+      }
+    `}
+    
+  ${({ buttonType }) =>
+    buttonType === ButtonTypes.hamburger &&
+    css`
+      display: none;
+      border: none;
+      background-color: transparent;
+      color: white;
+      margin-right: 10px;
 
-            :hover {
-              border-bottom: 1px solid ${({ theme: { color } }) => color.green};
-            }
-          `}
+      :hover {
+        color: ${({ theme: { color } }) => color.navyBlue};
+      }
 
-          ${({ buttonType }) =>
-            buttonType === ButtonTypes.alert &&
-            css`
-              display: block;
-              margin: 10px auto;
-              padding: 3px 12px;
-              border: 1px solid black;
-              border-radius: 5px;
-              font-size: 20px;
-              letter-spacing: 2px;
-
-              :hover {
-                background-color: ${({ theme: { color } }) => color.red};
-                color: white;
-                border-color: white;
-              }
-            `}
+      @media ${media.small} {
+        display: block;
+      }
+    `}
 `;

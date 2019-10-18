@@ -3,10 +3,10 @@ import { media } from "../../styles/media";
 
 export const StyledMain = styled.main`
   max-width: 1300px;
-  margin: 40px auto;
+  margin: 80px auto;
 
   @media ${media.small} {
-    margin-top: 10px;
+    margin-top: 40px;
   }
 `;
 

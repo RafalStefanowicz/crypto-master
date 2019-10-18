@@ -1,23 +1,24 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 
 import { ROUTES, NAV_LINKS } from "../../../types";
-import { StyledNavList, StyledNavItem } from "./navListStyles";
+import { StyledNavLink, StyledNavList, StyledNavItem } from "../navStyles";
 
 export const NavList = () => {
   return (
     <StyledNavList>
       <StyledNavItem>
-        <NavLink to={ROUTES.STOCK}>{NAV_LINKS.STOCK}</NavLink>
+        <StyledNavLink to={ROUTES.STOCK}>{NAV_LINKS.STOCK}</StyledNavLink>
       </StyledNavItem>
       <StyledNavItem>
-        <NavLink to={ROUTES.RANK}>{NAV_LINKS.RANK}</NavLink>
+        <StyledNavLink to={ROUTES.RANK}>{NAV_LINKS.RANK}</StyledNavLink>
       </StyledNavItem>
       <StyledNavItem>
-        <NavLink to={ROUTES.INVESTMENTS}>{NAV_LINKS.INVESTMENTS}</NavLink>
+        <StyledNavLink to={ROUTES.INVESTMENTS}>
+          {NAV_LINKS.INVESTMENTS}
+        </StyledNavLink>
       </StyledNavItem>
       <StyledNavItem>
-        <NavLink to={ROUTES.ACCOUNT}>{NAV_LINKS.ACCOUNT}</NavLink>
+        <StyledNavLink to={ROUTES.ACCOUNT}>{NAV_LINKS.ACCOUNT}</StyledNavLink>
       </StyledNavItem>
     </StyledNavList>
   );
