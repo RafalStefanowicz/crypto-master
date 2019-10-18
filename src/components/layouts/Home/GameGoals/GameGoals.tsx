@@ -1,6 +1,6 @@
 import React from "react";
 
-import { StyledGoalsList, StyledGoalItem } from "./gameGoalsStyle";
+import { StyledGoalsList, StyledGoalItem, StyledGoal } from "../homeStyles";
 import { cryptoIcons } from "../../../../constants/cryptoIcons";
 import CryptoIconsList from "./CryptoIconsList/CryptoIconsList";
 import { divideObjectValues } from "../../../../utility/divideObjectValues";
@@ -11,19 +11,23 @@ export default function GameGoals() {
     <StyledGoalsList>
       <StyledGoalItem>
         <CryptoIconsList iconsList={dividedIcons[0]} />
-        Improve your trading skills on a virtual cryptocurrency market
+        <StyledGoal>
+          Improve your trading skills on a virtual cryptocurrency market
+        </StyledGoal>
       </StyledGoalItem>
       <StyledGoalItem>
         <CryptoIconsList iconsList={dividedIcons[1]} />
-        Trade twenty of the most popular cryptocurrencies
+        <StyledGoal>
+          Trade twenty of the most popular cryptocurrencies
+        </StyledGoal>
       </StyledGoalItem>
       <StyledGoalItem>
         <CryptoIconsList iconsList={dividedIcons[2]} />
-        Compete in the ranking with other users
+        <StyledGoal>Compete in the ranking with other users</StyledGoal>
       </StyledGoalItem>
       <StyledGoalItem>
         <CryptoIconsList iconsList={dividedIcons[3]} />
-        Compare your strategy to the most-won users
+        <StyledGoal>Compare your strategy to the most-won users</StyledGoal>
       </StyledGoalItem>
     </StyledGoalsList>
   );
