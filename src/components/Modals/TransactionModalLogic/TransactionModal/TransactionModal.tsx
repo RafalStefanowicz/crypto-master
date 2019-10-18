@@ -39,7 +39,7 @@ export const TransactionModal = ({
         <StyledTime>{timeLeft}</StyledTime>
         <StyledAcqusitionQuestion>
           <span>{`Do you want to ${transactionType} `}</span>
-          <StyledImportant>{`${cryptoAmount} ${cryptoSymbol}`}</StyledImportant>
+          <StyledImportant>{`${cryptoAmount} ${cryptoSymbol} `}</StyledImportant>
           <span>for </span>
           <StyledImportant>{usdAmount} $</StyledImportant>
           <span>?</span>

@@ -3,6 +3,10 @@ import { connect } from "react-redux";
 
 import { Modal } from "../Modal/Modal";
 import { hideModal } from "../../../redux/actions/modalActions";
+import { StyledAlertText } from "./alertModalStyles";
+import { Button } from "../../Button/Button";
+import { ButtonTypes } from "../../../styles/buttonStyles";
+import { MODAL_TYPES } from "../../../types/MODAL_TYPES";
 
 interface AlertModalProps {
   hideModal: typeof hideModal;
@@ -11,11 +15,11 @@ interface AlertModalProps {
 
 const _AlertModal = ({ hideModal, alertText }: AlertModalProps) => {
   return (
-    <Modal>
-      <>
-        <h1>{alertText}</h1>
-        <button onClick={hideModal}>OK</button>
-      </>
+    <Modal modalType={MODAL_TYPES.ALERT}>
+      <StyledAlertText>{alertText}</StyledAlertText>
+      <Button buttonType={ButtonTypes.alert} handleClick={hideModal}>
+        ACCEPT
+      </Button>
     </Modal>
   );
 };

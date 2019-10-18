@@ -1,7 +1,12 @@
 import ReactModal from "react-modal";
 import styled from "styled-components";
+import { MODAL_TYPES } from "../../../types/MODAL_TYPES";
 
-const _StyledReactModal = styled(ReactModal)`
+interface ReactModalProps {
+  modalType?: MODAL_TYPES;
+}
+
+const _StyledReactModal = styled(ReactModal)<ReactModalProps>`
   max-width: 600px;
   background-color: white;
   border: 2px solid black;
@@ -9,6 +14,10 @@ const _StyledReactModal = styled(ReactModal)`
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  border-color: ${({ modalType, theme }) =>
+    modalType === MODAL_TYPES.ALERT && theme.color.red};
+
   :focus {
     outline: none;
   }
@@ -21,7 +30,7 @@ type StyledReactModalType = typeof _StyledReactModal & {
 
 export const StyledReactModal = _StyledReactModal as StyledReactModalType;
 
-export const StyledExitButton = styled.button`
+export const StyledExitButton = styled.button<ReactModalProps>`
   position: absolute;
   right: 10px;
   top: 10px;
@@ -33,5 +42,8 @@ export const StyledExitButton = styled.button`
 
   :hover {
     color: ${({ theme: { color } }) => color.green};
+
+    color: ${({ modalType, theme: { color } }) =>
+      modalType === MODAL_TYPES.ALERT && color.red};
   }
 `;

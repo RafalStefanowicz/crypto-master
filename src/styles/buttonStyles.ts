@@ -8,7 +8,8 @@ export enum ButtonTypes {
   rectangle = "rectangle",
   backButton = "backButton",
   provider = "provider",
-  forgotPassword = "forgotPassword"
+  forgotPassword = "forgotPassword",
+  alert = "alert"
 }
 
 interface StyledButtonProps {
@@ -18,7 +19,9 @@ interface StyledButtonProps {
     | ButtonTypes.rectangle
     | ButtonTypes.backButton
     | ButtonTypes.provider
-    | ButtonTypes.forgotPassword;
+    | ButtonTypes.forgotPassword
+    | ButtonTypes.alert;
+
   theme: ThemeI;
 }
 
@@ -136,4 +139,22 @@ export const StyledButton = styled.button<StyledButtonProps>`
               border-bottom: 1px solid ${({ theme: { color } }) => color.green};
             }
           `}
+
+          ${({ buttonType }) =>
+            buttonType === ButtonTypes.alert &&
+            css`
+              display: block;
+              margin: 10px auto;
+              padding: 3px 12px;
+              border: 1px solid black;
+              border-radius: 5px;
+              font-size: 20px;
+              letter-spacing: 2px;
+
+              :hover {
+                background-color: ${({ theme: { color } }) => color.red};
+                color: white;
+                border-color: white;
+              }
+            `}
 `;
