@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledJoinModalWrapper = styled.div`
-  width: 230px;
+  width: 250px;
   margin: 0 auto;
   height: 360px;
 `;

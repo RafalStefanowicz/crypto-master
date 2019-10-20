@@ -6,10 +6,11 @@ export const StyledInfo = styled.h1`
   text-align: center;
   max-width: 70%;
   margin: 0 auto 20px;
+  font-size: 26px;
 
   @media ${media.small} {
-    font-size: 24px;
     margin-bottom: 10px;
+    font-size: 18px;
   }
 `;
 

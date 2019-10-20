@@ -146,4 +146,8 @@ export const StyledRoiWrapper = styled.span`
 
 export const StyledSwitchButtonsWrapper = styled.div`
   margin: 20px auto;
+
+  @media ${media.small} {
+    margin: 10px auto;
+  }
 `;

@@ -1,6 +1,7 @@
 import ReactModal from "react-modal";
 import styled from "styled-components";
 import { MODAL_TYPES } from "../../../types/MODAL_TYPES";
+import { media } from "../../../styles/media";
 
 interface ReactModalProps {
   modalType?: MODAL_TYPES;
@@ -11,6 +12,7 @@ const _StyledReactModal = styled(ReactModal)<ReactModalProps>`
   background-color: white;
   border: 2px solid black;
   position: relative;
+  padding: 20px;
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -20,6 +22,10 @@ const _StyledReactModal = styled(ReactModal)<ReactModalProps>`
 
   :focus {
     outline: none;
+  }
+
+  @media ${media.small} {
+    top: 50%;
   }
 `;
 // styled ReactsModal have bug in its type,

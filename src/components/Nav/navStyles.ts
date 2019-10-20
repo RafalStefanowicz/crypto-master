@@ -8,26 +8,27 @@ interface StyledNavProps {
   theme: ThemeI;
 }
 export const StyledNav = styled.nav<StyledNavProps>`
-  font-size: 22px;
-
+  font-size: 18px;
   display: flex;
   justify-content: space-between;
   position: fixed;
   left: 0;
   right: 0;
   top: 0;
-  padding: 4px 0;
+  z-index: 2;
   background-color: ${({ theme }) => theme.color.green};
   color: white;
-  @media ${media.small} {
-    font-size: 18px;
-  }
 `;
 
 export const StyledNavLink = styled(NavLink)`
-  margin: 0 10px;
+  margin: 0 15px;
+  padding: 6px 0;
   &.active {
     color: ${({ theme }) => theme.color.navyBlue};
+  }
+
+  @media ${media.small} {
+    padding: 12px 0;
   }
 `;
 
@@ -38,7 +39,19 @@ export const StyledNavList = styled.ul`
   }
 `;
 
-export const StyledNavItem = styled.li``;
+export const StyledNavItem = styled.li`
+  padding: 6px 0;
+
+  @media ${media.small} {
+    :first-child {
+      padding-top: 0px;
+    }
+
+    :last-child {
+      padding-bottom: 12px;
+    }
+  }
+`;
 
 interface NavBarProps {
   isShown: boolean;
@@ -54,19 +67,19 @@ export const StyledNavBar = styled.div<NavBarProps>`
       right: 0;
     }
     li:nth-child(1) {
-      top: 30px;
+      top: 45px;
       transition-delay: 0.3s;
     }
     li:nth-child(2) {
-      top: 52px;
+      top: 72px;
       transition-delay: 0.2s;
     }
     li:nth-child(3) {
-      top: 72px;
+      top: 105px;
       transition-delay: 0.1s;
     }
     li:nth-child(4) {
-      top: 94px;
+      top: 138px;
       transition-delay: 0s;
     }
 

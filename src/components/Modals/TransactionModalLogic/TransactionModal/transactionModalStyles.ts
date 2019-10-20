@@ -17,6 +17,7 @@ export const StyledTransactionModal = styled.div`
 
 export const StyledAcqusitionQuestion = styled.p`
   margin: 20px 0 10px;
+  text-align: center;
 `;
 
 export const StyledFeeInfo = styled.p`

@@ -4,16 +4,10 @@ import { media } from "../../styles/media";
 export const StyledMain = styled.main`
   max-width: 1300px;
   margin: 80px auto;
+  padding: 0 20px;
 
   @media ${media.small} {
-    margin-top: 40px;
-  }
-`;
-
-export const StyledMainInner = styled.div`
-  margin: 0 20px;
-
-  @media ${media.small} {
-    margin: 0 4px;
+    margin: 64px auto;
+    padding: 0 15px;
   }
 `;

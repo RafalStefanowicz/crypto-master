@@ -162,6 +162,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
   ${({ buttonType }) =>
     buttonType === ButtonTypes.hamburger &&
     css`
+      font-size: 26px;
       display: none;
       border: none;
       background-color: transparent;

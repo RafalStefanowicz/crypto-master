@@ -4,6 +4,7 @@ import { TransitionTypes } from "../../types/TransitionTypes";
 export const StyledWalletWrapper = styled.div`
   flex: 1;
   max-width: 400px;
+  margin-bottom: 30px;
 `;
 
 interface WalletItemProps {
@@ -13,7 +14,7 @@ interface WalletItemProps {
 export const StyledWalletItem = styled.li<WalletItemProps>`
   display: flex;
   align-items: center;
-  margin: 10px;
+  margin: 10px 0;
 
   &.trade-item-enter {
     background-color: ${({ transitionType, theme }) => {
@@ -28,14 +29,14 @@ export const StyledWalletItem = styled.li<WalletItemProps>`
   }
   &.trade-item-enter-active {
     transition: 2s linear;
-    background-color: white;
+    background-color: #fff;
   }
   &.wallet-item-enter {
     background-color: ${({ theme: { color } }) => color.green};
   }
   &.wallet-item-enter-active {
     transition: 2s;
-    background-color: white;
+    background-color: #fff;
   }
   &.wallet-item-exit {
     opacity: 1;
@@ -43,7 +44,7 @@ export const StyledWalletItem = styled.li<WalletItemProps>`
   }
   &.wallet-item-exit-active {
     transition: 2s;
-    background-color: white;
+    background-color: #fff;
     opacity: 0;
   }
 `;

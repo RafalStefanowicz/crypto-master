@@ -11,7 +11,7 @@ export const StyledIconsList = styled.ul`
 
   @media ${media.small} {
     justify-content: left;
-    margin: 10px auto;
+    margin: 6px auto;
   }
 `;
 

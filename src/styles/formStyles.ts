@@ -40,7 +40,7 @@ export const StyledMessage = styled(ErrorMessage)`
 export const StyledSubmitButton = styled.button`
   display: block;
   margin: 4px auto;
-  padding: 4px 22px;
+  padding: 4px 26px;
   border: 1px solid black;
 
   :hover {
@@ -73,6 +73,6 @@ export const StyledLoadingIconWrapper = styled.span<
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  left: -20px;
+  left: -23px;
   display: ${({ submitting }) => (submitting ? "inline" : "none")};
 `;
