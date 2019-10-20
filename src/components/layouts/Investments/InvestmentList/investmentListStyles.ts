@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components";
-import { ColorType } from "../../../../styles/theme";
 import { media } from "../../../../styles/media";
 
 export const StyledInvestedItem = styled.li`
@@ -30,6 +29,7 @@ export const StyledInvestedHeader = styled.div<StyledInvestedHeaderProps>`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: ${({ theme: { color } }) => color.navyBlue};
 
   ${({ type }) =>
     type === InvestedHeaderTypes.icons &&
@@ -45,7 +45,6 @@ export enum LabelTypes {
 
 interface StyledLabelProps {
   type?: LabelTypes;
-  color?: ColorType;
 }
 
 export const StyledLabel = styled.div<StyledLabelProps>`
@@ -54,7 +53,6 @@ export const StyledLabel = styled.div<StyledLabelProps>`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  color: ${({ color }) => color};
 
   ${({ type }) =>
     type === LabelTypes.roi &&
@@ -71,34 +69,12 @@ export const StyledLabel = styled.div<StyledLabelProps>`
     `};
 `;
 
-export enum IconWrapperTypes {
-  small = "small"
-}
-
-interface IconWrapperProps {
-  type?: IconWrapperTypes;
-}
-
-export const StyledIconWrapper = styled.div<IconWrapperProps>`
-  width: 36px;
-  height: 36px;
-  margin-right: 5px;
+export const StyledIconWrapper = styled.div`
+  height: 18px;
+  width: 22px;
+  font-size: 18px;
 
   fill: ${({ theme: { color } }) => color.navyBlue};
-
-  ${({ type }) =>
-    type === IconWrapperTypes.small &&
-    css`
-      height: 28px;
-      width: 28px;
-      margin-right: 10px;
-    `}
-`;
-
-export const StyledHeaderImg = styled.img`
-  height: 28px;
-  margin-right: 5px;
-  color: ${({ theme: { color } }) => color.navyBlue};
 `;
 
 export const StyledData = styled.span`
@@ -130,8 +106,8 @@ export const StyledTopLink = styled.div`
 `;
 
 export const StyledIconDescription = styled.span`
+  margin-left: 5px;
   letter-spacing: 2px;
-  color: ${({ theme: { color } }) => color.navyBlue};
   text-transform: uppercase;
 `;
 

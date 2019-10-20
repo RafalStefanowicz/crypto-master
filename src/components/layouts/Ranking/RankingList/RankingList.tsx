@@ -1,6 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHandPointer } from "@fortawesome/free-solid-svg-icons";
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 
 import { ROUTES } from "../../../../types/ROUTES";
 import { getUsersAssetDetails } from "../../../../utility/getUsersAssetDetails";
@@ -38,7 +38,7 @@ export const RankingList = ({ filteredUsersAssetRank }: RankingListProps) => {
           </StyledAssetWrapper>
           <StyledLinkWrapper>
             <StyledNavLink to={`${ROUTES.INVESTMENTS}/${userName}`}>
-              <FontAwesomeIcon icon={faHandPointer} />
+              <FontAwesomeIcon icon={faInfoCircle} />
             </StyledNavLink>
           </StyledLinkWrapper>
         </StyledRankItem>

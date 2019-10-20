@@ -2,20 +2,22 @@ import React from "react";
 
 import {
   StyledLabel,
-  StyledIconWrapper,
-  StyledHeaderImg,
   LabelTypes,
   StyledIconDescription,
   StyledRoiWrapper,
-  IconWrapperTypes,
   StyledInvestedHeader,
-  InvestedHeaderTypes
+  InvestedHeaderTypes,
+  StyledIconWrapper
 } from "../investmentListStyles";
 
-import roi2 from "../../../../../assets/images/roi2.png";
-import SvgBuyIcon from "../../../../../Icons/BuyIcon";
-import SvgSellIcon from "../../../../../Icons/SellIcon";
-import TodayIcon from "../../../../../Icons/TodayIcon";
+import { BuyIcon } from "../../../../../Icons/BuyIcon";
+import { SellIcon } from "../../../../../Icons/SellIcon";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faDollarSign,
+  faHandHoldingUsd
+} from "@fortawesome/free-solid-svg-icons";
 
 export enum InvestmentHeaderTypes {
   current = "current",
@@ -32,25 +34,30 @@ export const InvestmentHeader = ({ type }: InvestmendHeaderProps) => {
     <>
       <StyledInvestedHeader type={InvestedHeaderTypes.icons}>
         <StyledLabel></StyledLabel>
+
         <StyledLabel type={LabelTypes.date}>
           <StyledIconWrapper>
-            <SvgBuyIcon />
+            <BuyIcon />
           </StyledIconWrapper>
           <StyledIconDescription>buy</StyledIconDescription>
         </StyledLabel>
+
         <StyledLabel type={LabelTypes.date}>
-          <StyledIconWrapper
-            type={isCurrent ? IconWrapperTypes.small : undefined}
-          >
-            {isCurrent ? <TodayIcon /> : <SvgSellIcon />}
-          </StyledIconWrapper>
+          {isCurrent ? (
+            <FontAwesomeIcon icon={faDollarSign} />
+          ) : (
+            <StyledIconWrapper>
+              <SellIcon />
+            </StyledIconWrapper>
+          )}
           <StyledIconDescription>
             {isCurrent ? "now" : "sell"}
           </StyledIconDescription>
         </StyledLabel>
+
         <StyledLabel type={LabelTypes.roi}>
           <StyledRoiWrapper>
-            <StyledHeaderImg src={roi2}></StyledHeaderImg>
+            <FontAwesomeIcon icon={faHandHoldingUsd} />
             <StyledIconDescription>roi</StyledIconDescription>
           </StyledRoiWrapper>
         </StyledLabel>
