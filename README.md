@@ -13,7 +13,7 @@
 
 Technologies:
 React, 
-Typescript,
+TypeScript,
 Firebase,
 Redux, 
 Hooks, 
@@ -21,7 +21,7 @@ React-router-dom,
 Supsense,
 memo,
 Styled-components,
-...
+others..
 
 
 
