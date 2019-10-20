@@ -12,6 +12,10 @@ export const StyledStockWrapper = styled.div`
 
 export const StyledTradeWrapper = styled.div`
   flex: 4;
+  margin-right: 50px;
+  @media ${media.small} {
+    margin-right: 0;
+  }
 `;
 
 export const StyledStockLabel = styled.h1`
