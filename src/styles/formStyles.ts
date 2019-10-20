@@ -63,13 +63,11 @@ export const StyledButtonInner = styled.span`
   position: relative;
 `;
 
-interface StyledLoadingIconWrapperProps {
+interface StyledIconWrapperProps {
   submitting: boolean;
 }
 
-export const StyledLoadingIconWrapper = styled.span<
-  StyledLoadingIconWrapperProps
->`
+export const StyledIconWrapper = styled.span<StyledIconWrapperProps>`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);

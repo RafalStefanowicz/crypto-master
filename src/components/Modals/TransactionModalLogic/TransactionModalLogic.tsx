@@ -33,7 +33,7 @@ const _TransactionModalLogic = ({
   hideModal
 }: TransactionModalLogicProps) => {
   // time for modal on screen
-  const [timeLeft, setTimeLeft] = useState(110);
+  const [timeLeft, setTimeLeft] = useState(10);
   const [isSubmitting, setIsSubmitting] = useState(false);
   // set counting
   useEffect(() => {

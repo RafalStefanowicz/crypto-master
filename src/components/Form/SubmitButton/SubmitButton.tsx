@@ -5,7 +5,7 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import {
   StyledSubmitButton,
   StyledButtonInner,
-  StyledLoadingIconWrapper
+  StyledIconWrapper
 } from "../../../styles/formStyles";
 
 interface SubmitButtonProps {
@@ -28,9 +28,9 @@ export const SubmitButton = ({
       onClick={handleSubmit}
     >
       <StyledButtonInner>
-        <StyledLoadingIconWrapper submitting={submitting}>
+        <StyledIconWrapper submitting={submitting}>
           <FontAwesomeIcon icon={faSpinner} className="fa-spin" />
-        </StyledLoadingIconWrapper>
+        </StyledIconWrapper>
         {text}
       </StyledButtonInner>
     </StyledSubmitButton>

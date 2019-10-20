@@ -80,14 +80,14 @@ export const StyledButton = styled.button<StyledButtonProps>`
       left: 0;
       border: none;
       background-color: transparent;
-      font-size: 52px;
+      font-size: 36px;
 
       :hover {
         color: ${({ theme: { color } }) => color.green};
       }
 
       @media ${media.small} {
-        font-size: 30px;
+        font-size: 20px;
       }
     `}
 

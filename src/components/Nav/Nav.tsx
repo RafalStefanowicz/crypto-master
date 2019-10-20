@@ -21,7 +21,7 @@ export const Nav = () => {
     return () => {
       window.removeEventListener("click", memoHideNavBar);
     };
-  }, [showNavBar]);
+  }, [showNavBar, memoHideNavBar]);
 
   return (
     <StyledNav
