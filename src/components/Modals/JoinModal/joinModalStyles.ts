@@ -7,7 +7,9 @@ export const StyledJoinModalWrapper = styled.div`
 `;
 
 export const StyledProviderWrapper = styled.div`
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 10px;
 `;
 
