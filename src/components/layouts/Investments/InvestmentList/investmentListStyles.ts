@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import { media } from "../../../../styles/media";
+import { ColorType } from "../../../../styles/theme";
 
 export const StyledInvestedItem = styled.li`
   padding: 8px 0;
@@ -45,6 +46,7 @@ export enum LabelTypes {
 
 interface StyledLabelProps {
   type?: LabelTypes;
+  color?: ColorType;
 }
 
 export const StyledLabel = styled.div<StyledLabelProps>`
@@ -67,6 +69,8 @@ export const StyledLabel = styled.div<StyledLabelProps>`
         display: none;
       }
     `};
+
+  color: ${({ color }) => color};
 `;
 
 export const StyledIconWrapper = styled.div`
