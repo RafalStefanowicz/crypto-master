@@ -1,6 +1,7 @@
 import { getUniqueUserName } from "./getUniqueUserName";
 import { UserNamesI } from "../redux/reducers/userNames";
 import { isProperLength } from "./isProperLength";
+import { testPassword } from "./testPassword";
 
 interface ISignUpValues {
   userName: string;
@@ -48,12 +49,10 @@ export const signUpValidate = (userNames: UserNamesI): SignUpValidateType => (
   }
   if (!values.email) {
     errors.email = "Required";
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-    errors.email = "Invalid email format";
   }
   if (!values.password) {
     errors.password = "Required";
-  } else if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/i.test(values.password)) {
+  } else if (!testPassword(values.password)) {
     errors.password =
       "Minimum six characters, at least one letter and one number";
   }
@@ -74,12 +73,10 @@ export const signInValidate = (values: SignInValuesI): SignInErrorsI => {
   let errors: SignInErrorsI = {};
   if (!values.email) {
     errors.email = "Required";
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-    errors.email = "Invalid email format";
   }
   if (!values.password) {
     errors.password = "Required";
-  } else if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/i.test(values.password)) {
+  } else if (!testPassword(values.password)) {
     errors.password =
       "Minimum six characters, at least one letter and one number";
   }
@@ -100,8 +97,6 @@ export const resetPasswordValidate = (
   let errors: SignInErrorsI = {};
   if (!values.email) {
     errors.email = "Required";
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-    errors.email = "Invalid email format";
   }
   return errors;
 };
@@ -115,9 +110,7 @@ export const changePasswordValidate = (
   }
   if (!values.newPassword) {
     errors.newPassword = "Required";
-  } else if (
-    !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/i.test(values.newPassword)
-  ) {
+  } else if (!testPassword(values.newPassword)) {
     errors.newPassword =
       "Minimum six characters, at least one letter and one number";
   }
