@@ -46,11 +46,11 @@ export const getInvestmentAfterTransaction = ({
       if (buyCryptoAmount > amount) {
         sellCryptoAmount = amount;
         currentInvestments[times[i]].cryptoAmount = buyCryptoAmount - amount;
-        amount -= buyCryptoAmount;
+        amount = getCryptoFormat(amount - buyCryptoAmount);
       } else if (buyCryptoAmount <= amount) {
         sellCryptoAmount = buyCryptoAmount;
         currentInvestments[times[i]] = {};
-        amount -= buyCryptoAmount;
+        amount = getCryptoFormat(amount - buyCryptoAmount);
       }
 
       sellTime += 1;
