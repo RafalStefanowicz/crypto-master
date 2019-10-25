@@ -16,10 +16,9 @@ Right after logging with google, facebook or custom email and password, the user
 <br/>
 Members compete in the most-winning users ranking in which all the cryptos in the wallet are converted to usd and compared. 
 <br/>
-Investments tab provides the information about profits of ongoing investments , and results of completed ones.  
-<br/>
+Investments tab provides the information about profits of ongoing investments , and results of completed ones.<br/>
 User is able to remind or change his password.
-
+<br/>
 Technologies:
 <br/>
 Firebase: database / authorization 
