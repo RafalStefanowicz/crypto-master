@@ -18,7 +18,7 @@ Members compete in the most-winning users ranking in which all the cryptos in th
 <br/>
 Investments tab provides the information about profits of ongoing investments , and results of completed ones.<br/>
 User is able to remind or change his password.
-<br/>
+<br/><br/>
 Technologies:
 <br/>
 Firebase: database / authorization 
