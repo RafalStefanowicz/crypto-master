@@ -44,7 +44,7 @@ const _ChangePasswordForm = ({
           setSubmitting(false);
           showModal({
             modalType: MODAL_TYPES.ALERT,
-            modalProps: { alertText: "Please provide actual password" }
+            modalProps: { alertText: "Please provide the actual password" }
           });
         }
       }}

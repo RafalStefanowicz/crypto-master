@@ -10,14 +10,13 @@
 
 ### Create custom account or simply sign in with google or facebook.
 
-The largest app, designed and written by myself from scratch. It is cryptocurrency simulation. The aim is to help user develop his trade skills. 
+The largest app, designed and written by myself from scratch. It is cryptocurrency simulation. The aim is to help users develop their trade skills.
 <br/><br/>
-Right after logging with google, facebook or custom email and password, the user receives 10k $ for trading. There are twenty of the most known crypto with actual prices to deal with it. Members compete in the most-winning users ranking in which all the cryptos in the wallet are converted to usd and compared. Investments tab provides the information about profits of ongoing investments , and results of completed ones. User is able to remind or change his password.
+After logging with google, facebook or custom-made email the user receives \$10k for trading. There are twenty of the most known cryptos with actual prices to deal with.
+Members compete in the ranking of the most-winning players in which all the cryptos in the wallet are converted to usd and compared. Investments' tab provides the information about profits of ongoing investments, and results of the completed ones. User is able to remind by email or change his password.
 <br/><br/>
 Technologies:
 <br/>
-Firebase: database / authorization 
+Firebase: database / authorization
 <br/>
-React  / TypeScript / Redux / redux-thunk / Formik / Suspense / memo / Hooks / Higher-Order Components / react-modal / react-scroll / react-transition-group / styled component 
-
-
+React / TypeScript / Redux / redux-thunk / Formik / Suspense / memo / Hooks / Higher-Order Components / react-modal / react-scroll / react-transition-group / styled component

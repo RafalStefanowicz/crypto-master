@@ -20,6 +20,7 @@ import { ColorType } from "../../../../styles/theme";
 import { Button } from "../../../Button/Button";
 import { ButtonTypes } from "../../../../styles/buttonStyles";
 import { TradeTransition } from "../../../TradeTransition/TradeTransition";
+import { StyledCryptoItem } from "../../../layouts/Stock/stockStyles";
 
 interface CryptoItemFormProps {
   transactionType: TransactionType;
@@ -52,52 +53,54 @@ const _CryptoItemForm = ({
   };
 
   return (
-    <StyledTradeForm onSubmit={handleTransaction}>
-      <StyledInfoWrapper>
-        <StyledCrypto>
-          <StyledImg src={cryptoIcon} alt={cryptoIcon}></StyledImg>
-          <StyledSymbol>{`${cryptoSymbol} `}</StyledSymbol>
-        </StyledCrypto>
-        <StyledLabel>
-          <TradeTransition
-            value={price}
-            light={true}
-            renderTransitionedElement={transactionType => (
-              <StyledPrice transitionType={transactionType}>
-                {price} $
-              </StyledPrice>
-            )}
-          ></TradeTransition>
-        </StyledLabel>
-        <StyledChange color={getColorFee(Number(change24hour))}>
-          {change24hour}%
-        </StyledChange>
-        <StyledInput
-          name={cryptoSymbol}
-          value={inputValue}
-          type="number"
-          placeholder={
-            transactionType === TransactionType.buy
-              ? "USD.."
-              : `${cryptoSymbol}..`
-          }
-          onChange={handleInputChange}
-        />
-      </StyledInfoWrapper>
-      {inputValue ? (
-        <StyledAcquisitionWrapper>
-          <StyledAcquisition>{`${acqusition} ${
-            transactionType === TransactionType.buy ? cryptoSymbol : "usd"
-          }`}</StyledAcquisition>
-          <StyledFee> {fee}$ fee</StyledFee>
+    <StyledCryptoItem>
+      <StyledTradeForm onSubmit={handleTransaction}>
+        <StyledInfoWrapper>
+          <StyledCrypto>
+            <StyledImg src={cryptoIcon} alt={cryptoIcon}></StyledImg>
+            <StyledSymbol>{`${cryptoSymbol} `}</StyledSymbol>
+          </StyledCrypto>
           <StyledLabel>
-            <Button buttonType={ButtonTypes.rectangle}>
-              {transactionType}
-            </Button>
+            <TradeTransition
+              value={price}
+              light={true}
+              renderTransitionedElement={transactionType => (
+                <StyledPrice transitionType={transactionType}>
+                  {price} $
+                </StyledPrice>
+              )}
+            ></TradeTransition>
           </StyledLabel>
-        </StyledAcquisitionWrapper>
-      ) : null}
-    </StyledTradeForm>
+          <StyledChange color={getColorFee(Number(change24hour))}>
+            {change24hour}%
+          </StyledChange>
+          <StyledInput
+            name={cryptoSymbol}
+            value={inputValue}
+            type="number"
+            placeholder={
+              transactionType === TransactionType.buy
+                ? "USD.."
+                : `${cryptoSymbol}..`
+            }
+            onChange={handleInputChange}
+          />
+        </StyledInfoWrapper>
+        {inputValue ? (
+          <StyledAcquisitionWrapper>
+            <StyledAcquisition>{`${acqusition} ${
+              transactionType === TransactionType.buy ? cryptoSymbol : "usd"
+            }`}</StyledAcquisition>
+            <StyledFee> {fee}$ fee</StyledFee>
+            <StyledLabel>
+              <Button buttonType={ButtonTypes.rectangle}>
+                {transactionType}
+              </Button>
+            </StyledLabel>
+          </StyledAcquisitionWrapper>
+        ) : null}
+      </StyledTradeForm>
+    </StyledCryptoItem>
   );
 };
 
